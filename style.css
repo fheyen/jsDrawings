@@ -1,0 +1,13 @@
+body {
+    background-color: #333;
+    color: #eee;
+    text-align: center;
+}
+
+.drawingContainer {
+   border-bottom: 1px solid #666;
+}
+
+.drawingContainer h2 {
+    border-bottom: 1px solid #0097EE;
+}
