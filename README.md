@@ -1,8 +1,14 @@
 # jsDrawings
 
-Drawings in JavaScript (nothing to see here yet).
+Drawings in JavaScript. Suggestions are welcome.
 
-## Yin Yang
+## Finished
+
+### Yin Yang
 ![Yin Yang result image](img/yinyang.png?raw=true "Yin Yang")
 
-## Ornament
+
+## Planned
+
+### Ornament
+
