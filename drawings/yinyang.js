@@ -16,7 +16,6 @@ class YinYang {
     this.height = height;
     this.margin = margin;
     this.parent = parent;
-    this.container = {};
     this.canvas = {};
   }
 
@@ -25,31 +24,16 @@ class YinYang {
   */
   init() {
     this.clear();
-    this.createContainer();
     this.createCanvas();
     this.draw();
+    return this;
   }
 
   /***
   * Clears the parent element.
   */
-  // TODO: only remove this.container
   clear() {
-    this.parent.innerHTML = "";
-  }
-
-  /***
-  * Creates the drawing container and title.
-  */
-  createContainer() {
-    this.container = document.createElement("div");
-    this.container.className = "drawingContainer";
-    this.parent.appendChild(this.container);
-
-    // add heading with title
-    this.heading = document.createElement("h2");
-    this.heading.innerHTML = this.title;
-    this.container.appendChild(this.heading);
+    this.canvas.remove();
   }
 
   /***
@@ -59,7 +43,7 @@ class YinYang {
     this.canvas = document.createElement("canvas");
     this.canvas.width = this.width;
     this.canvas.height = this.height;
-    this.container.appendChild(this.canvas);
+    this.parent.appendChild(this.canvas);
   }
 
   /***
