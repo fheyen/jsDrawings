@@ -42,13 +42,17 @@ class Ornament extends Drawing {
         this.drawCircle(center.x, center.y, r);
 
 
-        // draw center circle
+        this.drawCircle(center.x, center.y, 1);
+
         r /= 3;
 
 
+        let p = new Point(this.margin, cy);
 
+        for (let i = 0; i < 6; i++) {
+            this.drawPart(this.margin + i * r, cy, r, pi, cx, cy);
+        }
 
-        this.drawTriangularPart(center, r, pi, cx, cy);
 
 
         return this;
@@ -74,18 +78,11 @@ class Ornament extends Drawing {
         ctx.restore();
     }
 
-    drawTriangularPart(center, r, pi, cx, cy) {
-        let p = center.clone();
-        this.drawCircle(p.x, p.y, r, undefined, 0, 1 / 3 * pi);
-        p.translate(r, 0);
-        this.drawCircle(p.x, p.y, r, undefined, pi - 1 / 3 * pi, pi);
-        p.rotate(cx, cy, 2 / 3 * pi);
-        this.drawCircle(p.x, p.y, r, undefined, 5 / 3 * pi, 0);
-        p.translate(2 * r, 0);
-        this.drawCircle(p.x, p.y, r, undefined, pi, 4 / 3 * pi);
-        p.translate(-r, -Math.sqrt(3) * r);
-        this.drawCircle(p.x, p.y, r, undefined, 1 / 3 * pi, 2 / 3 * pi);
-        p.translate(0, Math.sqrt(3) * r);
-        this.drawCircle(p.x, p.y, r, undefined, 4 / 3 * pi, 5 / 3 * pi);
+    drawPart(x, y, r, pi) {
+        x += r / 2;
+        y += - 1 / 2 * r * Math.sqrt(3);
+        this.drawCircle(x, y, r, undefined, 1 / 3 * pi, 2 / 3 * pi);
+        y += Math.sqrt(3) * r;
+        this.drawCircle(x, y, r, undefined, 4 / 3 * pi, 5 / 3 * pi);
     }
 }
