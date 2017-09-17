@@ -27,58 +27,31 @@ class Ornament extends Drawing {
     draw() {
         const ctx = this.canvas.getContext("2d");
 
-        const centerX = this.width / 2;
-        const centerY = this.height / 2;
+        const cx = this.width / 2;
+        const cy = this.height / 2;
 
 
         // start values
-        let radius = Math.min(this.width, this.height) / 2 - this.margin;
-        let center = new Point(centerX, centerY);
+        let r = Math.min(this.width, this.height) / 2 - this.margin;
+        let center = new Point(cx, cy);
+        const pi = Math.PI;
 
 
 
         // draw outer circle
-        this.drawCircle(center.x, center.y, radius);
+        this.drawCircle(center.x, center.y, r);
 
 
         // draw center circle
-        radius /= 3;
-        let p = center.clone();
-
-        // draw circle layers
-        this.drawHexagonalPart(center, radius, this);
-        this.drawHexagonalPart(center.translate(Math.sqrt(3) * radius, 0), radius, this);
-        for (let i = 0; i <= 6; i++) {
-            this.drawHexagonalPart(center.rotate(centerX, centerY, i * 2 / 6 * Math.PI), radius, this);
-        }
+        r /= 3;
 
 
 
+
+        this.drawTriangularPart(center, r, pi, cx, cy);
 
 
         return this;
-    }
-
-
-
-    drawHexagonalPart(center, radius, drawing) {
-        let p = center.clone();
-        p.translate(0, -radius);
-        for (let i = 0; i < 6; i++) {
-            let angle = 2 / 6 * Math.PI;
-            p.rotate(center.x, center.x, angle);
-            let a = (i + 1) * angle + 1 / 6 * Math.PI;
-            // drawing.drawCircle(p.x, p.y, radius, undefined, a, a + 2 / 3 * Math.PI);
-        }
-
-        p = center.clone();
-        p.translate(Math.sqrt(3) * radius, 0);
-        for (let i = 0; i < 6; i++) {
-            let angle = 2 / 6 * Math.PI;
-            p.rotate(center.x, center.y, angle);
-            let a = (i - 3) * angle + 1 / 6 * Math.PI;
-            drawing.drawCircle(p.x, p.y, radius, undefined, a, a + 1 / 3 * Math.PI);
-        }
     }
 
 
@@ -86,18 +59,33 @@ class Ornament extends Drawing {
      * Draws a circle or partial circle.
      * @param x x-cooridnate
      * @param y y-coordinate
-     * @param radius radius
+     * @param r r
      * @param stroke (default: "#fff") stroke color
      * @param startAngle (default: 0) start angle
      * @param endAngle (default: 2 * Pi) end angle
      */
-    drawCircle(x, y, radius, stroke = "#fff", startAngle = 0, endAngle = 2 * Math.PI) {
+    drawCircle(x, y, r, stroke = "#fff", startAngle = 0, endAngle = 2 * Math.PI) {
         const ctx = this.canvas.getContext("2d");
         ctx.save();
         ctx.strokeStyle = stroke;
         ctx.beginPath();
-        ctx.arc(x, y, radius, startAngle, endAngle);
+        ctx.arc(x, y, r, startAngle, endAngle);
         ctx.stroke();
         ctx.restore();
+    }
+
+    drawTriangularPart(center, r, pi, cx, cy) {
+        let p = center.clone();
+        this.drawCircle(p.x, p.y, r, undefined, 0, 1 / 3 * pi);
+        p.translate(r, 0);
+        this.drawCircle(p.x, p.y, r, undefined, pi - 1 / 3 * pi, pi);
+        p.rotate(cx, cy, 2 / 3 * pi);
+        this.drawCircle(p.x, p.y, r, undefined, 5 / 3 * pi, 0);
+        p.translate(2 * r, 0);
+        this.drawCircle(p.x, p.y, r, undefined, pi, 4 / 3 * pi);
+        p.translate(-r, -Math.sqrt(3) * r);
+        this.drawCircle(p.x, p.y, r, undefined, 1 / 3 * pi, 2 / 3 * pi);
+        p.translate(0, Math.sqrt(3) * r);
+        this.drawCircle(p.x, p.y, r, undefined, 4 / 3 * pi, 5 / 3 * pi);
     }
 }
