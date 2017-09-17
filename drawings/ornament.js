@@ -16,9 +16,10 @@ class Ornament extends Drawing {
      * @param height (default: 100) height of the canvas
      * @param margin (default: 0) margin around image content
      */
-    constructor(parent, width = 100, height = 100, margin = 0) {
+    constructor(parent, width = 100, height = 100, margin = 0, colors) {
         super(parent, width, height, margin);
         this.title = "Ornament";
+        this.colors = colors;
     }
 
     /**
@@ -26,34 +27,32 @@ class Ornament extends Drawing {
      */
     draw() {
         const ctx = this.canvas.getContext("2d");
-
         const cx = this.width / 2;
         const cy = this.height / 2;
 
-
         // start values
         let r = Math.min(this.width, this.height) / 2 - this.margin;
-        let center = new Point(cx, cy);
-        const pi = Math.PI;
-
-
 
         // draw outer circle
-        this.drawCircle(center.x, center.y, r);
-
-
-        this.drawCircle(center.x, center.y, 1);
+        this.drawCircle(cx, cy, r);
+        r -= 10;
+        this.drawCircle(cx, cy, r);
 
         r /= 3;
 
+        this.drawLines(r, cy);
 
-        let p = new Point(this.margin, cy);
+        ctx.translate(this.width / 2, this.height / 2);
+        ctx.rotate(Math.PI / 3);
+        ctx.translate(-this.width / 2, -this.height / 2);
 
-        for (let i = 0; i < 6; i++) {
-            this.drawPart(this.margin + i * r, cy, r, pi, cx, cy);
-        }
+        this.drawLines(r, cy);
 
+        ctx.translate(this.width / 2, this.height / 2);
+        ctx.rotate(Math.PI / 3);
+        ctx.translate(-this.width / 2, -this.height / 2);
 
+        this.drawLines(r, cy);
 
         return this;
     }
@@ -68,21 +67,39 @@ class Ornament extends Drawing {
      * @param startAngle (default: 0) start angle
      * @param endAngle (default: 2 * Pi) end angle
      */
-    drawCircle(x, y, r, stroke = "#fff", startAngle = 0, endAngle = 2 * Math.PI) {
+    drawCircle(x, y, r, stroke = "#fff", fill = "rgba(0, 0, 0, 0)", startAngle = 0, endAngle = 2 * Math.PI) {
         const ctx = this.canvas.getContext("2d");
         ctx.save();
         ctx.strokeStyle = stroke;
+        ctx.fillStyle = fill;
         ctx.beginPath();
         ctx.arc(x, y, r, startAngle, endAngle);
         ctx.stroke();
+        ctx.fill();
         ctx.restore();
     }
 
-    drawPart(x, y, r, pi) {
+    drawPart(x, y, r) {
+        const pi = Math.PI;
         x += r / 2;
         y += - 1 / 2 * r * Math.sqrt(3);
-        this.drawCircle(x, y, r, undefined, 1 / 3 * pi, 2 / 3 * pi);
+        this.drawCircle(x, y, r, this.colors.stroke, this.colors.fill, 1 / 3 * pi, 2 / 3 * pi);
         y += Math.sqrt(3) * r;
-        this.drawCircle(x, y, r, undefined, 4 / 3 * pi, 5 / 3 * pi);
+        this.drawCircle(x, y, r, this.colors.stroke, this.colors.fill, 4 / 3 * pi, 5 / 3 * pi);
+    }
+
+    drawLines(r, cy) {
+        const m = this.margin + 10;
+        const lengths = [6, 5, 4, 3];
+        for (let line = 0; line < lengths.length; line++) {
+            for (let i = 0; i < lengths[line]; i++) {
+                let top = line * 0.5 * r * Math.sqrt(3);
+                let left = m + (line * 0.5 + i) * r;
+                this.drawPart(left, cy + top, r);
+                if (line > 0) {
+                    this.drawPart(left, cy - top, r);
+                }
+            }
+        }
     }
 }

@@ -22,7 +22,11 @@ function init() {
         contentContainer,
         conf.width,
         conf.height,
-        conf.margin
+        conf.margin,
+        {
+            stroke: "#fff",
+            fill: "rgba(0, 0, 0, 0)"
+        }
     ).init();
 
 
