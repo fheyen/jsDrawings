@@ -14,6 +14,7 @@ class Drawing {
         this.margin = margin;
         this.parent = parent;
         this.canvas;
+        this.title = "Unnamed Drawing";
     }
 
     /**

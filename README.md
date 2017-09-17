@@ -16,3 +16,8 @@ Drawings in JavaScript. Suggestions are welcome.
 
 
 ## Planned
+
+
+Mandelbrot
+
+Dragon Curve (parameterized)
