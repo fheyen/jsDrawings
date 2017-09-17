@@ -29,8 +29,8 @@ class Mandelbrot extends Drawing {
         const max_iteration = 500;
 
         // for each pixel
-        for (let px = ~~this.margin, w = ~~(this.width - this.margin); px <= w; px += pixelSize) {
-            for (let py = ~~this.margin, h = ~~(this.height - this.margin); py <= ~~(h / 2); py += pixelSize) {
+        for (let px = 0, w = ~~(this.width); px <= w; px += pixelSize) {
+            for (let py = 0, h = ~~(this.height); py <= ~~(h / 2); py += pixelSize) {
 
                 // x0 = scaled x coordinate of pixel (scaled to lie in the Mandelbrot X scale (-2.5, 1))
                 let x0 = (px / w) * 3.5 - 2.5;
@@ -66,6 +66,7 @@ class Mandelbrot extends Drawing {
                 let color2 = palette[~~(iteration) + 1];
 
                 // iteration % 1 = fractional part of iteration.
+                // TODO: transparency?
                 let color = this.linear_interpolate(color1, color2, iteration % 1);
 
                 ctx.fillStyle = color;
