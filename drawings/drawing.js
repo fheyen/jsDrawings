@@ -41,10 +41,12 @@ class Drawing {
      * Creates the canvas.
      */
     createCanvas() {
-        this.canvas = document.createElement("canvas");
-        this.canvas.width = this.width;
-        this.canvas.height = this.height;
-        this.parent.appendChild(this.canvas);
+        if (!this.canvas) {
+            this.canvas = document.createElement("canvas");
+            this.canvas.width = this.width;
+            this.canvas.height = this.height;
+            this.parent.appendChild(this.canvas);
+        }
         return this;
     }
 

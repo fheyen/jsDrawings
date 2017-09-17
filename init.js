@@ -26,4 +26,11 @@ function init() {
             fill: "rgba(0, 0, 0, 0)"
         }
     ).init();
+
+    const mandebrot = new Mandelbrot(
+        contentContainer,
+        conf.width,
+        conf.height,
+        conf.margin
+    ).init();
 }

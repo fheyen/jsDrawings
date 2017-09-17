@@ -13,6 +13,7 @@ class Ornament extends Drawing {
      * @param width (default: 100) width of the canvas
      * @param height (default: 100) height of the canvas
      * @param margin (default: 0) margin around image content
+     * @param colors object {fill, stroke} with color srings
      */
     constructor(parent, width = 100, height = 100, margin = 0, colors) {
         super(parent, width, height, margin);
