@@ -11,7 +11,9 @@ Drawings in JavaScript. Suggestions are welcome.
 
 ![Ornament result image](img/ornament_small.png?raw=true "Ornament")
 
+### Mandelbrot
 
+![Mandelbrot result image](img/mandelbrot_small.png?raw=true "Mandelbrot")
 
 
 
