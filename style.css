@@ -4,10 +4,10 @@ body {
     text-align: center;
 }
 
-.drawingContainer {
+.frame {
    border-bottom: 1px solid #666;
 }
 
-.drawingContainer h2 {
+.frame h1 {
     border-bottom: 1px solid #0097EE;
 }
