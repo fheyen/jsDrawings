@@ -24,7 +24,7 @@ function init() {
         conf.height,
         conf.margin,
         {
-            stroke: "#fff",
+            stroke: "#000",
             fill: "rgba(0, 0, 0, 0)"
         }
     ).init();

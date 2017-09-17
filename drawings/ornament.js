@@ -7,8 +7,6 @@
  * Create and render a new object with
  *    const ornament = new Ornament(...).init();
  */
-// TODO: flood fill?
-// https://gist.github.com/binarymax/4071852
 class Ornament extends Drawing {
     /**
      * @param parent DOM elemnt to append this drawing to
@@ -33,13 +31,14 @@ class Ornament extends Drawing {
         // start values
         let r = Math.min(this.width, this.height) / 2 - this.margin;
 
-        // draw outer circle
-        this.drawCircle(cx, cy, r);
+        // draw outer circles
+        this.drawCircle(cx, cy, r, this.colors.stroke);
         r -= 10;
-        this.drawCircle(cx, cy, r);
+        this.drawCircle(cx, cy, r, this.colors.stroke);
 
         r /= 3;
 
+        // draw inner pattern line-wise and rotate canvas in between
         this.drawLines(r, cy);
 
         ctx.translate(this.width / 2, this.height / 2);
@@ -57,12 +56,11 @@ class Ornament extends Drawing {
         return this;
     }
 
-
     /**
      * Draws a circle or partial circle.
      * @param x x-cooridnate
      * @param y y-coordinate
-     * @param r r
+     * @param r radius
      * @param stroke (default: "#fff") stroke color
      * @param startAngle (default: 0) start angle
      * @param endAngle (default: 2 * Pi) end angle
@@ -79,6 +77,12 @@ class Ornament extends Drawing {
         ctx.restore();
     }
 
+    /**
+     * Draws a small part consisting of two partial circles.
+     * @param {*} x x-coordinate
+     * @param {*} y y-coordinate
+     * @param {*} r radius
+     */
     drawPart(x, y, r) {
         const pi = Math.PI;
         x += r / 2;
@@ -88,6 +92,11 @@ class Ornament extends Drawing {
         this.drawCircle(x, y, r, this.colors.stroke, this.colors.fill, 4 / 3 * pi, 5 / 3 * pi);
     }
 
+    /**
+     * Draws a line of parts.
+     * @param {*} r radius
+     * @param {*} cy center y coodinate of the canvas
+     */
     drawLines(r, cy) {
         const m = this.margin + 10;
         const lengths = [6, 5, 4, 3];
