@@ -18,6 +18,13 @@ function init() {
         conf.margin
     ).init();
 
+    const ornament = new Ornament(
+        contentContainer,
+        conf.width,
+        conf.height,
+        conf.margin
+    ).init();
+
 
 
 }

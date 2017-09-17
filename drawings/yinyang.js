@@ -2,8 +2,8 @@
  * Class for a Yin Yang drawing in JavaScript.
  *
  * Usage:
- * Create a new object with   const yinyang = new YinYang(...);
- * Render it using            yinyang.init();
+ * Create and render a new object with
+ *    const yinyang = new YinYang(...).init();
  */
 class YinYang extends Drawing {
   /**
