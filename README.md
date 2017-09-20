@@ -35,34 +35,34 @@ https://en.wikipedia.org/wiki/Sierpinski_triangle
 ## Planned
 
 
-#Sierpinski Carpet
+### Sierpinski Carpet
 
 https://en.wikipedia.org/wiki/Sierpinski_carpet
 
 
-#Pythagoras tree
+### Pythagoras tree
 
 https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)#Varying_the_angle
 
 
-#Gosper Curve
+### Gosper Curve
 
 https://en.wikipedia.org/wiki/Gosper_curve
 
 
-#Hexaflake
+### Hexaflake
 
 https://en.wikipedia.org/wiki/Hexaflake
 
 
-#Osgood Curve
+### Osgood Curve
 
 https://en.wikipedia.org/wiki/Osgood_curve
 
 
-#Rapidly-exploring Random Tree
+### Rapidly-exploring Random Tree
 
 https://en.wikipedia.org/wiki/Rapidly-exploring_random_tree
 
 
-#Animated drawing
+### Animated drawing
