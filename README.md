@@ -2,6 +2,8 @@
 
 Drawings in JavaScript. Suggestions are welcome.
 
+
+
 ## Finished
 
 ### Yin Yang
@@ -15,11 +17,14 @@ Drawings in JavaScript. Suggestions are welcome.
 
 ![Mandelbrot result image](img/mandelbrot_small.png?raw=true "Mandelbrot")
 
+### Dragon Curve
+
+![Dragon Curve result image](img/dragoncurve_small.png?raw=true "Dragon Curve")
+
+
 
 
 ## Planned
 
 
-Mandelbrot
-
-Dragon Curve (parameterized)
+Animated drawing
