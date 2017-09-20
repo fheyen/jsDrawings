@@ -8,28 +8,40 @@ Drawings in JavaScript. Suggestions are welcome.
 ## Finished
 
 
+### Overview
+
+![](img/extrasmall/yinyang_xs.png?raw=true "Yin Yang") ![](img/extrasmall/ornament_xs.png?raw=true "Ornament") ![](img/extrasmall/mandelbrot_xs.png?raw=true "Mandelbrot") ![](img/extrasmall/dragoncurve_xs.png?raw=true "Dragon Curve") ![](img/extrasmall/sierpinski_xs.png?raw=true "Sierpinski Triangle (using color)") ![](img/extrasmall/sierpinski2_xs.png?raw=true "Sierpinski Triangle (using opacity)")
+
+
 ### Yin Yang
-![Yin Yang result image](img/yinyang.png?raw=true "Yin Yang")
+
+https://en.wikipedia.org/wiki/Yin_and_yang
+
+![](img/yinyang.png?raw=true "Yin Yang")
 
 ### Ornament
 
-![Ornament result image](img/ornament.png?raw=true "Ornament")
+https://en.wikipedia.org/wiki/Overlapping_circles_grid
+
+![](img/ornament.png?raw=true "Ornament")
 
 ### Mandelbrot
 
-![Mandelbrot result image](img/mandelbrot.png?raw=true "Mandelbrot")
+https://en.wikipedia.org/wiki/Mandelbrot_set
+
+![](img/mandelbrot.png?raw=true "Mandelbrot")
 
 ### Dragon Curve
 
-![Dragon Curve result image](img/dragoncurve.png?raw=true "Dragon Curve")
+https://en.wikipedia.org/wiki/Dragon_curve
+
+![](img/dragoncurve.png?raw=true "Dragon Curve")
 
 ### Sierpinski Triangle
 
 https://en.wikipedia.org/wiki/Sierpinski_triangle
 
-![Sierpinski Triangle result image](img/sierpinski.png?raw=true "Sierpinski Triangle (using color)")
-
-![Sierpinski Triangle result image](img/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
+![](img/sierpinski.png?raw=true "Sierpinski Triangle (using color)") ![](img/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
 
 
 ## Planned
