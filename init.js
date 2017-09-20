@@ -10,12 +10,7 @@ function init() {
         margin: 10
     };
 
-    // const yinyang = new YinYang(
-    //     contentContainer,
-    //     conf.width,
-    //     conf.height,
-    //     conf.margin
-    // ).init();
+    // const yinyang = new YinYang(contentContainer).init();
 
     // const ornament = new Ornament(
     //     contentContainer,
@@ -28,17 +23,7 @@ function init() {
     //     }
     // ).init();
 
-    // const mandebrot = new Mandelbrot(
-    //     contentContainer,
-    //     conf.width,
-    //     conf.height,
-    //     conf.margin
-    // ).init();
+    // const mandebrot = new Mandelbrot(contentContainer).init();
 
-    const dragoncurve = new DragonCurve(
-        contentContainer,
-        conf.width,
-        conf.height,
-        conf.margin
-    ).init();
+    const dragoncurve = new DragonCurve(contentContainer).init();
 }
