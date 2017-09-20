@@ -25,5 +25,7 @@ function init() {
 
     // const mandebrot = new Mandelbrot(contentContainer).init();
 
-    const dragoncurve = new DragonCurve(contentContainer).init();
+    // const dragoncurve = new DragonCurve(contentContainer).init();
+
+    const sierpinski = new Sierpinski(contentContainer).init();
 }

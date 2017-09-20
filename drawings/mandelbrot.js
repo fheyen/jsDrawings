@@ -10,7 +10,7 @@ class Mandelbrot extends Drawing {
      * @param height (default: 100) height of the canvas
      * @param margin (default: 0) margin around image content
      */
-    constructor(parent, width = 100, height = 100, margin = 0, colors) {
+    constructor(parent, width = 500, height = 500, margin = 10, colors) {
         super(parent, width, height, margin);
         this.title = "Mandelbrot";
         this.colors = colors;

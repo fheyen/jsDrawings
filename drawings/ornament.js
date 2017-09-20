@@ -15,7 +15,7 @@ class Ornament extends Drawing {
      * @param margin (default: 0) margin around image content
      * @param colors object {fill, stroke} with color srings
      */
-    constructor(parent, width = 100, height = 100, margin = 0, colors) {
+    constructor(parent, width = 500, height = 500, margin = 10, colors) {
         super(parent, width, height, margin);
         this.title = "Ornament";
         this.colors = colors;
