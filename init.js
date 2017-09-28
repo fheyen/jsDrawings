@@ -10,22 +10,22 @@ function init() {
         margin: 10
     };
 
-    // const yinyang = new YinYang(contentContainer).init();
+    const yinyang = new YinYang(contentContainer).init();
 
-    // const ornament = new Ornament(
-    //     contentContainer,
-    //     conf.width,
-    //     conf.height,
-    //     conf.margin,
-    //     {
-    //         stroke: "#eee",
-    //         fill: "rgba(0, 0, 0, 0)"
-    //     }
-    // ).init();
+    const ornament = new Ornament(
+        contentContainer,
+        conf.width,
+        conf.height,
+        conf.margin,
+        {
+            stroke: "#eee",
+            fill: "rgba(0, 0, 0, 0)"
+        }
+    ).init();
 
-    // const mandebrot = new Mandelbrot(contentContainer).init();
+    const mandebrot = new Mandelbrot(contentContainer).init();
 
-    // const dragoncurve = new DragonCurve(contentContainer).init();
+    const dragoncurve = new DragonCurve(contentContainer).init();
 
     const sierpinski = new Sierpinski(contentContainer).init();
 }
