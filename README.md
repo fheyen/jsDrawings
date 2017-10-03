@@ -17,6 +17,7 @@ Drawings in JavaScript. Suggestions are welcome.
 ![](img/xs/gospercurve.png?raw=true "Gosper Curve")
 ![](img/xs/sierpinski.png?raw=true "Sierpinski Triangle (using color)")
 ![](img/xs/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
+![](img/xs/hexaflake.png?raw=true "Hexa Flake")
 
 
 ### Yin Yang
@@ -47,13 +48,20 @@ https://en.wikipedia.org/wiki/Dragon_curve
 
 https://en.wikipedia.org/wiki/Gosper_curve
 
-![](img/xs/gospercurve.png?raw=true "Gosper Curve")
+![](img/gospercurve.png?raw=true "Gosper Curve")
 
 ### Sierpinski Triangle
 
 https://en.wikipedia.org/wiki/Sierpinski_triangle
 
-![](img/sierpinski.png?raw=true "Sierpinski Triangle (using color)") ![](img/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
+![](img/sierpinski.png?raw=true "Sierpinski Triangle (using color)")
+![](img/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
+
+### Hexaflake
+
+https://en.wikipedia.org/wiki/Hexaflake
+
+![](img/hexaflake.png?raw=true "Hexa Flake")
 
 
 ## Planned
@@ -67,16 +75,6 @@ https://en.wikipedia.org/wiki/Sierpinski_carpet
 ### Pythagoras tree
 
 https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)#Varying_the_angle
-
-
-### Gosper Curve
-
-https://en.wikipedia.org/wiki/Gosper_curve
-
-
-### Hexaflake
-
-https://en.wikipedia.org/wiki/Hexaflake
 
 
 ### Osgood Curve
