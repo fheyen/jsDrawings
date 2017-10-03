@@ -2,10 +2,6 @@
  * Class for an ornament drawing in JavaScript.
  *
  * https://de.wikipedia.org/wiki/Blume_des_Lebens
- *
- * Usage:
- * Create and render a new object with
- *    const ornament = new Ornament(...).init();
  */
 class Ornament extends Drawing {
     /**
