@@ -23,7 +23,7 @@ class GosperCurve extends Drawing {
 
         // color brewer spectral 11
         const palette = ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"];
-        const level = 5;
+        const level = 4;
 
         // get curve
         let curve = "A";
@@ -112,12 +112,10 @@ class GosperCurve extends Drawing {
     }
 
     getNext(curve) {
-        console.log(curve);
         // A -> A-B--B+A++AA+B-
         // B -> +A-BB--B-A++A+B
-        curve = this.replaceAll(curve, "A", "A-b--b+A++AA+b-");
+        curve = this.replaceAll(curve, "A", "A-B--B+A++AA+B-");
         curve = this.replaceAll(curve, "B", "+A-BB--B-A++A+B");
-        curve = this.replaceAll(curve, "b", "B");
         return curve;
     }
 

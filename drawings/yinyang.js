@@ -10,7 +10,7 @@ class YinYang extends Drawing {
    * @param parent DOM elemnt to append this drawing to
    * @param width (default: 100) width of the canvas
    * @param height (default: 100) height of the canvas
-   * @param margin (default: 0) margin around image content
+   * @param margin (default: 10) margin around image content
    */
   constructor(parent, width = 500, height = 500, margin = 10) {
     super(parent, width, height, margin);

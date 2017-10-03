@@ -14,6 +14,7 @@ Drawings in JavaScript. Suggestions are welcome.
 ![](img/xs/ornament.png?raw=true "Ornament")
 ![](img/xs/mandelbrot.png?raw=true "Mandelbrot")
 ![](img/xs/dragoncurve.png?raw=true "Dragon Curve")
+![](img/xs/gospercurve.png?raw=true "Gosper Curve")
 ![](img/xs/sierpinski.png?raw=true "Sierpinski Triangle (using color)")
 ![](img/xs/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
 
@@ -41,6 +42,12 @@ https://en.wikipedia.org/wiki/Mandelbrot_set
 https://en.wikipedia.org/wiki/Dragon_curve
 
 ![](img/dragoncurve.png?raw=true "Dragon Curve")
+
+### Gosper Curve
+
+https://en.wikipedia.org/wiki/Gosper_curve
+
+![](img/xs/gospercurve.png?raw=true "Gosper Curve")
 
 ### Sierpinski Triangle
 

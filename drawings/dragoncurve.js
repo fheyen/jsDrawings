@@ -8,7 +8,7 @@ class DragonCurve extends Drawing {
      * @param parent DOM elemnt to append this drawing to
      * @param width (default: 100) width of the canvas
      * @param height (default: 100) height of the canvas
-     * @param margin (default: 0) margin around image content
+     * @param margin (default: 10) margin around image content
      */
     constructor(parent, width = 500, height = 500, margin = 10) {
         super(parent, width, height, margin);
@@ -35,7 +35,6 @@ class DragonCurve extends Drawing {
         let currentX = 0, minX = 0, maxX = 0;
         let currentY = -10, minY = -10, maxY = -10;
         let currentAngleDeg = 90; // start upwards
-
         let path = [];
         path.push([0, 0]);
         path.push([0, -10]);
@@ -67,11 +66,11 @@ class DragonCurve extends Drawing {
             // add new point
             path.push([currentX, currentY]);
 
+            // update min and max
             minX = currentX < minX ? currentX : minX;
             minY = currentY < minY ? currentY : minY;
             maxX = currentX > maxX ? currentX : maxX;
             maxY = currentY > maxY ? currentY : maxY;
-
         }
 
         // rescale and translate
