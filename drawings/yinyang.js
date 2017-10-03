@@ -12,7 +12,7 @@ class YinYang extends Drawing {
    * @param height (default: 100) height of the canvas
    * @param margin (default: 10) margin around image content
    */
-  constructor(parent, width = 500, height = 500, margin = 10) {
+  constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
     super(parent, width, height, margin);
     this.title = "Yin Yang";
   }
@@ -27,34 +27,15 @@ class YinYang extends Drawing {
     const centerY = this.height / 2;
     const radius = Math.min(this.width, this.height) / 2 - this.margin;
 
-    this.drawCircle(centerX, centerY, radius, "#000", 0, Math.PI);
-    this.drawCircle(centerX, centerY, radius, "#fff", Math.PI, 2 * Math.PI);
+    lib.drawCircle(ctx, centerX, centerY, radius, "#000", "#000", 0, Math.PI);
+    lib.drawCircle(ctx, centerX, centerY, radius, "#fff", "#fff", Math.PI, 2 * Math.PI);
 
-    this.drawCircle(centerX - radius / 2, centerY, radius / 2, "#000");
-    this.drawCircle(centerX + radius / 2, centerY, radius / 2, "#fff");
+    lib.drawCircle(ctx, centerX - radius / 2, centerY, radius / 2, "#000", "#000");
+    lib.drawCircle(ctx, centerX + radius / 2, centerY, radius / 2, "#fff", "#fff");
 
-    this.drawCircle(centerX - radius / 2, centerY, radius / 8, "#fff");
-    this.drawCircle(centerX + radius / 2, centerY, radius / 8, "#000");
+    lib.drawCircle(ctx, centerX - radius / 2, centerY, radius / 8, "#fff", "#fff");
+    lib.drawCircle(ctx, centerX + radius / 2, centerY, radius / 8, "#000", "#000");
 
     return this;
-  }
-
-  /**
-   * Draws a circle or partial circle.
-   * @param x x-cooridnate
-   * @param y y-coordinate
-   * @param radius radius
-   * @param fill fill color
-   * @param startAngle (default: 0) start angle
-   * @param endAngle (default: 2 * Pi) end angle
-   */
-  drawCircle(x, y, radius, fill, startAngle = 0, endAngle = 2 * Math.PI) {
-    const ctx = this.canvas.getContext("2d");
-    ctx.save();
-    ctx.fillStyle = fill;
-    ctx.beginPath();
-    ctx.arc(x, y, radius, startAngle, endAngle);
-    ctx.fill();
-    ctx.restore();
   }
 }

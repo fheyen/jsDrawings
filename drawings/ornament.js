@@ -13,12 +13,10 @@ class Ornament extends Drawing {
      * @param width (default: 100) width of the canvas
      * @param height (default: 100) height of the canvas
      * @param margin (default: 10) margin around image content
-     * @param colors object {fill, stroke} with color srings
      */
-    constructor(parent, width = 500, height = 500, margin = 10, colors) {
+    constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10, colors) {
         super(parent, width, height, margin);
         this.title = "Ornament";
-        this.colors = colors;
     }
 
     /**
@@ -33,9 +31,9 @@ class Ornament extends Drawing {
         let r = Math.min(this.width, this.height) / 2 - this.margin;
 
         // draw outer circles
-        this.drawCircle(cx, cy, r, this.colors.stroke);
+        lib.drawCircle(ctx, cx, cy, r, "#fff", "rgba(0, 0, 0, 0)");
         r -= 10;
-        this.drawCircle(cx, cy, r, this.colors.stroke);
+        lib.drawCircle(ctx, cx, cy, r, "#fff", "rgba(0, 0, 0, 0)");
 
         r /= 3;
 
@@ -58,45 +56,25 @@ class Ornament extends Drawing {
     }
 
     /**
-     * Draws a circle or partial circle.
-     * @param x x-cooridnate
-     * @param y y-coordinate
-     * @param r radius
-     * @param stroke (default: "#fff") stroke color
-     * @param startAngle (default: 0) start angle
-     * @param endAngle (default: 2 * Pi) end angle
-     */
-    drawCircle(x, y, r, stroke = "#fff", fill = "rgba(0, 0, 0, 0)", startAngle = 0, endAngle = 2 * Math.PI) {
-        const ctx = this.canvas.getContext("2d");
-        ctx.save();
-        ctx.strokeStyle = stroke;
-        ctx.fillStyle = fill;
-        ctx.beginPath();
-        ctx.arc(x, y, r, startAngle, endAngle);
-        ctx.stroke();
-        ctx.fill();
-        ctx.restore();
-    }
-
-    /**
      * Draws a small part consisting of two partial circles.
-     * @param {*} x x-coordinate
-     * @param {*} y y-coordinate
-     * @param {*} r radius
+     * @param {number} x x-coordinate
+     * @param {number} y y-coordinate
+     * @param {number} r radius
      */
     drawPart(x, y, r) {
+        let ctx = this.canvas.getContext("2d");
         const pi = Math.PI;
         x += r / 2;
         y += - 1 / 2 * r * Math.sqrt(3);
-        this.drawCircle(x, y, r, this.colors.stroke, this.colors.fill, 1 / 3 * pi, 2 / 3 * pi);
+        lib.drawCircle(ctx, x, y, r, "#fff", "rgba(0, 0, 0, 0)", 1 / 3 * pi, 2 / 3 * pi);
         y += Math.sqrt(3) * r;
-        this.drawCircle(x, y, r, this.colors.stroke, this.colors.fill, 4 / 3 * pi, 5 / 3 * pi);
+        lib.drawCircle(ctx, x, y, r, "#fff", "rgba(0, 0, 0, 0)", 4 / 3 * pi, 5 / 3 * pi);
     }
 
     /**
      * Draws a line of parts.
-     * @param {*} r radius
-     * @param {*} cy center y coodinate of the canvas
+     * @param {number} r radius
+     * @param {number} cy center y coodinate of the canvas
      */
     drawLines(r, cy) {
         const m = this.margin + 10;

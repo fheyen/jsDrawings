@@ -4,7 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <script src="./drawings/drawing.js"></script>
+  <title>JavaScript Drawings</title>
+
+  <script src="./lib.js"></script>
+  <script src="./drawings/_drawing.js"></script>
+
   <script src="./drawings/yinyang.js"></script>
   <script src="./drawings/ornament.js"></script>
   <script src="./drawings/mandelbrot.js"></script>
@@ -20,11 +24,30 @@
       text-align: center;
     }
   </style>
+
+  <script>
+    /**
+     * Creates drawings.
+     */
+    function init() {
+
+      // const yinyang = new YinYang().init();
+
+      // const ornament = new Ornament().init();
+
+      // const mandebrot = new Mandelbrot().init();
+
+      // const dragoncurve = new DragonCurve().init();
+
+      // const gospercurve = new GosperCurve().init();
+
+      // const sierpinski = new Sierpinski().init();
+    }
+  </script>
 </head>
 
 <body onload="init()">
-  <div id="content">
-  </div>
+
 </body>
 
 </html>

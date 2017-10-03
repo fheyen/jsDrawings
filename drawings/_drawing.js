@@ -4,11 +4,11 @@
 class Drawing {
     /***
      * @param parent DOM elemnt to append this drawing to
-     * @param width (default: 100) width of the canvas
-     * @param height (default: 100) height of the canvas
-     * @param margin (default: 10) margin around image content
+     * @param width width of the canvas
+     * @param height height of the canvas
+     * @param margin margin around image content
      */
-    constructor(parent, width = 500, height = 500, margin = 10) {
+    constructor(parent, width, height, margin) {
         this.width = width;
         this.height = height;
         this.margin = margin;
@@ -47,6 +47,7 @@ class Drawing {
             this.canvas.height = this.height;
             this.parent.appendChild(this.canvas);
         }
+        this.ctx = this.canvas.getContext("2d");
         return this;
     }
 

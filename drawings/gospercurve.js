@@ -10,7 +10,7 @@ class GosperCurve extends Drawing {
      * @param height (default: 100) height of the canvas
      * @param margin (default: 10) margin around image content
      */
-    constructor(parent, width = 500, height = 500, margin = 10) {
+    constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
         super(parent, width, height, margin);
         this.title = "Gosper Curve";
     }
@@ -53,6 +53,7 @@ class GosperCurve extends Drawing {
                     path.push([currentX, currentY]);
 
                     // update min and max
+                    // TODO: use lib
                     minX = currentX < minX ? currentX : minX;
                     minY = currentY < minY ? currentY : minY;
                     maxX = currentX > maxX ? currentX : maxX;
@@ -75,67 +76,21 @@ class GosperCurve extends Drawing {
             }
         }
 
-        // rescale and translate
-        const w = this.width;
-        const h = this.height;
-        const m = this.margin;
-
-        // translate (minX, minY) to (0, 0)
-        path = path.map(function (p) { return [p[0] - minX, p[1] - minY] });
-
-        // scale to fit into canvas - margin
-        const factor = Math.min((w - 2 * m) / (maxX - minX), (h - 2 * m) / (maxY - minY));
-        path = path.map(p => [p[0] * factor, p[1] * factor]);
-
-        // center
-        let width = (maxX - minX) * factor;
-        let height = (maxY - minY) * factor;
-        let moveX = (w - width) / 2;
-        let moveY = (h - height) / 2;
-        path = path.map(p => [p[0] + moveX, p[1] + moveY]);
+        // scale and center
+        path = lib.rescaleAndCenter(path, this.width, this.height, this.margin);
 
         // draw
-        let oldP = path[0];
-        let i = 0;
-        path.forEach(p => {
-            ctx.beginPath();
-            ctx.moveTo(oldP[0], oldP[1]);
-            ctx.lineTo(p[0], p[1]);
-            ctx.closePath();
-            // change color while progressing
-            ctx.strokeStyle = palette[~~((i++ / path.length) * palette.length)];
-            ctx.stroke();
-            oldP = p;
-        });
+        lib.drawPath(ctx, path, palette);
 
         return this;
     }
 
     getNext(curve) {
-        console.log(curve);
         // A -> A-B--B+A++AA+B-
         // B -> +A-BB--B-A++A+B
-        curve = this.replaceAll(curve, "A", "A-b--b+A++AA+b-");
-        curve = this.replaceAll(curve, "B", "+A-BB--B-A++A+B");
-        curve = this.replaceAll(curve, "b", "B");
+        curve = lib.replaceAll(curve, "A", "A-b--b+A++AA+b-");
+        curve = lib.replaceAll(curve, "B", "+A-BB--B-A++A+B");
+        curve = lib.replaceAll(curve, "b", "B");
         return curve;
-    }
-
-    /*******************************************************************************
-     * Escapes a regular expression.
-     *
-     * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
-     */
-    escapeRegExp(str) {
-        return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-    }
-
-    /*******************************************************************************
-     * Replaces all occurrences of <find> in <str> with <replace>.
-     *
-     * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
-     */
-    replaceAll(str, find, replace) {
-        return str.replace(new RegExp(this.escapeRegExp(find), "g"), replace);
     }
 }

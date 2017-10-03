@@ -10,19 +10,20 @@ class Sierpinski extends Drawing {
      * @param height (default: 100) height of the canvas
      * @param margin (default: 10) margin around image content
      */
-    constructor(parent, width = 500, height = 500, margin = 10) {
+    constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
         super(parent, width, height, margin);
         this.title = "Sierpinski Triangle";
-        this.palette = ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd"];
     }
 
     /**
      * Draws the image.
      */
     draw() {
-        const maxLevel = 12;
+        // maximum recursion level
+        const maxLevel = 10;
 
-        let startPoints = [
+        // start triangle
+        const startPoints = [
             {
                 x: this.margin,
                 y: this.height - this.margin
@@ -43,13 +44,15 @@ class Sierpinski extends Drawing {
         return this;
     }
 
+    /**
+     * Recursively draws triangles.
+     * @param {*} level current recursion level
+     * @param {*} maxLevel maximum recursion level
+     * @param {*} points points of the parent triangle
+     */
     recurse(level, maxLevel, points) {
-        // change color while progressing
-        // let color = this.palette[~~((level / maxLevel) * (this.palette.length - 1))];
-        let color = "rgba(0, 0, 0, 0.1)";
-
         // draw triangle
-        this.drawTriangle(points, color);
+        lib.drawTriangle(this.ctx, points, "rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.1)");
 
         // get points of child triangles
         let pointsA = [
@@ -79,28 +82,11 @@ class Sierpinski extends Drawing {
             points[2]
         ];
 
-
         // recurse
         if (level > 1) {
             this.recurse(level - 1, maxLevel, pointsA);
             this.recurse(level - 1, maxLevel, pointsB);
             this.recurse(level - 1, maxLevel, pointsC);
         }
-    }
-
-    /**
-     * Draws a filled triangle.
-     * @param {any[]} points array with 3 points as {x, y}
-     * @param {string} color fill style
-     */
-    drawTriangle(points, color) {
-        const ctx = this.canvas.getContext("2d");
-        ctx.beginPath();
-        ctx.moveTo(points[0].x, points[0].y);
-        ctx.lineTo(points[1].x, points[1].y);
-        ctx.lineTo(points[2].x, points[2].y);
-        ctx.closePath();
-        ctx.fillStyle = color;
-        ctx.fill();
     }
 }

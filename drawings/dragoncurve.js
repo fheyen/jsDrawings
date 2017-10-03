@@ -10,7 +10,7 @@ class DragonCurve extends Drawing {
      * @param height (default: 100) height of the canvas
      * @param margin (default: 10) margin around image content
      */
-    constructor(parent, width = 500, height = 500, margin = 10) {
+    constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
         super(parent, width, height, margin);
         this.title = "Dragon Curve";
     }
@@ -33,11 +33,11 @@ class DragonCurve extends Drawing {
 
         // draw curve
         let currentX = 0, minX = 0, maxX = 0;
-        let currentY = -10, minY = -10, maxY = -10;
+        let currentY = -1, minY = -1, maxY = -1;
         let currentAngleDeg = 90; // start upwards
         let path = [];
         path.push([0, 0]);
-        path.push([0, -10]);
+        path.push([0, -1]);
 
         for (let i = 0, len = curve.length; i < len; i++) {
             // go 1 step in current direction
@@ -48,63 +48,19 @@ class DragonCurve extends Drawing {
                 currentAngleDeg = currentAngleDeg < 0 ? currentAngleDeg + 360 : currentAngleDeg;
             }
 
-            switch (currentAngleDeg) {
-                case 0:
-                    currentX += 10;
-                    break;
-                case 90:
-                    currentY -= 10;
-                    break;
-                case 180:
-                    currentX -= 10;
-                    break;
-                case 270:
-                    currentY += 10;
-                    break;
-            }
+            let currentAngleRad = currentAngleDeg / 180 * Math.PI;
+            currentX += Math.cos(currentAngleRad);
+            currentY += Math.sin(currentAngleRad);
 
             // add new point
             path.push([currentX, currentY]);
-
-            // update min and max
-            minX = currentX < minX ? currentX : minX;
-            minY = currentY < minY ? currentY : minY;
-            maxX = currentX > maxX ? currentX : maxX;
-            maxY = currentY > maxY ? currentY : maxY;
         }
 
-        // rescale and translate
-        const w = this.width;
-        const h = this.height;
-        const m = this.margin;
-
-        // translate (minX, minY) to (0, 0)
-        path = path.map(function (p) { return [p[0] - minX, p[1] - minY] });
-
-        // scale to fit into canvas - margin
-        const factor = Math.min((w - 2 * m) / (maxX - minX), (h - 2 * m) / (maxY - minY));
-        path = path.map(p => [p[0] * factor, p[1] * factor]);
-
-        // center
-        let width = (maxX - minX) * factor;
-        let height = (maxY - minY) * factor;
-        let moveX = (w - width) / 2;
-        let moveY = (h - height) / 2;
-        path = path.map(p => [p[0] + moveX, p[1] + moveY]);
+        // scale and center
+        path = lib.rescaleAndCenter(path, this.width, this.height, this.margin);
 
         // draw
-        let oldP = path[0];
-        let i = 0;
-        path.forEach(p => {
-            ctx.beginPath();
-            ctx.moveTo(oldP[0], oldP[1]);
-            ctx.lineTo(p[0], p[1]);
-            ctx.closePath();
-            // change color while progressing
-            ctx.strokeStyle = palette[~~((i++ / path.length) * palette.length)];
-            ctx.stroke();
-            oldP = p;
-        });
+        lib.drawPath(ctx, path, palette);
 
         return this;
     }
