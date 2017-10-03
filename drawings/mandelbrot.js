@@ -19,14 +19,31 @@ class Mandelbrot extends Drawing {
      * Draws the image.
      */
     draw() {
-        const ctx = this.canvas.getContext("2d");
-        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        // source: https://stackoverflow.com/questions/16500656/which-color-gradient-is-used-to-color-mandelbrot-in-wikipedia
+        const palette = [
+            lib.rgbColorToHex(66, 30, 15),
+            lib.rgbColorToHex(25, 7, 26),
+            lib.rgbColorToHex(9, 1, 47),
+            lib.rgbColorToHex(4, 4, 73),
+            lib.rgbColorToHex(0, 7, 100),
+            lib.rgbColorToHex(12, 44, 138),
+            lib.rgbColorToHex(24, 82, 177),
+            lib.rgbColorToHex(57, 125, 209),
+            lib.rgbColorToHex(134, 181, 229),
+            lib.rgbColorToHex(211, 236, 248),
+            lib.rgbColorToHex(241, 233, 191),
+            lib.rgbColorToHex(248, 201, 95),
+            lib.rgbColorToHex(255, 170, 0),
+            lib.rgbColorToHex(204, 128, 0),
+            lib.rgbColorToHex(153, 87, 0),
+            lib.rgbColorToHex(106, 52, 3)
+        ];
 
-        // color brewer spectral 11
-        const palette = ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"];
+        const pixelSize = 1;
+        const max_iteration = 800;
 
-        const pixelSize = 0.5;
-        const max_iteration = 500;
+
+        this.debugmax = 0;
 
         // for each pixel
         for (let px = 0, w = ~~(this.width); px <= w; px += pixelSize) {
@@ -62,19 +79,48 @@ class Mandelbrot extends Drawing {
                     iteration = iteration + 1 - nu;
                 }
 
-                let color1 = palette[~~(iteration)];
-                let color2 = palette[~~(iteration) + 1];
-
-                // iteration % 1 = fractional part of iteration.
-                let color = lib.colorLinearInterpolation(color1, color2, iteration % 1);
-
-                ctx.fillStyle = color;
-                ctx.fillRect(px, py, pixelSize, pixelSize);
+                // get color
+                this.ctx.fillStyle = this.getCachedColor(iteration, max_iteration, palette);
+                this.ctx.fillRect(px, py, pixelSize, pixelSize);
                 // use symmetry
-                ctx.fillRect(px, ~~(h - py), pixelSize, pixelSize);
+                this.ctx.fillRect(px, h - py, pixelSize, pixelSize);
             }
         }
 
         return this;
+    }
+
+    /**
+     * Use a cache to avaoid redundant color interpolation.
+     * @param {number} value value to map to a color
+     * @param {number} max maximum possible value
+     * @param {string[]} palette color palette
+     */
+    getCachedColor(value, max, palette) {
+        // crate cache if not yet done
+        if (!this.colorCache) {
+            this.colorCache = new Map();
+        }
+
+        if (this.colorCache.has(value)) {
+            // cache lookup
+            return this.colorCache.get(value);
+        } else {
+            // calculate value
+            let color1 = palette[~~(value / max * (palette.length - 1))];
+            let color2 = palette[~~(value / max * (palette.length - 1)) + 1];
+            if (!color2) {
+                color2 = palette[palette.length - 1];
+            }
+
+            let fraction = (value / (max / palette.length));
+            if (fraction >= 1) {
+                fraction = 1;
+            }
+
+            let color = lib.colorLinearInterpolation(color1, color2, fraction);
+            this.colorCache.set(value, color);
+            return color;
+        }
     }
 }

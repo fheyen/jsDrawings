@@ -19,10 +19,8 @@ class GosperCurve extends Drawing {
      * Draws the image.
      */
     draw() {
-        const ctx = this.canvas.getContext("2d");
-
         // color brewer spectral 11
-        const palette = ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"];
+        const palette = ["#9e0142", "#f46d43", "#fdae61", "#fee08b", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"];
         const level = 5;
 
         // get curve
@@ -51,13 +49,6 @@ class GosperCurve extends Drawing {
 
                     // add new point
                     path.push([currentX, currentY]);
-
-                    // update min and max
-                    // TODO: use lib
-                    minX = currentX < minX ? currentX : minX;
-                    minY = currentY < minY ? currentY : minY;
-                    maxX = currentX > maxX ? currentX : maxX;
-                    maxY = currentY > maxY ? currentY : maxY;
                     break;
 
                 case "+":
@@ -80,7 +71,7 @@ class GosperCurve extends Drawing {
         path = lib.rescaleAndCenter(path, this.width, this.height, this.margin);
 
         // draw
-        lib.drawPath(ctx, path, palette);
+        lib.drawPath(this.ctx, path, palette, false);
 
         return this;
     }

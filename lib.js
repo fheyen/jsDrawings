@@ -104,29 +104,25 @@ const lib = {
      * @param {number} fraction value in [0, 1] that represents the relative position between to interpolation points
      */
     colorLinearInterpolation(color1, color2, fraction) {
-        let rgb1 = this.hexColorToRGB(color1);
-        let rgb2 = this.hexColorToRGB(color2);
-
-        let resultRgb = {
-            r: rgb1.r * (1 - fraction) + rgb2.r * fraction,
-            g: rgb1.g * (1 - fraction) + rgb2.g * fraction,
-            b: rgb1.b * (1 - fraction) + rgb2.b * fraction
-        };
-
-        return this.rgbColorToHex({ r, g, b } = resultRgb);
-    },
-
-    /**
-     * Creates and returns a canvas object.
-     * @param {number} width width
-     * @param {number} height height
-     */
-    createCanvas(width, height) {
-        let canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        // document.getElementsByTagName("body")[0].appendChild(canvas);
-        return canvas;
+        if (fraction > 1 || fraction < 0) {
+            console.error(`fraction is not in [0, 1]: ${fraction}`);
+        }
+        try {
+            let rgb1 = this.hexColorToRGB(color1);
+            let rgb2 = this.hexColorToRGB(color2);
+            let resultRgb = {
+                r: Math.round(rgb1.r * (1 - fraction) + rgb2.r * fraction),
+                g: Math.round(rgb1.g * (1 - fraction) + rgb2.g * fraction),
+                b: Math.round(rgb1.b * (1 - fraction) + rgb2.b * fraction)
+            };
+            let { r, g, b } = resultRgb;
+            return this.rgbColorToHex(r, g, b);
+        } catch (error) {
+            console.error(error);
+            console.error("invalid colors:");
+            console.error(color1);
+            console.error(color2);
+        }
     },
 
     /**
@@ -178,20 +174,34 @@ const lib = {
      * @param {array[]} path points as [x, y]
      * @param {string[]} palette stroke style array
      */
-    drawPath(ctx, path, palette) {
-        // draw
+    drawPath(ctx, path, palette, interpolate = true) {
         let oldP = path[0];
         let i = 0;
+        let blocklength = path.length / palette.length;
         path.forEach(p => {
             ctx.beginPath();
             ctx.moveTo(oldP[0], oldP[1]);
             ctx.lineTo(p[0], p[1]);
             ctx.closePath();
+
             // change color while progressing
-            ctx.strokeStyle = palette[~~((i++ / path.length) * palette.length)];
+            let color1 = palette[~~(i / path.length * (palette.length - 1))];
+
+            if (interpolate) {
+                // interpolate intermediate colors
+                let color2 = palette[~~(i / path.length * (palette.length - 1)) + 1];
+                if (!color2) {
+                    color2 = palette[palette.length - 1];
+                }
+                let fraction = (i % blocklength) / blocklength;
+                ctx.strokeStyle = lib.colorLinearInterpolation(color1, color2, fraction);
+            } else {
+                ctx.strokeStyle = color1;
+            }
             ctx.stroke();
+
+            i++;
             oldP = p;
         });
     }
-
 }

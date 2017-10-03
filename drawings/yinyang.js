@@ -21,20 +21,18 @@ class YinYang extends Drawing {
    * Draws the image.
    */
   draw() {
-    const ctx = this.canvas.getContext("2d");
-
     const centerX = this.width / 2;
     const centerY = this.height / 2;
     const radius = Math.min(this.width, this.height) / 2 - this.margin;
 
-    lib.drawCircle(ctx, centerX, centerY, radius, "#000", "#000", 0, Math.PI);
-    lib.drawCircle(ctx, centerX, centerY, radius, "#fff", "#fff", Math.PI, 2 * Math.PI);
+    lib.drawCircle(this.ctx, centerX, centerY, radius, "#000", "#000", 0, Math.PI);
+    lib.drawCircle(this.ctx, centerX, centerY, radius, "#fff", "#fff", Math.PI, 2 * Math.PI);
 
-    lib.drawCircle(ctx, centerX - radius / 2, centerY, radius / 2, "#000", "#000");
-    lib.drawCircle(ctx, centerX + radius / 2, centerY, radius / 2, "#fff", "#fff");
+    lib.drawCircle(this.ctx, centerX - radius / 2, centerY, radius / 2, "#000", "#000");
+    lib.drawCircle(this.ctx, centerX + radius / 2, centerY, radius / 2, "#fff", "#fff");
 
-    lib.drawCircle(ctx, centerX - radius / 2, centerY, radius / 8, "#fff", "#fff");
-    lib.drawCircle(ctx, centerX + radius / 2, centerY, radius / 8, "#000", "#000");
+    lib.drawCircle(this.ctx, centerX - radius / 2, centerY, radius / 8, "#fff", "#fff");
+    lib.drawCircle(this.ctx, centerX + radius / 2, centerY, radius / 8, "#000", "#000");
 
     return this;
   }

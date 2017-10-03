@@ -23,7 +23,7 @@ class Ornament extends Drawing {
      * Draws the image.
      */
     draw() {
-        const ctx = this.canvas.getContext("2d");
+        const ctx = this.ctx;
         const cx = this.width / 2;
         const cy = this.height / 2;
 
