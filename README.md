@@ -10,7 +10,12 @@ Drawings in JavaScript. Suggestions are welcome.
 
 ### Overview
 
-![](img/extrasmall/yinyang_xs.png?raw=true "Yin Yang") ![](img/extrasmall/ornament_xs.png?raw=true "Ornament") ![](img/extrasmall/mandelbrot_xs.png?raw=true "Mandelbrot") ![](img/extrasmall/dragoncurve_xs.png?raw=true "Dragon Curve") ![](img/extrasmall/sierpinski_xs.png?raw=true "Sierpinski Triangle (using color)") ![](img/extrasmall/sierpinski2_xs.png?raw=true "Sierpinski Triangle (using opacity)")
+![](img/xs/yinyang.png?raw=true "Yin Yang")
+![](img/xs/ornament.png?raw=true "Ornament")
+![](img/xs/mandelbrot.png?raw=true "Mandelbrot")
+![](img/xs/dragoncurve.png?raw=true "Dragon Curve")
+![](img/xs/sierpinski.png?raw=true "Sierpinski Triangle (using color)")
+![](img/xs/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
 
 
 ### Yin Yang
