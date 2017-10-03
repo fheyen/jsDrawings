@@ -1,14 +1,14 @@
 /**
- * Class for a Dragon Curve drawing in JavaScript.
+ * Class for a Sierpinski Triangle drawing in JavaScript.
  *
  * https://en.wikipedia.org/wiki/Sierpinski_triangle
  */
 class Sierpinski extends Drawing {
     /**
-     * @param parent DOM elemnt to append this drawing to
-     * @param width (default: 100) width of the canvas
-     * @param height (default: 100) height of the canvas
-     * @param margin (default: 10) margin around image content
+     * @param {Element} parent DOM elemnt to append this drawing to
+     * @param {number} width (default: 100) width of the canvas
+     * @param {number} height (default: 100) height of the canvas
+     * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
         super(parent, width, height, margin);
@@ -46,13 +46,13 @@ class Sierpinski extends Drawing {
 
     /**
      * Recursively draws triangles.
-     * @param {*} level current recursion level
-     * @param {*} maxLevel maximum recursion level
-     * @param {*} points points of the parent triangle
+     * @param {number} level current recursion level
+     * @param {number} maxLevel maximum recursion level
+     * @param {number} points points of the parent triangle
      */
     recurse(level, maxLevel, points) {
         // draw triangle
-        lib.drawTriangle(this.ctx, points, "rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.1)");
+        lib.drawPolygon(this.ctx, points, "rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.1)");
 
         // get points of child triangles
         let pointsA = [

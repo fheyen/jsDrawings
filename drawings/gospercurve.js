@@ -5,10 +5,10 @@
  */
 class GosperCurve extends Drawing {
     /**
-     * @param parent DOM elemnt to append this drawing to
-     * @param width (default: 100) width of the canvas
-     * @param height (default: 100) height of the canvas
-     * @param margin (default: 10) margin around image content
+     * @param {Element} parent DOM elemnt to append this drawing to
+     * @param {number} width (default: 100) width of the canvas
+     * @param {number} height (default: 100) height of the canvas
+     * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
         super(parent, width, height, margin);

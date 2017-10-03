@@ -3,10 +3,10 @@
  */
 class Drawing {
     /***
-     * @param parent DOM elemnt to append this drawing to
-     * @param width width of the canvas
-     * @param height height of the canvas
-     * @param margin margin around image content
+     * @param {Element} parent DOM elemnt to append this drawing to
+     * @param {number} width width of the canvas
+     * @param {number} height height of the canvas
+     * @param {number} margin margin around image content
      */
     constructor(parent, width, height, margin) {
         this.width = width;

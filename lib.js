@@ -149,18 +149,19 @@ const lib = {
     },
 
     /**
-     * Draws a filled triangle.
+     * Draws a filled polygon.
      * @param {CanvasContext} ctx canvas context
-     * @param {any[]} points array with 3 points as {x, y}
+     * @param {any[]} points array with points as {x, y}
      * @param {string} stroke stroke style
      * @param {string} fill fill style
      */
-    drawTriangle(ctx, points, stroke = "#000", fill = "rgba(0, 0, 0, 0)") {
+    drawPolygon(ctx, points, stroke = "#000", fill = "rgba(0, 0, 0, 0)") {
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
-        ctx.lineTo(points[1].x, points[1].y);
-        ctx.lineTo(points[2].x, points[2].y);
+        for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
         ctx.closePath();
         ctx.strokeStyle = stroke;
         ctx.fillStyle = fill;
