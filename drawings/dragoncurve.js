@@ -21,10 +21,8 @@ class DragonCurve extends Drawing {
     draw() {
         const ctx = this.canvas.getContext("2d");
 
-
         // color brewer spectral 11
         const palette = ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"];
-
         const level = 10;
 
         // get curve
@@ -82,7 +80,6 @@ class DragonCurve extends Drawing {
         const m = this.margin;
 
         // translate (minX, minY) to (0, 0)
-
         path = path.map(function (p) { return [p[0] - minX, p[1] - minY] });
 
         // scale to fit into canvas - margin
@@ -95,7 +92,6 @@ class DragonCurve extends Drawing {
         let moveX = (w - width) / 2;
         let moveY = (h - height) / 2;
         path = path.map(p => [p[0] + moveX, p[1] + moveY]);
-
 
         // draw
         let oldP = path[0];
@@ -118,7 +114,6 @@ class DragonCurve extends Drawing {
         // replace middle by L
         let middle = (curve.length - 1) / 2;
         let curveL = `${curve.substring(0, middle)}L${curve.substring(middle + 1, curve.length)}`;
-
         return `${curve}R${curveL}`;
     }
 }
