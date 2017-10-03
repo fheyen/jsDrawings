@@ -17,6 +17,7 @@ Drawings in JavaScript. Suggestions are welcome.
 ![](img/xs/gospercurve.png?raw=true "Gosper Curve")
 ![](img/xs/sierpinski.png?raw=true "Sierpinski Triangle (using color)")
 ![](img/xs/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
+![](img/xs/sierpinskiCarpet.png?raw=true "Sierpinski Carpet")
 ![](img/xs/hexaflake.png?raw=true "Hexa Flake")
 
 
@@ -26,11 +27,13 @@ https://en.wikipedia.org/wiki/Yin_and_yang
 
 ![](img/yinyang.png?raw=true "Yin Yang")
 
+
 ### Ornament
 
 https://en.wikipedia.org/wiki/Overlapping_circles_grid
 
 ![](img/ornament.png?raw=true "Ornament")
+
 
 ### Mandelbrot
 
@@ -38,11 +41,13 @@ https://en.wikipedia.org/wiki/Mandelbrot_set
 
 ![](img/mandelbrot.png?raw=true "Mandelbrot")
 
+
 ### Dragon Curve
 
 https://en.wikipedia.org/wiki/Dragon_curve
 
 ![](img/dragoncurve.png?raw=true "Dragon Curve")
+
 
 ### Gosper Curve
 
@@ -50,12 +55,21 @@ https://en.wikipedia.org/wiki/Gosper_curve
 
 ![](img/gospercurve.png?raw=true "Gosper Curve")
 
+
 ### Sierpinski Triangle
 
 https://en.wikipedia.org/wiki/Sierpinski_triangle
 
 ![](img/sierpinski.png?raw=true "Sierpinski Triangle (using color)")
 ![](img/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
+
+
+### Sierpinski Carpet
+
+https://en.wikipedia.org/wiki/Sierpinski_carpet
+
+![](img/sierpinskiCarpet.png?raw=true "Sierpinski Carpet")
+
 
 ### Hexaflake
 
@@ -67,9 +81,6 @@ https://en.wikipedia.org/wiki/Hexaflake
 ## Planned
 
 
-### Sierpinski Carpet
-
-https://en.wikipedia.org/wiki/Sierpinski_carpet
 
 
 ### Pythagoras tree
