@@ -12,10 +12,12 @@ const lib = {
         let h = height;
         let m = margin;
 
+        // get scaling factor and translation vector
         let factor = Math.min((w - 2 * m) / (maxX - minX), (h - 2 * m) / (maxY - minY));
         let moveX = (w - (maxX - minX) * factor) / 2;
         let moveY = (h - (maxY - minY) * factor) / 2;
 
+        // map points to new locations
         points = points.map(p => [
             (p[0] - minX) * factor + moveX,
             (p[1] - minY) * factor + moveY
@@ -27,7 +29,7 @@ const lib = {
     /**
      * Returns the minimum and maximum x and y coordinates
      * @param {array[]} points array of points as [x, y]
-     * @return [minX, minY, maxX, maxY]
+     * @return {number[]} [minX, minY, maxX, maxY]
      */
     getMinMax(points) {
         let minX = Number.MAX_VALUE;
@@ -60,12 +62,11 @@ const lib = {
      * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
      */
     replaceAll(str, find, replace) {
-        return str.replace(new RegExp(lib.escapeRegExp(find), "g"), replace);
+        return str.replace(new RegExp(this.escapeRegExp(find), "g"), replace);
     },
 
     /**
      * Converts a color in hex code (e.g. #FFFFFF) to an RGB object.
-     *
      * @param {string} color color in hex code
      */
     hexColorToRGB(color) {
@@ -85,9 +86,9 @@ const lib = {
 
     /**
      * Converts a color in RGB to a hex string.
-     * @param {*} r red color component
-     * @param {*} g green color component
-     * @param {*} b blue color component
+     * @param {number} r red color component
+     * @param {number} g green color component
+     * @param {number} b blue color component
      */
     rgbColorToHex(r, g, b) {
         // one value from integer to hex string, copied from d3
