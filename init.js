@@ -1,19 +1,17 @@
 function init() {
-    const contentContainer = document.getElementById("content");
-    // clear
-    contentContainer.innerHTML = "";
 
+    // configuration for all drawings
     const conf = {
-        contentContainer,
+        container: document.getElementById("content"),
         width: 500,
         height: 500,
         margin: 10
     };
 
-    // const yinyang = new YinYang(contentContainer).init();
+    // const yinyang = new YinYang(conf.container).init();
 
     // const ornament = new Ornament(
-    //     contentContainer,
+    //     conf.container,
     //     conf.width,
     //     conf.height,
     //     conf.margin,
@@ -23,9 +21,11 @@ function init() {
     //     }
     // ).init();
 
-    // const mandebrot = new Mandelbrot(contentContainer).init();
+    // const mandebrot = new Mandelbrot(conf.container).init();
 
-    // const dragoncurve = new DragonCurve(contentContainer).init();
+    // const dragoncurve = new DragonCurve(conf.container).init();
 
-    const sierpinski = new Sierpinski(contentContainer).init();
+    const gospercurve = new GosperCurve(conf.container).init();
+
+    // const sierpinski = new Sierpinski(conf.container).init();
 }
