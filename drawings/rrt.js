@@ -18,10 +18,6 @@ class RRT extends Drawing {
     /**
      * Draws the image.
      */
-    // TODO: add obstacles
-    // TODO: add target
-    // TODO: draw path to target
-    // TODO: simplify path
     draw() {
         const stepsize = 5;
 
