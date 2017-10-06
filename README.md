@@ -19,6 +19,7 @@ Drawings in JavaScript. Suggestions are welcome.
 ![](img/xs/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
 ![](img/xs/sierpinskiCarpet.png?raw=true "Sierpinski Carpet")
 ![](img/xs/hexaflake.png?raw=true "Hexa Flake")
+![](img/xs/rrt.png?raw=true "RRT")
 
 
 ### Yin Yang
@@ -78,6 +79,14 @@ https://en.wikipedia.org/wiki/Hexaflake
 ![](img/hexaflake.png?raw=true "Hexa Flake")
 
 
+
+### Rapidly-exploring Random Tree
+
+https://en.wikipedia.org/wiki/Rapidly-exploring_random_tree
+
+![](img/rrt.png?raw=true "RRT")
+
+
 ## Planned
 
 
@@ -93,9 +102,6 @@ https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)#Varying_the_angle
 https://en.wikipedia.org/wiki/Osgood_curve
 
 
-### Rapidly-exploring Random Tree
-
-https://en.wikipedia.org/wiki/Rapidly-exploring_random_tree
 
 
 ### Animated drawing

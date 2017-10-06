@@ -205,5 +205,14 @@ const lib = {
             i++;
             oldP = p;
         });
+    },
+
+    /**
+     * Returns a random integer from the interval [min, max)
+     * @param {number} min minimum
+     * @param {number} max maximum
+     */
+    randomInt(min, max) {
+        return min + Math.floor(Math.random() * (max - min));
     }
 }
