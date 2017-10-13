@@ -8,15 +8,15 @@ const lib = {
      * @returns {array[]} rescaled points
      */
     rescaleAndCenter(points, width, height, margin) {
-        let [minX, minY, maxX, maxY] = this.getMinMax(points);
-        let w = width;
-        let h = height;
-        let m = margin;
+        const [minX, minY, maxX, maxY] = this.getMinMax(points);
+        const w = width;
+        const h = height;
+        const m = margin;
 
         // get scaling factor and translation vector
-        let factor = Math.min((w - 2 * m) / (maxX - minX), (h - 2 * m) / (maxY - minY));
-        let moveX = (w - (maxX - minX) * factor) / 2;
-        let moveY = (h - (maxY - minY) * factor) / 2;
+        const factor = Math.min((w - 2 * m) / (maxX - minX), (h - 2 * m) / (maxY - minY));
+        const moveX = (w - (maxX - minX) * factor) / 2;
+        const moveY = (h - (maxY - minY) * factor) / 2;
 
         // map points to new locations
         points = points.map(p => [
@@ -80,10 +80,10 @@ const lib = {
      * @return {object} RGB
      */
     hexColorToRGB(color) {
-        if (typeof (color) != "string") {
+        if (typeof (color) !== "string") {
             throw new TypeError(`color is not a hex string: ${color}`);
         }
-        let c = color.charAt(0) == "#" ? color.substring(1, 7) : color;
+        const c = color.charAt(0) === "#" ? color.substring(1, 7) : color;
         if (c.length < 6) {
             throw new TypeError(`color has not the correct length of 6 characters: ${color}`);
         }
@@ -121,14 +121,14 @@ const lib = {
             console.error(`fraction is not in [0, 1]: ${fraction}`);
         }
         try {
-            let rgb1 = this.hexColorToRGB(color1);
-            let rgb2 = this.hexColorToRGB(color2);
-            let resultRgb = {
+            const rgb1 = this.hexColorToRGB(color1);
+            const rgb2 = this.hexColorToRGB(color2);
+            const resultRgb = {
                 r: Math.round(rgb1.r * (1 - fraction) + rgb2.r * fraction),
                 g: Math.round(rgb1.g * (1 - fraction) + rgb2.g * fraction),
                 b: Math.round(rgb1.b * (1 - fraction) + rgb2.b * fraction)
             };
-            let { r, g, b } = resultRgb;
+            const { r, g, b } = resultRgb;
             return this.rgbColorToHex(r, g, b);
         } catch (error) {
             console.error(error);
@@ -193,7 +193,7 @@ const lib = {
     drawPath(ctx, path, palette, interpolate = true) {
         let oldP = path[0];
         let i = 0;
-        let blocklength = path.length / palette.length;
+        const blocklength = path.length / palette.length;
         path.forEach(p => {
             ctx.beginPath();
             ctx.moveTo(oldP[0], oldP[1]);
@@ -201,7 +201,7 @@ const lib = {
             ctx.closePath();
 
             // change color while progressing
-            let color1 = palette[~~(i / path.length * (palette.length - 1))];
+            const color1 = palette[~~(i / path.length * (palette.length - 1))];
 
             if (interpolate) {
                 // interpolate intermediate colors
@@ -209,7 +209,7 @@ const lib = {
                 if (!color2) {
                     color2 = palette[palette.length - 1];
                 }
-                let fraction = (i % blocklength) / blocklength;
+                const fraction = (i % blocklength) / blocklength;
                 ctx.strokeStyle = lib.colorLinearInterpolation(color1, color2, fraction);
             } else {
                 ctx.strokeStyle = color1;
@@ -230,4 +230,4 @@ const lib = {
     randomInt(min, max) {
         return min + Math.floor(Math.random() * (max - min));
     }
-}
+};

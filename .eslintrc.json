@@ -22,9 +22,9 @@
     "rules": {
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
-        "no-undef": "warn",
+        "no-undef": "off",
         "no-unreachable": "warn",
-        "no-unused-vars": "warn",
+        "no-unused-vars": "off",
         "constructor-super": "warn",
         "valid-typeof": "warn",
         "comma-dangle": "warn",
@@ -42,16 +42,16 @@
         "no-octal": "warn",
         "no-shadow": "warn",
         "no-shadow-restricted-names": "warn",
-        "no-use-before-define": "warn",
+        "no-use-before-define": "off",
         "no-var": "warn",
         "one-var-declaration-per-line": "warn",
         "prefer-const": "warn",
         "prefer-template": "warn",
-        "Require-jsdoc": "warn",
+        "Require-jsdoc": "off",
         "semi": "warn",
         "spaced-comment": "warn",
         "strict": "warn",
         "use-isnan": "warn",
-        "valid-jsdoc": "warn"
+        "valid-jsdoc": "off"
     }
 }

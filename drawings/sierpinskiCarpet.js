@@ -53,9 +53,9 @@ class SierpinskiCarpet extends Drawing {
         this.ctx.fillRect(center.x - size / 2, center.y - size / 2, size, size);
 
         // get centers of child squares
-        let startX = center.x - size;
-        let startY = center.y - size;
-        let centers = [];
+        const startX = center.x - size;
+        const startY = center.y - size;
+        const centers = [];
         for (let row = 0; row < 3; row++) {
             for (let col = 0; col < 3; col++) {
                 centers.push({

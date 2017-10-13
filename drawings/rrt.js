@@ -60,7 +60,7 @@ class RRT extends Drawing {
         ];
 
         // initialize RRT
-        const tree = new randomTree(
+        const tree = new RandomTree(
             {
                 width: this.width,
                 height: this.height
@@ -83,7 +83,7 @@ class RRT extends Drawing {
     }
 }
 
-class randomTree {
+class RandomTree {
     constructor(areaSize, stepsize, rootPosition, targetPosition, targetProb, obstacles, ctx) {
         this.width = areaSize.width;
         this.height = areaSize.height;
@@ -106,7 +106,7 @@ class randomTree {
         console.log(`generating tree with max. ${maxIterations} iterations, max. ${maxVertices} vertices`);
         console.log(`stop when target reached: ${stopWhenTargetReached}`);
         console.log(`stepsize ${this.stepsize}`);
-        for (var i = 0; i < maxIterations; i++) {
+        for (let i = 0; i < maxIterations; i++) {
             this.samplePosition();
             if (stopWhenTargetReached && this.isTargetReached()) {
                 break;
@@ -127,15 +127,15 @@ class randomTree {
      * If there is no obstacle, the new position is added to the tree.
      */
     samplePosition() {
-        let position = this.getRandomPosition();
-        let nearest = this.getNearestVertex(position);
-        let difference = Vector.diff(position, nearest);
-        let direction = Vector.normalize(difference);
-        let distance = Vector.dist(position, nearest);
-        let step = Math.min(distance, this.stepsize);
-        let newPosition = Vector.add(nearest, Vector.mult(direction, this.stepsize));
+        const position = this.getRandomPosition();
+        const nearest = this.getNearestVertex(position);
+        const difference = Vector.diff(position, nearest);
+        const direction = Vector.normalize(difference);
+        const distance = Vector.dist(position, nearest);
+        const step = Math.min(distance, this.stepsize);
+        const newPosition = Vector.add(nearest, Vector.mult(direction, this.stepsize));
         // check for obstacles
-        for (var i = 0; i < this.obstacles.length; i++) {
+        for (let i = 0; i < this.obstacles.length; i++) {
             if (this.obstacles[i].isHit(newPosition)) {
                 return false;
             }
@@ -158,7 +158,7 @@ class randomTree {
         let tmpNearest = this.root;
         let tmpDistance = Number.MAX_VALUE;
         this.vertices.forEach(v => {
-            let distance = Vector.dist(v, position);
+            const distance = Vector.dist(v, position);
             if (distance < tmpDistance) {
                 tmpDistance = distance;
                 tmpNearest = v;
@@ -186,8 +186,8 @@ class randomTree {
      * distance of less than this.stepsize.
      */
     isTargetReached() {
-        let nearest = this.getNearestVertex(this.target);
-        let distance = Vector.dist(nearest, this.target);
+        const nearest = this.getNearestVertex(this.target);
+        const distance = Vector.dist(nearest, this.target);
         return distance < this.stepsize;
     }
 
@@ -206,11 +206,11 @@ class randomTree {
         this.ctx.strokeStyle = "#aaa";
         this.drawSubtree(this.root);
         // draw path to the vertex that is nearest to target
-        let path = this.getPath();
+        const path = this.getPath();
         this.ctx.strokeStyle = "#f00";
         this.drawPath(path);
         // draw straightened path
-        let sPath = this.getStraightenedPath();
+        const sPath = this.getStraightenedPath();
         this.ctx.strokeStyle = "#0f0";
         this.drawPath(sPath);
         // draw start
@@ -248,7 +248,7 @@ class randomTree {
     getPath() {
         let vertex = this.getNearestVertex(this.target);
         // get initial path
-        let path = [vertex];
+        const path = [vertex];
         while (vertex.parent) {
             path.push(vertex.parent);
             vertex = vertex.parent;
@@ -262,7 +262,7 @@ class randomTree {
      */
     drawPath(path) {
         // just go up in tree until root is rached
-        for (var i = 0; i < path.length - 1; i++) {
+        for (let i = 0; i < path.length - 1; i++) {
             this.ctx.beginPath();
             this.ctx.moveTo(path[i].x, path[i].y);
             this.ctx.lineTo(path[i + 1].x, path[i + 1].y);
@@ -275,13 +275,13 @@ class randomTree {
      * This is achieved by simply removing waypoints that are not necessary.
      */
     getStraightenedPath() {
-        let path = this.getPath();
+        const path = this.getPath();
         // remove vertices from path while still not hitting obstacles
         let improved;
         do {
             improved = false;
             for (let i = 0; i < path.length - 2; i++) {
-                let collision = this.pathCollision(path[i], path[i + 2]);
+                const collision = this.pathCollision(path[i], path[i + 2]);
                 // console.log(`${i}: collision: ${collision}`);
                 if (!collision) {
                     // remove path[i+1]
@@ -300,17 +300,17 @@ class randomTree {
      * @return true iff a collision has been detected
      */
     pathCollision(position1, position2) {
-        let distance = Vector.dist(position1, position2);
-        let steps = Math.ceil(distance / this.stepsize);
-        let stepsize = distance / steps;
-        let difference = Vector.diff(position2, position1);
-        let direction = Vector.normalize(difference);
+        const distance = Vector.dist(position1, position2);
+        const steps = Math.ceil(distance / this.stepsize);
+        const stepsize = distance / steps;
+        const difference = Vector.diff(position2, position1);
+        const direction = Vector.normalize(difference);
         let tmpPosition = position1;
-        let oneStep = Vector.mult(direction, stepsize);
-        for (var step = 0; step < steps; step++) {
+        const oneStep = Vector.mult(direction, stepsize);
+        for (let step = 0; step < steps; step++) {
             tmpPosition = Vector.add(tmpPosition, oneStep);
             // check for obstacles
-            for (var i = 0; i < this.obstacles.length; i++) {
+            for (let i = 0; i < this.obstacles.length; i++) {
                 if (this.obstacles[i].isHit(tmpPosition)) {
                     return true;
                 }
@@ -337,11 +337,12 @@ class Vector {
     }
 
     static norm(vector) {
-        return Math.sqrt(vector.x ** 2 + vector.y ** 2);
+        // return Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+        return Math.hypot(vector.x, vector.y);
     }
 
     static normalize(vector) {
-        let norm = this.norm(vector);
+        const norm = this.norm(vector);
         return {
             x: vector.x / norm,
             y: vector.y / norm
@@ -363,7 +364,7 @@ class Vector {
 class Obstacle {
     constructor(safetyMargin) {
         this.safetyMargin = safetyMargin;
-        this.fillColor = "rgba(200, 0, 0, 0.5)"
+        this.fillColor = "rgba(200, 0, 0, 0.5)";
         this.marginColor = "rgba(255, 255, 255, 0.4)";
     }
 
@@ -388,7 +389,7 @@ class CircularObstacle extends Obstacle {
     }
 
     draw(ctx) {
-        let trans = "rgba(0, 0, 0, 0)";
+        const trans = "rgba(0, 0, 0, 0)";
         // draw safetyMargin
         lib.drawCircle(ctx, this.center.x, this.center.y, this.radius + this.safetyMargin, trans, this.marginColor);
         // draw obstacle

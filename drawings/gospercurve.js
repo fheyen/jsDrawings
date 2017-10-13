@@ -31,9 +31,10 @@ class GosperCurve extends Drawing {
         }
 
         // draw curve
-        let currentX = 0, minX = 0, maxX = 0;
-        let currentY = -1, minY = -1, maxY = -1;
-        let currentAngleDeg = 90; // start upwards
+        let currentX = 0;
+        let currentY = -1;
+        // start upwards
+        let currentAngleDeg = 90;
         let path = [];
         path.push([0, 0]);
         path.push([0, -1]);
@@ -44,7 +45,7 @@ class GosperCurve extends Drawing {
                 case "A":
                 case "B":
                     // go forward (in the current direction)
-                    let currentAngleRad = currentAngleDeg / 180 * Math.PI;
+                    const currentAngleRad = currentAngleDeg / 180 * Math.PI;
                     currentX += Math.cos(currentAngleRad);
                     currentY += Math.sin(currentAngleRad);
 

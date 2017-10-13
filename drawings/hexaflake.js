@@ -59,8 +59,8 @@ class HexaFlake extends Drawing {
         lib.drawPolygon(this.ctx, points, "rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.1)");
 
         // get center and radius of child hexagons
-        let childRadius = radius / 3;
-        let centers = [];
+        const childRadius = radius / 3;
+        const centers = [];
         angleDeg = 30;
         for (let i = 0; i < 6; i++) {
             centers.push({

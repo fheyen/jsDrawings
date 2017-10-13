@@ -25,29 +25,31 @@ class DragonCurve extends Drawing {
         const level = 10;
 
         // get curve
-        let curve = "R"; // l: left turn, r: right turn
+        // l: left turn, r: right turn
+        let curve = "R";
         for (let l = 1; l < level; l++) {
             curve = this.getNext(curve);
         }
 
         // draw curve
-        let currentX = 0, minX = 0, maxX = 0;
-        let currentY = -1, minY = -1, maxY = -1;
-        let currentAngleDeg = 90; // start upwards
+        let currentX = 0;
+        let currentY = -1;
+        // start upwards
+        let currentAngleDeg = 90;
         let path = [];
         path.push([0, 0]);
         path.push([0, -1]);
 
         for (let i = 0, len = curve.length; i < len; i++) {
             // go 1 step in current direction
-            if (curve[i] == "L") {
+            if (curve[i] === "L") {
                 currentAngleDeg = (currentAngleDeg + 90) % 360;
             } else {
                 currentAngleDeg = (currentAngleDeg - 90);
                 currentAngleDeg = currentAngleDeg < 0 ? currentAngleDeg + 360 : currentAngleDeg;
             }
 
-            let currentAngleRad = currentAngleDeg / 180 * Math.PI;
+            const currentAngleRad = currentAngleDeg / 180 * Math.PI;
             currentX += Math.cos(currentAngleRad);
             currentY += Math.sin(currentAngleRad);
 
@@ -66,8 +68,8 @@ class DragonCurve extends Drawing {
 
     getNext(curve) {
         // replace middle by L
-        let middle = (curve.length - 1) / 2;
-        let curveL = `${curve.substring(0, middle)}L${curve.substring(middle + 1, curve.length)}`;
+        const middle = (curve.length - 1) / 2;
+        const curveL = `${curve.substring(0, middle)}L${curve.substring(middle + 1, curve.length)}`;
         return `${curve}R${curveL}`;
     }
 }

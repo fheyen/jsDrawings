@@ -59,7 +59,7 @@ class Ornament extends Drawing {
      * @param {number} r radius
      */
     drawPart(x, y, r) {
-        let ctx = this.canvas.getContext("2d");
+        const ctx = this.canvas.getContext("2d");
         const pi = Math.PI;
         x += r / 2;
         y += - 1 / 2 * r * Math.sqrt(3);
@@ -78,8 +78,8 @@ class Ornament extends Drawing {
         const lengths = [6, 5, 4, 3];
         for (let line = 0; line < lengths.length; line++) {
             for (let i = 0; i < lengths[line]; i++) {
-                let top = line * 0.5 * r * Math.sqrt(3);
-                let left = m + (line * 0.5 + i) * r;
+                const top = line * 0.5 * r * Math.sqrt(3);
+                const left = m + (line * 0.5 + i) * r;
                 this.drawPart(left, cy + top, r);
                 if (line > 0) {
                     this.drawPart(left, cy - top, r);

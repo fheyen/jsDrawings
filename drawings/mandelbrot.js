@@ -51,9 +51,9 @@ class Mandelbrot extends Drawing {
             for (let py = 0, h = ~~(this.height); py <= ~~(h / 2); py += pixelSize) {
 
                 // x0 = scaled x coordinate of pixel (scaled to lie in the Mandelbrot X scale (-2.5, 1))
-                let x0 = (px / w) * 3.5 - 2.5;
+                const x0 = (px / w) * 3.5 - 2.5;
                 // y0 = scaled y coordinate of pixel (scaled to lie in the Mandelbrot Y scale (-1, 1))
-                let y0 = (py / h) * 2 - 1;
+                const y0 = (py / h) * 2 - 1;
 
                 let x = 0.0;
                 let y = 0.0;
@@ -61,7 +61,7 @@ class Mandelbrot extends Drawing {
 
                 // Here N=2^8 is chosen as a reasonable bailout radius.
                 while (x * x + y * y < (1 << 16) && iteration < max_iteration) {
-                    let xtemp = x * x - y * y + x0;
+                    const xtemp = x * x - y * y + x0;
                     y = 2 * x * y + y0;
                     x = xtemp;
                     iteration = iteration + 1;
@@ -70,8 +70,8 @@ class Mandelbrot extends Drawing {
                 // Used to avoid floating point issues with points inside the set.
                 if (iteration < max_iteration) {
                     // sqrt of inner term removed using log simplification rules.
-                    let log_zn = Math.log(x * x + y * y) / 2;
-                    let nu = Math.log(log_zn / Math.log(2)) / Math.log(2);
+                    const log_zn = Math.log(x * x + y * y) / 2;
+                    const nu = Math.log(log_zn / Math.log(2)) / Math.log(2);
 
                     // Rearranging the potential function.
                     // Dividing log_zn by log(2) instead of log(N = 1<<8)
@@ -96,6 +96,7 @@ class Mandelbrot extends Drawing {
      * @param {number} value value to map to a color
      * @param {number} max maximum possible value
      * @param {string[]} palette color palette
+     * @returns {string} cached color
      */
     getCachedColor(value, max, palette) {
         // crate cache if not yet done
@@ -108,7 +109,7 @@ class Mandelbrot extends Drawing {
             return this.colorCache.get(value);
         } else {
             // calculate value
-            let color1 = palette[~~(value / max * (palette.length - 1))];
+            const color1 = palette[~~(value / max * (palette.length - 1))];
             let color2 = palette[~~(value / max * (palette.length - 1)) + 1];
             if (!color2) {
                 color2 = palette[palette.length - 1];
@@ -119,7 +120,7 @@ class Mandelbrot extends Drawing {
                 fraction = 1;
             }
 
-            let color = lib.colorLinearInterpolation(color1, color2, fraction);
+            const color = lib.colorLinearInterpolation(color1, color2, fraction);
             this.colorCache.set(value, color);
             return color;
         }

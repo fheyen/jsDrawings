@@ -56,7 +56,7 @@ class Sierpinski extends Drawing {
         lib.drawPolygon(this.ctx, points, "rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.1)");
 
         // get points of child triangles
-        let pointsA = [
+        const pointsA = [
             points[0],
             {
                 x: (points[0].x + points[1].x) / 2,
@@ -68,7 +68,7 @@ class Sierpinski extends Drawing {
             }
         ];
 
-        let pointsB = [
+        const pointsB = [
             pointsA[1],
             points[1],
             {
@@ -77,7 +77,7 @@ class Sierpinski extends Drawing {
             }
         ];
 
-        let pointsC = [
+        const pointsC = [
             pointsA[2],
             pointsB[2],
             points[2]
