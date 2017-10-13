@@ -17,6 +17,7 @@ class DragonCurve extends Drawing {
 
     /**
      * Draws the image.
+     * @returns {DragonCurve} this
      */
     draw() {
         // color brewer spectral 11

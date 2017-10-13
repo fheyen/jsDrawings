@@ -17,6 +17,7 @@ class RRT extends Drawing {
 
     /**
      * Draws the image.
+     * @returns {RRT} this
      */
     draw() {
         const stepsize = 5;

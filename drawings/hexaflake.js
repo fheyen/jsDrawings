@@ -17,6 +17,7 @@ class HexaFlake extends Drawing {
 
     /**
      * Draws the image.
+     * @returns {HexaFlake} this
      */
     draw() {
         // maximum recursion level
@@ -41,6 +42,7 @@ class HexaFlake extends Drawing {
      * @param {number} maxLevel maximum recursion level
      * @param {number} radius radius of hexagons' outher bounding circle
      * @param {any} center of the hexagon as {x, y}
+     * @returns {void}
      */
     recurse(level, maxLevel, radius, center) {
         // calculate hexagon points

@@ -17,6 +17,7 @@ class Mandelbrot extends Drawing {
 
     /**
      * Draws the image.
+     * @returns {Mandelbrot} this
      */
     draw() {
         // source: https://stackoverflow.com/questions/16500656/which-color-gradient-is-used-to-color-mandelbrot-in-wikipedia

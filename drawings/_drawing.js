@@ -1,8 +1,8 @@
-/***
+/**
  * Class for a drawing in JavaScript.
  */
 class Drawing {
-    /***
+    /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width width of the canvas
      * @param {number} height height of the canvas
@@ -19,6 +19,7 @@ class Drawing {
 
     /**
      * Creates the drawing container, title and canvas and draws the image.
+     * @return {Drawing} this
      */
     init() {
         this.clear();
@@ -29,6 +30,7 @@ class Drawing {
 
     /**
      * Clears the parent element.
+     * @return {Drawing} this
      */
     clear() {
         if (this.canvas) {
@@ -39,6 +41,7 @@ class Drawing {
 
     /**
      * Creates the canvas.
+     * @return {Drawing} this
      */
     createCanvas() {
         if (!this.canvas) {
@@ -53,6 +56,7 @@ class Drawing {
 
     /**
      * Draws the image.
+     * @return {Drawing} this
      */
     draw() {
         console.warn("draw(): Not implemented yet!");

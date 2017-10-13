@@ -17,6 +17,7 @@ class SierpinskiCarpet extends Drawing {
 
     /**
      * Draws the image.
+     * @returns {SierpinskiCarpet} this
      */
     draw() {
         // maximum recursion level

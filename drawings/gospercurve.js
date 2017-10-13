@@ -17,6 +17,7 @@ class GosperCurve extends Drawing {
 
     /**
      * Draws the image.
+     * @returns {GosperCurve} this
      */
     draw() {
         // color brewer spectral 11

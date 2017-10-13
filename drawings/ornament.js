@@ -17,6 +17,7 @@ class Ornament extends Drawing {
 
     /**
      * Draws the image.
+     * @returns {Ornament} this
      */
     draw() {
         const ctx = this.ctx;

@@ -17,6 +17,7 @@ class Sierpinski extends Drawing {
 
     /**
      * Draws the image.
+     * @returns {Sierpinski} this
      */
     draw() {
         // maximum recursion level

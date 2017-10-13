@@ -1,10 +1,11 @@
 const lib = {
     /**
      * Translates and scales 2D points to fit given bounds, while keeping aspect ratio.
-     * @param {array[]} points array of points as [x, y]
-     * @param {number} width
-     * @param {number} height
-     * @param {number} margin
+     * @param {array[]} points - array of points as [x, y]
+     * @param {number} width - width
+     * @param {number} height - height
+     * @param {number} margin - margin
+     * @returns {array[]} rescaled points
      */
     rescaleAndCenter(points, width, height, margin) {
         let [minX, minY, maxX, maxY] = this.getMinMax(points);
@@ -47,19 +48,27 @@ const lib = {
         return [minX, minY, maxX, maxY];
     },
 
-    /*******************************************************************************
+    /**
      * Escapes a regular expression.
      *
      * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
+     *
+     * @param {string} str regex
+     * @return {string} escaped regex
      */
     escapeRegExp(str) {
         return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
     },
 
-    /*******************************************************************************
+    /**
      * Replaces all occurrences of <find> in <str> with <replace>.
      *
      * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
+     *
+     * @param {string} str string
+     * @param {string} find text to replace
+     * @param {string} replace text to replace with
+     * @returns {string} result
      */
     replaceAll(str, find, replace) {
         return str.replace(new RegExp(this.escapeRegExp(find), "g"), replace);
@@ -68,6 +77,7 @@ const lib = {
     /**
      * Converts a color in hex code (e.g. #FFFFFF) to an RGB object.
      * @param {string} color color in hex code
+     * @return {object} RGB
      */
     hexColorToRGB(color) {
         if (typeof (color) != "string") {
@@ -89,6 +99,7 @@ const lib = {
      * @param {number} r red color component
      * @param {number} g green color component
      * @param {number} b blue color component
+     * @return {string} hex string
      */
     rgbColorToHex(r, g, b) {
         // one value from integer to hex string, copied from d3
@@ -103,6 +114,7 @@ const lib = {
      * @param {string} color1 color as hex code
      * @param {string} color2 color as hex code
      * @param {number} fraction value in [0, 1] that represents the relative position between to interpolation points
+     * @return {object} RGB
      */
     colorLinearInterpolation(color1, color2, fraction) {
         if (fraction > 1 || fraction < 0) {
@@ -136,6 +148,7 @@ const lib = {
      * @param {string} fill fill style
      * @param {number} startAngle (default: 0) start angle
      * @param {number} endAngle (default: 2 * Pi) end angle
+     * @return {void}
      */
     drawCircle(ctx, x, y, radius, stroke = "#000", fill = "rgba(0, 0, 0, 0)", startAngle = 0, endAngle = 2 * Math.PI) {
         ctx.save();
@@ -154,6 +167,7 @@ const lib = {
      * @param {any[]} points array with points as {x, y}
      * @param {string} stroke stroke style
      * @param {string} fill fill style
+     * @return {void}
      */
     drawPolygon(ctx, points, stroke = "#000", fill = "rgba(0, 0, 0, 0)") {
         ctx.save();
@@ -211,6 +225,7 @@ const lib = {
      * Returns a random integer from the interval [min, max)
      * @param {number} min minimum
      * @param {number} max maximum
+     * @return {number} random integer
      */
     randomInt(min, max) {
         return min + Math.floor(Math.random() * (max - min));

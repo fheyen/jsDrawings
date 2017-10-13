@@ -17,6 +17,7 @@ class YinYang extends Drawing {
 
     /**
      * Draws the image.
+     * @returns {YinYang} this
      */
     draw() {
         const centerX = this.width / 2;
