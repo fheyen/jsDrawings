@@ -19,7 +19,7 @@ class OsgoodCurve extends Drawing {
      * Draws the image.
      * @returns {OsgoodCurve} this
      */
-    public draw() {
+    draw() {
         // maximum recursion level
         const maxLevel = 9;
 

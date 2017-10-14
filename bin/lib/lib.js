@@ -64,7 +64,7 @@ var lib = {
      * @returns {string} result
      */
     replaceAll: function (str, find, replace) {
-        return str.replace(new RegExp(this.escapeRegExp(find), "g"), replace);
+        return str.replace(new RegExp(lib.escapeRegExp(find), "g"), replace);
     },
     /**
      * Converts a color in hex code (e.g. #FFFFFF) to an RGB object.

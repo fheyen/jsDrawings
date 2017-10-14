@@ -71,7 +71,7 @@ const lib = {
      * @returns {string} result
      */
     replaceAll(str: string, find: string, replace: string): string {
-        return str.replace(new RegExp(this.escapeRegExp(find), "g"), replace);
+        return str.replace(new RegExp(lib.escapeRegExp(find), "g"), replace);
     },
 
     /**
@@ -184,7 +184,7 @@ const lib = {
      */
     drawPolygon(
         ctx: CanvasRenderingContext2D | null,
-        points: any[],
+        points: { x: number, y: number }[],
         stroke: string = "#000",
         fill: string = "rgba(0, 0, 0, 0)"
     ): void {
@@ -213,7 +213,7 @@ const lib = {
      */
     drawPath(
         ctx: CanvasRenderingContext2D | null,
-        path: any[],
+        path: number[][],
         palette: string[],
         interpolate: boolean = true
     ): void {

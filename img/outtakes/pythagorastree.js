@@ -19,7 +19,7 @@ class PT extends Drawing {
      * Draws the image.
      * @returns {PT} this
      */
-    public draw() {
+    draw() {
         const level = 5;
 
         const startSize = (Math.min(this.width, this.height) - 2 * this.margin) / 6;
@@ -63,7 +63,7 @@ class PythagorasTree {
 
         this.root = {
             square: this.startSquare
-        }
+        };
     }
 
     /**
@@ -104,7 +104,7 @@ class PythagorasTree {
     /**
      * Draws the tree with start, target, path and obstacles.
      */
-    public draw() {
+    draw() {
         // draw tree: recurse from root
         this.drawSubtree(this.root);
     }
@@ -149,7 +149,7 @@ class Square {
         return new Square(this.points.slice(0));
     }
 
-    public draw(ctx) {
+    draw(ctx) {
         lib.drawPolygon(ctx, this.points, "#000", "rgba(0, 0, 0, 0)");
     }
 }

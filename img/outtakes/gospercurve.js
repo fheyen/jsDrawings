@@ -18,7 +18,7 @@ class GosperCurve extends Drawing {
     /**
      * Draws the image.
      */
-    public draw() {
+    draw() {
         const ctx = this.canvas.getContext("2d");
 
         // color brewer spectral 11
