@@ -17,6 +17,7 @@ Drawings in JavaScript. Suggestions are welcome.
 ![](img/xs/sierpinskiCarpet.png?raw=true "Sierpinski Carpet")
 ![](img/xs/hexaflake.png?raw=true "Hexa Flake")
 ![](img/xs/rrt.png?raw=true "RRT")
+![](img/xs/pythagorastree.png?raw=true "Pythagoras Tree")
 
 ### Yin Yang
 
@@ -79,11 +80,13 @@ Drawings in JavaScript. Suggestions are welcome.
 
 ![](img/rrt.png?raw=true "RRT")
 
-## Planned
-
-### Pythagoras tree
+### Pythagoras Tree
 
 [wikipedia](https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)#Varying_the_angle)
+
+![](img/pythagorastree.png?raw=true "Pythagoras Tree")
+
+## Planned
 
 ### Osgood Curve
 
