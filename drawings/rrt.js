@@ -10,9 +10,9 @@ class RRT extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
+    constructor(parent, width, height, margin) {
         super(parent, width, height, margin);
-        this.title = "Yin Yang";
+        this.title = "RRT";
     }
 
     /**
@@ -101,6 +101,7 @@ class RandomTree {
      * @param {number} maxVertices maximum number of vertices
      * @param {number} maxIterations maximum number of iterations
      * @param {boolean} stopWhenTargetReached if this is set to true, tree generation is stopped once the target has been reached
+     * @returns {void}
      */
     generateTree(maxIterations, maxVertices, stopWhenTargetReached) {
         console.log(`generating tree with max. ${maxIterations} iterations, max. ${maxVertices} vertices`);
@@ -125,6 +126,7 @@ class RandomTree {
      * Samples a random position and goes one stepsize in
      * its direction from the nearest vertex of the tree.
      * If there is no obstacle, the new position is added to the tree.
+     *  @returns {boolean} true iff new position was obstacle free and added to the tree
      */
     samplePosition() {
         const position = this.getRandomPosition();
@@ -153,6 +155,7 @@ class RandomTree {
     /**
      * Returns the vertex that is closest to the target.
      * @param {any} position
+     *  @returns {object} nearest vertex
      */
     getNearestVertex(position) {
         let tmpNearest = this.root;
@@ -169,6 +172,7 @@ class RandomTree {
 
     /**
      * Returns a position or the target at random.
+     * @returns {object} random position
      */
     getRandomPosition() {
         // sometimes take the target
@@ -184,6 +188,7 @@ class RandomTree {
     /**
      * Returns true iff the nearest vertex to the target has a
      * distance of less than this.stepsize.
+     * @returns {boolean} true iff target is closer than this.stepsize
      */
     isTargetReached() {
         const nearest = this.getNearestVertex(this.target);
@@ -193,6 +198,7 @@ class RandomTree {
 
     /**
      * Draws the tree with start, target, path and obstacles.
+     * @returns {void}
      */
     draw() {
         this.ctx.fillStyle = "#000";
@@ -222,6 +228,7 @@ class RandomTree {
     /**
      * Draws a subtree recursively.
      * @param {any} root
+     * @returns {void}
      */
     drawSubtree(root) {
         if (!root.children) {
@@ -244,6 +251,7 @@ class RandomTree {
     /**
      * Returns the path from the vertex nearest
      * to the target up to the root.
+     * @returns {object[]} path
      */
     getPath() {
         let vertex = this.getNearestVertex(this.target);
@@ -259,6 +267,7 @@ class RandomTree {
     /**
      * Draws a path.
      * @param {any[]} path
+     * @returns {void}
      */
     drawPath(path) {
         // just go up in tree until root is rached
@@ -273,6 +282,7 @@ class RandomTree {
     /**
      * Simplifies the path from root to target by using straight shortcuts.
      * This is achieved by simply removing waypoints that are not necessary.
+     * * @returns {object[]} straightened path
      */
     getStraightenedPath() {
         const path = this.getPath();
@@ -321,46 +331,9 @@ class RandomTree {
     }
 }
 
-class Vector {
-    static add(vector1, vector2) {
-        return {
-            x: vector1.x + vector2.x,
-            y: vector1.y + vector2.y
-        };
-    }
-
-    static diff(vector1, vector2) {
-        return {
-            x: vector1.x - vector2.x,
-            y: vector1.y - vector2.y
-        };
-    }
-
-    static norm(vector) {
-        // return Math.sqrt(vector.x * vector.x + vector.y * vector.y);
-        return Math.hypot(vector.x, vector.y);
-    }
-
-    static normalize(vector) {
-        const norm = this.norm(vector);
-        return {
-            x: vector.x / norm,
-            y: vector.y / norm
-        };
-    }
-
-    static mult(vector, factor) {
-        return {
-            x: vector.x * factor,
-            y: vector.y * factor
-        };
-    }
-
-    static dist(vector1, vector2) {
-        return this.norm(this.diff(vector1, vector2));
-    }
-}
-
+/**
+ * Obstacle super class.
+ */
 class Obstacle {
     constructor(safetyMargin) {
         this.safetyMargin = safetyMargin;
@@ -368,15 +341,28 @@ class Obstacle {
         this.marginColor = "rgba(255, 255, 255, 0.4)";
     }
 
+    /**
+     * Hit test.
+     * @param {object} position
+     * @return true iff hit
+     */
     isHit(position) {
         alert("nyi");
     }
 
+    /**
+     * Draws this obstacle onto the canvas.
+     * @param {CanvasRenderingContext2D} ctx
+     * @returns {void}
+     */
     draw(ctx) {
         alert("nyi");
     }
 }
 
+/**
+ * Circular obstacle class.
+ */
 class CircularObstacle extends Obstacle {
     constructor(center, radius, safetyMargin) {
         super(safetyMargin);
@@ -384,10 +370,20 @@ class CircularObstacle extends Obstacle {
         this.radius = radius;
     }
 
+    /**
+     * Hit test.
+     * @param {object} position
+     * @return true iff hit
+     */
     isHit(position) {
         return Vector.dist(this.center, position) < this.radius + this.safetyMargin;
     }
 
+    /**
+     * Draws this obstacle onto the canvas.
+     * @param {CanvasRenderingContext2D} ctx
+     * @returns {void}
+     */
     draw(ctx) {
         const trans = "rgba(0, 0, 0, 0)";
         // draw safetyMargin
@@ -397,6 +393,9 @@ class CircularObstacle extends Obstacle {
     }
 }
 
+/**
+ * Rectangular obstacle class.
+ */
 class RectangularObstacle extends Obstacle {
     constructor(position, width, height, safetyMargin) {
         super(safetyMargin);
@@ -405,6 +404,11 @@ class RectangularObstacle extends Obstacle {
         this.height = height;
     }
 
+    /**
+     * Hit test.
+     * @param {object} position
+     * @return true iff hit
+     */
     isHit(position) {
         return position.x > this.position.x - this.safetyMargin
             && position.y > this.position.y - this.safetyMargin
@@ -412,6 +416,11 @@ class RectangularObstacle extends Obstacle {
             && position.y < this.position.y + this.height + this.safetyMargin;
     }
 
+    /**
+     * Draws this obstacle onto the canvas.
+     * @param {CanvasRenderingContext2D} ctx
+     * @returns {void}
+     */
     draw(ctx) {
         // draw safetyMargin
         ctx.fillStyle = this.marginColor;

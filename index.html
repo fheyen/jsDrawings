@@ -6,8 +6,10 @@
 
   <title>JavaScript Drawings</title>
 
-  <script src="./lib.js"></script>
-  <script src="./drawings/_drawing.js"></script>
+  <script src="./lib/lib.js"></script>
+  <script src="./lib/vector.js"></script>
+  <script src="./lib/square.js"></script>
+  <script src="./lib/drawing.js"></script>
 
   <script src="./drawings/yinyang.js"></script>
   <script src="./drawings/ornament.js"></script>
@@ -19,6 +21,7 @@
   <script src="./drawings/sierpinskiCarpet.js"></script>
   <script src="./drawings/hexaflake.js"></script>
   <script src="./drawings/rrt.js"></script>
+  <script src="./drawings/pythagorastree.js"></script>
 
   <style>
     body {
@@ -45,7 +48,7 @@
 
       // const gospercurve = new GosperCurve().init();
 
-      const hilbertcurve = new HilbertCurve().init();
+      // const hilbertcurve = new HilbertCurve().init();
 
       // const sierpinski = new Sierpinski().init();
 
@@ -54,6 +57,8 @@
       // const sierpinskicarpet = new SierpinskiCarpet().init();
 
       // const rrt = new RRT().init();
+
+      const pt = new PT().init();
     }
   </script>
 </head>

@@ -10,7 +10,7 @@ class DragonCurve extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
+    constructor(parent, width, height, margin) {
         super(parent, width, height, margin);
         this.title = "Dragon Curve";
     }

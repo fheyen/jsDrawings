@@ -10,7 +10,7 @@ class GosperCurve extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
+    constructor(parent, width, height, margin) {
         super(parent, width, height, margin);
         this.title = "Gosper Curve";
     }
@@ -32,9 +32,10 @@ class GosperCurve extends Drawing {
         }
 
         // draw curve
-        let currentX = 0, minX = 0, maxX = 0;
-        let currentY = -1, minY = -1, maxY = -1;
-        let currentAngleDeg = 90; // start upwards
+        let currentX;
+        let currentY;
+        // start upwards
+        let currentAngleDeg = 90;
         let path = [];
         path.push([0, 0]);
         path.push([0, -1]);
@@ -45,7 +46,7 @@ class GosperCurve extends Drawing {
                 case "A":
                 case "B":
                     // go forward (in the current direction)
-                    let currentAngleRad = currentAngleDeg / 180 * Math.PI;
+                    const currentAngleRad = currentAngleDeg / 180 * Math.PI;
                     currentX += Math.cos(currentAngleRad);
                     currentY += Math.sin(currentAngleRad);
 
@@ -81,17 +82,17 @@ class GosperCurve extends Drawing {
         const m = this.margin;
 
         // translate (minX, minY) to (0, 0)
-        path = path.map(function (p) { return [p[0] - minX, p[1] - minY] });
+        path = path.map((p) => { return [p[0] - minX, p[1] - minY]; });
 
         // scale to fit into canvas - margin
         const factor = Math.min((w - 2 * m) / (maxX - minX), (h - 2 * m) / (maxY - minY));
         path = path.map(p => [p[0] * factor, p[1] * factor]);
 
         // center
-        let width = (maxX - minX) * factor;
-        let height = (maxY - minY) * factor;
-        let moveX = (w - width) / 2;
-        let moveY = (h - height) / 2;
+        const width = (maxX - minX) * factor;
+        const height = (maxY - minY) * factor;
+        const moveX = (w - width) / 2;
+        const moveY = (h - height) / 2;
         path = path.map(p => [p[0] + moveX, p[1] + moveY]);
 
         // draw
@@ -119,7 +120,7 @@ class GosperCurve extends Drawing {
         return curve;
     }
 
-    /*******************************************************************************
+    /**
      * Escapes a regular expression.
      *
      * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
@@ -128,7 +129,7 @@ class GosperCurve extends Drawing {
         return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
     }
 
-    /*******************************************************************************
+    /**
      * Replaces all occurrences of <find> in <str> with <replace>.
      *
      * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
