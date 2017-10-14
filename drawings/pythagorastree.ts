@@ -10,7 +10,12 @@ class PT extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent, width, height, margin) {
+    constructor(
+        parent: HTMLElement,
+        width: number,
+        height: number,
+        margin: number
+    ) {
         super(parent, width, height, margin);
         this.title = "Pythagoras Tree";
     }
@@ -19,7 +24,7 @@ class PT extends Drawing {
      * Draws the image.
      * @returns {PT} this
      */
-    draw() {
+    public draw(): PT {
         const level = 9;
         const startSize = (Math.min(this.width, this.height) - 2 * this.margin) / 6;
         const startSquare = new Square(
@@ -50,24 +55,56 @@ class PT extends Drawing {
     }
 }
 
+class PythagorasTreeVertex {
+    public square: Square;
+    public children: PythagorasTreeVertex[];
+
+    constructor(square: Square, children: PythagorasTreeVertex[] = []) {
+        this.square = square;
+        this.children = children;
+    }
+
+    public addChild(child: PythagorasTreeVertex): void {
+        this.children.push(child);
+    }
+}
+
 /**
  * Pythagoras tree class.
  */
 class PythagorasTree {
-    constructor(startSquare, level, ctx) {
+    private startSquare: Square;
+    private level: number;
+    private ctx: CanvasRenderingContext2D;
+    private root: PythagorasTreeVertex;
+
+    constructor(
+        startSquare: Square,
+        level: number,
+        ctx: CanvasRenderingContext2D | null
+    ) {
+        if (ctx === null) {
+            throw new Error("ctx is null!");
+        }
         this.startSquare = startSquare;
         this.level = level;
         this.ctx = ctx;
 
-        this.root = {
-            square: this.startSquare
-        }
+        this.root = new PythagorasTreeVertex(this.startSquare);
+    }
+
+    /**
+     * Draws the tree with start, target, path and obstacles.
+     */
+    public draw(): void {
+        // draw tree: recurse from root
+        this.drawSubtree(this.root);
     }
 
     /**
      * Generates an PT.
      */
-    generateTree() {
+    public generateTree(): PythagorasTree {
         this.generateSubTree(this.root, this.level);
         return this;
     }
@@ -77,7 +114,7 @@ class PythagorasTree {
      * @param {any} root
      * @param {number} level levels left to recurse
      */
-    generateSubTree(root, level) {
+    private generateSubTree(root: PythagorasTreeVertex, level: number): void {
         if (level <= 0) {
             return;
         }
@@ -95,14 +132,8 @@ class PythagorasTree {
         s.rotate(c.x, c.y, Math.PI / 2);
 
         // add to tree
-        root.children = [
-            {
-                square: s
-            },
-            {
-                square: s2
-            }
-        ];
+        root.addChild(new PythagorasTreeVertex(s));
+        root.addChild(new PythagorasTreeVertex(s2));
 
         // recurse
         this.generateSubTree(root.children[0], level - 1);
@@ -110,18 +141,10 @@ class PythagorasTree {
     }
 
     /**
-     * Draws the tree with start, target, path and obstacles.
-     */
-    draw() {
-        // draw tree: recurse from root
-        this.drawSubtree(this.root);
-    }
-
-    /**
      * Draws a subtree recursively.
      * @param {any} root
      */
-    drawSubtree(root) {
+    private drawSubtree(root: PythagorasTreeVertex): void {
         // draw square
         root.square.draw(this.ctx);
         // recurse

@@ -9,16 +9,17 @@ var Drawing = /** @class */ (function () {
      * @param {number} height height of the canvas
      * @param {number} margin margin around image content
      */
-    function Drawing(parent, width, height, margin) {
+    function Drawing(parent, width, height, margin, title) {
         if (parent === void 0) { parent = document.getElementsByTagName("body")[0]; }
         if (width === void 0) { width = 500; }
         if (height === void 0) { height = 500; }
         if (margin === void 0) { margin = 10; }
+        if (title === void 0) { title = "Unnamed Drawing"; }
         this.width = width;
         this.height = height;
         this.margin = margin;
         this.parent = parent;
-        this.title = "Unnamed Drawing";
+        this.title = title;
     }
     /**
      * Creates the drawing container, title and canvas and draws the image.

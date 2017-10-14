@@ -10,7 +10,12 @@ class HilbertCurve extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent, width, height, margin) {
+    constructor(
+        parent: HTMLElement,
+        width: number,
+        height: number,
+        margin: number
+    ) {
         super(parent, width, height, margin);
         this.title = "Hilbert Curve";
     }
@@ -19,9 +24,21 @@ class HilbertCurve extends Drawing {
      * Draws the image.
      * @returns {HilbertCurve} this
      */
-    draw() {
+    public draw(): HilbertCurve {
         // color brewer spectral 11
-        const palette = ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"];
+        const palette = [
+            "#9e0142",
+            "#d53e4f",
+            "#f46d43",
+            "#fdae61",
+            "#fee08b",
+            "#ffffbf",
+            "#e6f598",
+            "#abdda4",
+            "#66c2a5",
+            "#3288bd",
+            "#5e4fa2"
+        ];
         const level = 7;
 
         // get curve
@@ -41,7 +58,7 @@ class HilbertCurve extends Drawing {
         path.push([0, 0]);
         path.push([0, -factor]);
 
-        for (let i = 0, len = curve.length; i < len; i++) {
+        for (let i = 0; i < curve.length; i++) {
             switch (curve[i]) {
                 case "F":
                     // go forward (in the current direction)
@@ -68,10 +85,6 @@ class HilbertCurve extends Drawing {
                     break;
             }
 
-            const currentAngleRad = currentAngleDeg / 180 * Math.PI;
-            currentX += Math.cos(currentAngleRad);
-            currentY += Math.sin(currentAngleRad);
-
             // add new point
             path.push([currentX, currentY]);
         }
@@ -85,7 +98,12 @@ class HilbertCurve extends Drawing {
         return this;
     }
 
-    getNext(curve) {
+    /**
+     * Get next-level curve
+     * @param curve old curve
+     * @returns new curve
+     */
+    private getNext(curve: string): string {
         // A -> -BF+AFA+FB-
         // B -> +AF-BFB−FA+
         curve = lib.replaceAll(curve, "A", "-bF+AFA+Fb-");

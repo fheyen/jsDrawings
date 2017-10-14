@@ -146,6 +146,9 @@ var lib = {
         if (fill === void 0) { fill = "rgba(0, 0, 0, 0)"; }
         if (startAngle === void 0) { startAngle = 0; }
         if (endAngle === void 0) { endAngle = 2 * Math.PI; }
+        if (!ctx) {
+            return;
+        }
         ctx.save();
         ctx.strokeStyle = stroke;
         ctx.fillStyle = fill;
@@ -166,6 +169,9 @@ var lib = {
     drawPolygon: function (ctx, points, stroke, fill) {
         if (stroke === void 0) { stroke = "#000"; }
         if (fill === void 0) { fill = "rgba(0, 0, 0, 0)"; }
+        if (!ctx) {
+            return;
+        }
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
@@ -187,6 +193,9 @@ var lib = {
      */
     drawPath: function (ctx, path, palette, interpolate) {
         if (interpolate === void 0) { interpolate = true; }
+        if (!ctx) {
+            return;
+        }
         var oldP = path[0];
         var i = 0;
         var blocklength = path.length / palette.length;

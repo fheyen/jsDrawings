@@ -10,7 +10,12 @@ class SierpinskiCarpet extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent, width, height, margin) {
+    constructor(
+        parent: HTMLElement,
+        width: number,
+        height: number,
+        margin: number
+    ) {
         super(parent, width, height, margin);
         this.title = "Sierpinsky Carpet";
     }
@@ -19,7 +24,11 @@ class SierpinskiCarpet extends Drawing {
      * Draws the image.
      * @returns {SierpinskiCarpet} this
      */
-    draw() {
+    public draw(): SierpinskiCarpet {
+        if (this.ctx === null) {
+            throw new Error("ctx is null!");
+        }
+
         // maximum recursion level
         const maxLevel = 5;
 
@@ -48,7 +57,16 @@ class SierpinskiCarpet extends Drawing {
      * @param {number} size size of the child squares
      * @param {any} center center of the square as {x, y}
      */
-    recurse(level, maxLevel, size, center) {
+    private recurse(
+        level: number,
+        maxLevel: number,
+        size: number,
+        center: { x: number, y: number }
+    ) {
+        if (this.ctx === null) {
+            throw new Error("ctx is null!");
+        }
+
         // fill middle
         this.ctx.fillRect(center.x - size / 2, center.y - size / 2, size, size);
 

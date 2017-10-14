@@ -10,7 +10,12 @@ class OsgoodCurve extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent, width, height, margin) {
+    constructor(
+        parent: HTMLElement,
+        width: number,
+        height: number,
+        margin: number
+    ) {
         super(parent, width, height, margin);
         this.title = "Osgood Curve";
     }
@@ -19,9 +24,9 @@ class OsgoodCurve extends Drawing {
      * Draws the image.
      * @returns {OsgoodCurve} this
      */
-    public draw() {
+    public draw(): OsgoodCurve {
         // maximum recursion level
-        const maxLevel = 9;
+        const maxLevel = 11;
 
         // start triangle
         const startPoints = [
@@ -40,7 +45,7 @@ class OsgoodCurve extends Drawing {
         ];
 
         // daw triangle
-        // lib.drawPolygon(this.ctx, startPoints, "rgba(0, 0, 0, 0)", "#000");
+        lib.drawPolygon(this.ctx, startPoints, "rgba(0, 0, 0, 0)", "#fff");
 
         // recursively draw triangles
         this.recurse(maxLevel, maxLevel, startPoints);
@@ -54,20 +59,24 @@ class OsgoodCurve extends Drawing {
      * @param {number} maxLevel maximum recursion level
      * @param {number} points points of the parent triangle
      */
-    recurse(level, maxLevel, points) {
+    private recurse(
+        level: number,
+        maxLevel: number,
+        points: { x: number, y: number }[]
+    ): void {
         const wedgeSize = 0.05;
         // draw wedge
         const diff = Vector.diff(points[1], points[0]);
         const direction = Vector.normalize(diff);
         const dist = Vector.dist(points[1], points[0]);
-        const wedgeLeft = Vector.add(points[0], Vector.mult(direction, dist * 0.5 - wedgeSize));
-        const wedgeRight = Vector.add(points[0], Vector.mult(direction, dist * 0.5 + wedgeSize));
+        const wedgeLeft = Vector.add(points[0], Vector.mult(direction, dist * (0.5 - wedgeSize)));
+        const wedgeRight = Vector.add(points[0], Vector.mult(direction, dist * (0.5 + wedgeSize)));
         const wedge = [
             points[2],
             wedgeLeft,
             wedgeRight
         ];
-        lib.drawPolygon(this.ctx, wedge, "#fff", "#fff");
+        lib.drawPolygon(this.ctx, wedge, "#333", "#333");
 
         // get points of child triangles
         const pointsA = [

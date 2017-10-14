@@ -3,12 +3,12 @@
  */
 class Drawing {
     public title: string;
-    private width: number;
-    private height: number;
-    private margin: number;
-    private parent: HTMLElement;
-    private canvas: HTMLCanvasElement;
-    private ctx: CanvasRenderingContext2D | null;
+    protected width: number;
+    protected height: number;
+    protected margin: number;
+    protected parent: HTMLElement;
+    protected canvas: HTMLCanvasElement;
+    protected ctx: CanvasRenderingContext2D | null;
 
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
@@ -20,13 +20,14 @@ class Drawing {
         parent: HTMLElement = document.getElementsByTagName("body")[0],
         width: number = 500,
         height: number = 500,
-        margin: number = 10
+        margin: number = 10,
+        title: string = "Unnamed Drawing"
     ) {
         this.width = width;
         this.height = height;
         this.margin = margin;
         this.parent = parent;
-        this.title = "Unnamed Drawing";
+        this.title = title;
     }
 
     /**

@@ -10,16 +10,20 @@ class YinYang extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent, width, height, margin) {
-        super(parent, width, height, margin);
-        this.title = "Yin Yang";
+    constructor(
+        parent: HTMLElement,
+        width: number,
+        height: number,
+        margin: number
+    ) {
+        super(parent, width, height, margin, "Yin Yang");
     }
 
     /**
      * Draws the image.
      * @returns {YinYang} this
      */
-    draw() {
+    public draw(): YinYang {
         const centerX = this.width / 2;
         const centerY = this.height / 2;
         const radius = Math.min(this.width, this.height) / 2 - this.margin;

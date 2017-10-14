@@ -10,7 +10,12 @@ class DragonCurve extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent, width, height, margin) {
+    constructor(
+        parent: HTMLElement,
+        width: number,
+        height: number,
+        margin: number
+    ) {
         super(parent, width, height, margin);
         this.title = "Dragon Curve";
     }
@@ -19,9 +24,21 @@ class DragonCurve extends Drawing {
      * Draws the image.
      * @returns {DragonCurve} this
      */
-    draw() {
+    public draw(): DragonCurve {
         // color brewer spectral 11
-        const palette = ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"];
+        const palette = [
+            "#9e0142",
+            "#d53e4f",
+            "#f46d43",
+            "#fdae61",
+            "#fee08b",
+            "#ffffbf",
+            "#e6f598",
+            "#abdda4",
+            "#66c2a5",
+            "#3288bd",
+            "#5e4fa2"
+        ];
         const level = 10;
 
         // get curve
@@ -40,7 +57,7 @@ class DragonCurve extends Drawing {
         path.push([0, 0]);
         path.push([0, -1]);
 
-        for (let i = 0, len = curve.length; i < len; i++) {
+        for (let i = 0; i < curve.length; i++) {
             // go 1 step in current direction
             if (curve[i] === "L") {
                 currentAngleDeg = (currentAngleDeg + 90) % 360;
@@ -66,7 +83,12 @@ class DragonCurve extends Drawing {
         return this;
     }
 
-    getNext(curve) {
+    /**
+     * Get next-level curve
+     * @param curve old curve
+     * @returns new curve
+     */
+    private getNext(curve: string): string {
         // replace middle by L
         const middle = (curve.length - 1) / 2;
         const curveL = `${curve.substring(0, middle)}L${curve.substring(middle + 1, curve.length)}`;

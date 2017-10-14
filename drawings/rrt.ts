@@ -10,7 +10,12 @@ class RRT extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent, width, height, margin) {
+    constructor(
+        parent: HTMLElement,
+        width: number,
+        height: number,
+        margin: number
+    ) {
         super(parent, width, height, margin);
         this.title = "RRT";
     }
@@ -19,7 +24,11 @@ class RRT extends Drawing {
      * Draws the image.
      * @returns {RRT} this
      */
-    draw() {
+    public draw(): RRT {
+        if (this.ctx === null) {
+            throw new Error("ctx is null!");
+        }
+
         const stepsize = 5;
 
         const start = {
@@ -83,27 +92,62 @@ class RRT extends Drawing {
     }
 }
 
+class RandomTreeVertex {
+    public x: number;
+    public y: number;
+    public parent: RandomTreeVertex;
+    public children: RandomTreeVertex[];
+
+    constructor(position: { x: number, y: number }) {
+        this.x = position.x;
+        this.y = position.y;
+        this.children = [];
+    }
+}
+
 class RandomTree {
-    constructor(areaSize, stepsize, rootPosition, targetPosition, targetProb, obstacles, ctx) {
+    private width: number;
+    private height: number;
+    private stepsize: number;
+    private root: RandomTreeVertex;
+    private target: { x: number, y: number };
+    private targetProb: number;
+    private obstacles: Obstacle[];
+    private ctx: CanvasRenderingContext2D | null;
+    private vertices: RandomTreeVertex[];
+
+    constructor(
+        areaSize: { width: number, height: number },
+        stepsize: number,
+        rootPosition: { x: number, y: number },
+        targetPosition: { x: number, y: number },
+        targetProb: number,
+        obstacles: Obstacle[],
+        ctx: CanvasRenderingContext2D
+    ) {
+        if (ctx === null) {
+            throw new Error("ctx is null!");
+        }
         this.width = areaSize.width;
         this.height = areaSize.height;
-        this.root = rootPosition;
+        this.root = new RandomTreeVertex(rootPosition);
         this.target = targetPosition;
         this.targetProb = targetProb;
         this.stepsize = stepsize;
         this.obstacles = obstacles;
         this.ctx = ctx;
-        this.vertices = [this.root];
+        this.vertices = [new RandomTreeVertex(this.root)];
     }
 
     /**
      * Generates an RRT.
      * @param {number} maxVertices maximum number of vertices
      * @param {number} maxIterations maximum number of iterations
-     * @param {boolean} stopWhenTargetReached if this is set to true, tree generation is stopped once the target has been reached
+     * @param {boolean} stopWhenTargetReached if this is set to true,
+     *  tree generation is stopped once the target has been reached
      * @returns {void}
      */
-    generateTree(maxIterations, maxVertices, stopWhenTargetReached) {
+    public generateTree(maxIterations: number, maxVertices: number, stopWhenTargetReached: boolean): void {
         console.log(`generating tree with max. ${maxIterations} iterations, max. ${maxVertices} vertices`);
         console.log(`stop when target reached: ${stopWhenTargetReached}`);
         console.log(`stepsize ${this.stepsize}`);
@@ -123,74 +167,11 @@ class RandomTree {
     }
 
     /**
-     * Samples a random position and goes one stepsize in
-     * its direction from the nearest vertex of the tree.
-     * If there is no obstacle, the new position is added to the tree.
-     *  @returns {boolean} true iff new position was obstacle free and added to the tree
-     */
-    samplePosition() {
-        const position = this.getRandomPosition();
-        const nearest = this.getNearestVertex(position);
-        const difference = Vector.diff(position, nearest);
-        const direction = Vector.normalize(difference);
-        const distance = Vector.dist(position, nearest);
-        const step = Math.min(distance, this.stepsize);
-        const newPosition = Vector.add(nearest, Vector.mult(direction, this.stepsize));
-        // check for obstacles
-        for (let i = 0; i < this.obstacles.length; i++) {
-            if (this.obstacles[i].isHit(newPosition)) {
-                return false;
-            }
-        }
-        // add new position
-        newPosition.parent = nearest;
-        if (!nearest.children) {
-            nearest.children = [];
-        }
-        nearest.children.push(newPosition);
-        this.vertices.push(newPosition);
-        return true;
-    }
-
-    /**
-     * Returns the vertex that is closest to the target.
-     * @param {any} position
-     *  @returns {object} nearest vertex
-     */
-    getNearestVertex(position) {
-        let tmpNearest = this.root;
-        let tmpDistance = Number.MAX_VALUE;
-        this.vertices.forEach(v => {
-            const distance = Vector.dist(v, position);
-            if (distance < tmpDistance) {
-                tmpDistance = distance;
-                tmpNearest = v;
-            }
-        });
-        return tmpNearest;
-    }
-
-    /**
-     * Returns a position or the target at random.
-     * @returns {object} random position
-     */
-    getRandomPosition() {
-        // sometimes take the target
-        if (Math.random() < this.targetProb) {
-            return this.target;
-        }
-        return {
-            x: lib.randomInt(0, this.width),
-            y: lib.randomInt(0, this.height)
-        };
-    }
-
-    /**
      * Returns true iff the nearest vertex to the target has a
      * distance of less than this.stepsize.
      * @returns {boolean} true iff target is closer than this.stepsize
      */
-    isTargetReached() {
+    public isTargetReached() {
         const nearest = this.getNearestVertex(this.target);
         const distance = Vector.dist(nearest, this.target);
         return distance < this.stepsize;
@@ -200,13 +181,18 @@ class RandomTree {
      * Draws the tree with start, target, path and obstacles.
      * @returns {void}
      */
-    draw() {
+    public draw() {
+        if (this.ctx === null) {
+            throw new Error("ctx is null!");
+        }
         this.ctx.fillStyle = "#000";
         // draw background
         this.ctx.fillRect(0, 0, this.width, this.height);
         // draw obstacles
         this.obstacles.forEach(o => {
-            o.draw(this.ctx);
+            if (this.ctx) {
+                o.draw(this.ctx);
+            }
         });
         // draw tree: recurse from root
         this.ctx.strokeStyle = "#aaa";
@@ -226,34 +212,11 @@ class RandomTree {
     }
 
     /**
-     * Draws a subtree recursively.
-     * @param {any} root
-     * @returns {void}
-     */
-    drawSubtree(root) {
-        if (!root.children) {
-            // leaf vertex
-            return;
-        }
-        // draw line from root to all children ...
-        root.children.forEach(c => {
-            this.ctx.beginPath();
-            this.ctx.moveTo(root.x, root.y);
-            this.ctx.lineTo(c.x, c.y);
-            this.ctx.stroke();
-        });
-        // ... then recurse
-        root.children.forEach(c => {
-            this.drawSubtree(c);
-        });
-    }
-
-    /**
      * Returns the path from the vertex nearest
      * to the target up to the root.
      * @returns {object[]} path
      */
-    getPath() {
+    public getPath() {
         let vertex = this.getNearestVertex(this.target);
         // get initial path
         const path = [vertex];
@@ -269,7 +232,10 @@ class RandomTree {
      * @param {any[]} path
      * @returns {void}
      */
-    drawPath(path) {
+    public drawPath(path: RandomTreeVertex[]): void {
+        if (this.ctx === null) {
+            throw new Error("ctx is null!");
+        }
         // just go up in tree until root is rached
         for (let i = 0; i < path.length - 1; i++) {
             this.ctx.beginPath();
@@ -284,7 +250,7 @@ class RandomTree {
      * This is achieved by simply removing waypoints that are not necessary.
      * * @returns {object[]} straightened path
      */
-    getStraightenedPath() {
+    public getStraightenedPath(): RandomTreeVertex[] {
         const path = this.getPath();
         // remove vertices from path while still not hitting obstacles
         let improved;
@@ -304,12 +270,102 @@ class RandomTree {
     }
 
     /**
+     * Samples a random position and goes one stepsize in
+     * its direction from the nearest vertex of the tree.
+     * If there is no obstacle, the new position is added to the tree.
+     *  @returns {boolean} true iff new position was obstacle free and added to the tree
+     */
+    private samplePosition(): boolean {
+        const position = this.getRandomPosition();
+        const nearest = this.getNearestVertex(position);
+        const difference = Vector.diff(position, nearest);
+        const direction = Vector.normalize(difference);
+        const distance = Vector.dist(position, nearest);
+        const step = Math.min(distance, this.stepsize);
+        const newPosition = Vector.add(nearest, Vector.mult(direction, this.stepsize));
+        // check for obstacles
+        for (let i = 0; i < this.obstacles.length; i++) {
+            if (this.obstacles[i].isHit(newPosition)) {
+                return false;
+            }
+        }
+        // add new position
+        const newVertex = new RandomTreeVertex(newPosition);
+        newVertex.parent = nearest;
+        nearest.children.push(newVertex);
+        this.vertices.push(newVertex);
+        return true;
+    }
+
+    /**
+     * Returns the vertex that is closest to the target.
+     * @param {any} position
+     *  @returns {object} nearest vertex
+     */
+    private getNearestVertex(position: { x: number, y: number }): RandomTreeVertex {
+        let tmpNearest = this.root;
+        let tmpDistance = Number.MAX_VALUE;
+        this.vertices.forEach(v => {
+            const distance = Vector.dist(v, position);
+            if (distance < tmpDistance) {
+                tmpDistance = distance;
+                tmpNearest = v;
+            }
+        });
+        return tmpNearest;
+    }
+
+    /**
+     * Returns a position or the target at random.
+     * @returns {object} random position
+     */
+    private getRandomPosition(): { x: number, y: number } {
+        // sometimes take the target
+        if (Math.random() < this.targetProb) {
+            return this.target;
+        }
+        return {
+            x: lib.randomInt(0, this.width),
+            y: lib.randomInt(0, this.height)
+        };
+    }
+
+    /**
+     * Draws a subtree recursively.
+     * @param {any} root
+     * @returns {void}
+     */
+    private drawSubtree(root: RandomTreeVertex): void {
+        if (root.children.length === 0) {
+            // leaf vertex
+            return;
+        }
+        // draw line from root to all children ...
+        root.children.forEach(c => {
+            if (this.ctx === null) {
+                return;
+            }
+            this.ctx.beginPath();
+            this.ctx.moveTo(root.x, root.y);
+            this.ctx.lineTo(c.x, c.y);
+            this.ctx.stroke();
+        });
+        // ... then recurse
+        root.children.forEach(c => {
+            this.drawSubtree(c);
+        });
+    }
+
+    /**
      * Subsamples a straight line from position1 to position2 and checks for collisions.
      * @param {any} position1 a position as {x, y}
      * @param {any} position2 a position as {x, y}
      * @return true iff a collision has been detected
      */
-    pathCollision(position1, position2) {
+    private pathCollision(
+        position1: { x: number, y: number },
+        position2: { x: number, y: number }
+    ): boolean {
         const distance = Vector.dist(position1, position2);
         const steps = Math.ceil(distance / this.stepsize);
         const stepsize = distance / steps;
@@ -335,10 +391,12 @@ class RandomTree {
  * Obstacle super class.
  */
 class Obstacle {
-    constructor(safetyMargin) {
+    protected marginColor: string = "rgba(255, 255, 255, 0.4)";
+    protected fillColor: string = "rgba(200, 0, 0, 0.5)";
+    protected safetyMargin: number;
+
+    constructor(safetyMargin: number) {
         this.safetyMargin = safetyMargin;
-        this.fillColor = "rgba(200, 0, 0, 0.5)";
-        this.marginColor = "rgba(255, 255, 255, 0.4)";
     }
 
     /**
@@ -346,8 +404,9 @@ class Obstacle {
      * @param {object} position
      * @return true iff hit
      */
-    isHit(position) {
+    public isHit(position: { x: number, y: number }): boolean {
         alert("nyi");
+        return false;
     }
 
     /**
@@ -355,7 +414,7 @@ class Obstacle {
      * @param {CanvasRenderingContext2D} ctx
      * @returns {void}
      */
-    draw(ctx) {
+    public draw(ctx: CanvasRenderingContext2D): void {
         alert("nyi");
     }
 }
@@ -364,7 +423,14 @@ class Obstacle {
  * Circular obstacle class.
  */
 class CircularObstacle extends Obstacle {
-    constructor(center, radius, safetyMargin) {
+    private center: { x: number, y: number };
+    private radius: number;
+
+    constructor(
+        center: { x: number, y: number },
+        radius: number,
+        safetyMargin: number
+    ) {
         super(safetyMargin);
         this.center = center;
         this.radius = radius;
@@ -375,7 +441,7 @@ class CircularObstacle extends Obstacle {
      * @param {object} position
      * @return true iff hit
      */
-    isHit(position) {
+    public isHit(position: { x: number, y: number }): boolean {
         return Vector.dist(this.center, position) < this.radius + this.safetyMargin;
     }
 
@@ -384,7 +450,7 @@ class CircularObstacle extends Obstacle {
      * @param {CanvasRenderingContext2D} ctx
      * @returns {void}
      */
-    draw(ctx) {
+    public draw(ctx: CanvasRenderingContext2D): void {
         const trans = "rgba(0, 0, 0, 0)";
         // draw safetyMargin
         lib.drawCircle(ctx, this.center.x, this.center.y, this.radius + this.safetyMargin, trans, this.marginColor);
@@ -397,7 +463,16 @@ class CircularObstacle extends Obstacle {
  * Rectangular obstacle class.
  */
 class RectangularObstacle extends Obstacle {
-    constructor(position, width, height, safetyMargin) {
+    private position: { x: number, y: number };
+    private width: number;
+    private height: number;
+
+    constructor(
+        position: { x: number, y: number },
+        width: number,
+        height: number,
+        safetyMargin: number
+    ) {
         super(safetyMargin);
         this.position = position;
         this.width = width;
@@ -409,7 +484,7 @@ class RectangularObstacle extends Obstacle {
      * @param {object} position
      * @return true iff hit
      */
-    isHit(position) {
+    public isHit(position: { x: number, y: number }): boolean {
         return position.x > this.position.x - this.safetyMargin
             && position.y > this.position.y - this.safetyMargin
             && position.x < this.position.x + this.width + this.safetyMargin
@@ -421,7 +496,7 @@ class RectangularObstacle extends Obstacle {
      * @param {CanvasRenderingContext2D} ctx
      * @returns {void}
      */
-    draw(ctx) {
+    public draw(ctx: CanvasRenderingContext2D): void {
         // draw safetyMargin
         ctx.fillStyle = this.marginColor;
         ctx.fillRect(

@@ -152,7 +152,7 @@ const lib = {
      * @return {void}
      */
     drawCircle(
-        ctx: CanvasRenderingContext2D,
+        ctx: CanvasRenderingContext2D | null,
         x: number,
         y: number,
         radius: number,
@@ -161,6 +161,9 @@ const lib = {
         startAngle: number = 0,
         endAngle: number = 2 * Math.PI
     ): void {
+        if (!ctx) {
+            return;
+        }
         ctx.save();
         ctx.strokeStyle = stroke;
         ctx.fillStyle = fill;
@@ -180,11 +183,14 @@ const lib = {
      * @return {void}
      */
     drawPolygon(
-        ctx: CanvasRenderingContext2D,
+        ctx: CanvasRenderingContext2D | null,
         points: any[],
         stroke: string = "#000",
         fill: string = "rgba(0, 0, 0, 0)"
     ): void {
+        if (!ctx) {
+            return;
+        }
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
@@ -206,11 +212,14 @@ const lib = {
      * @param {string[]} palette stroke style array
      */
     drawPath(
-        ctx: CanvasRenderingContext2D,
+        ctx: CanvasRenderingContext2D | null,
         path: any[],
         palette: string[],
         interpolate: boolean = true
     ): void {
+        if (!ctx) {
+            return;
+        }
         let oldP = path[0];
         let i = 0;
         const blocklength = path.length / palette.length;

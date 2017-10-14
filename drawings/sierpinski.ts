@@ -10,7 +10,12 @@ class Sierpinski extends Drawing {
      * @param {number} height (default: 100) height of the canvas
      * @param {number} margin (default: 10) margin around image content
      */
-    constructor(parent, width, height, margin) {
+    constructor(
+        parent: HTMLElement,
+        width: number,
+        height: number,
+        margin: number
+    ) {
         super(parent, width, height, margin);
         this.title = "Sierpinski Triangle";
     }
@@ -19,7 +24,7 @@ class Sierpinski extends Drawing {
      * Draws the image.
      * @returns {Sierpinski} this
      */
-    draw() {
+    public draw(): Sierpinski {
         // maximum recursion level
         const maxLevel = 10;
 
@@ -51,7 +56,11 @@ class Sierpinski extends Drawing {
      * @param {number} maxLevel maximum recursion level
      * @param {number} points points of the parent triangle
      */
-    recurse(level, maxLevel, points) {
+    private recurse(
+        level: number,
+        maxLevel: number,
+        points: { x: number, y: number }[]
+    ) {
         // draw triangle
         lib.drawPolygon(this.ctx, points, "rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.1)");
 
