@@ -12,6 +12,7 @@ Drawings in JavaScript. Suggestions are welcome.
 ![](img/xs/dragoncurve.png?raw=true "Dragon Curve")
 ![](img/xs/gospercurve.png?raw=true "Gosper Curve")
 ![](img/xs/hilbertcurve.png?raw=true "Hilbert Curve")
+![](img/xs/osgoodcurve.png?raw=true "Osgood Curve")
 ![](img/xs/sierpinski.png?raw=true "Sierpinski Triangle (using color)")
 ![](img/xs/sierpinski2.png?raw=true "Sierpinski Triangle (using opacity)")
 ![](img/xs/sierpinskiCarpet.png?raw=true "Sierpinski Carpet")
@@ -55,6 +56,12 @@ Drawings in JavaScript. Suggestions are welcome.
 
 ![](img/hilbertcurve.png?raw=true "Hilbert Curve")
 
+### Osgood Curve
+
+[wikipedia](https://en.wikipedia.org/wiki/Osgood_curve)
+
+![](img/osgoodcurve.png?raw=true "Osgood Curve")
+
 ### Sierpinski Triangle
 
 [wikipedia](https://en.wikipedia.org/wiki/Sierpinski_triangle)
@@ -87,10 +94,6 @@ Drawings in JavaScript. Suggestions are welcome.
 ![](img/pythagorastree.png?raw=true "Pythagoras Tree")
 
 ## Planned
-
-### Osgood Curve
-
-[wikipedia](https://en.wikipedia.org/wiki/Osgood_curve)
 
 ### Animated drawing
 
