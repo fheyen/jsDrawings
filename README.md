@@ -46,7 +46,7 @@ Drawings in JavaScript. Suggestions are welcome.
 
 [wikipedia](httpps://en.wikipedia.org/wiki/Gosper_curve)
 
-![](img/gospercurve.png?raw=true "Gosper Curve")### Gosper Curve
+![](img/gospercurve.png?raw=true "Gosper Curve")
 
 ## Hilbert Curve
 
