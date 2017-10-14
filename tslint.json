@@ -1,9 +1,30 @@
 {
-    "defaultSeverity": "error",
+    "defaultSeverity": "warning",
     "extends": [
         "tslint:recommended"
     ],
     "jsRules": {},
-    "rules": {},
+    "rules": {
+        "trailing-comma": false,
+        "no-console": false,
+        "array-type": true,
+        "arrow-parens": false,
+        "encoding": true,
+        "max-classes-per-file": false,
+        "no-any": true,
+        "no-conditional-assignment": true,
+        "no-invalid-this": true,
+        "one-variable-per-declaration": true,
+        "prefer-for-of": false,
+        "prefer-template": true,
+        "quotemark": true,
+        "semicolon": true,
+        "space-within-parens": false,
+        "triple-equals": true,
+        "use-isnan": true,
+        "object-literal-sort-keys": false,
+        "curly": true,
+        "one-line": false
+    },
     "rulesDirectory": []
 }

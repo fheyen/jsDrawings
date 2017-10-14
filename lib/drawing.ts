@@ -2,18 +2,30 @@
  * Class for a drawing in JavaScript.
  */
 class Drawing {
+    public title: string;
+    private width: number;
+    private height: number;
+    private margin: number;
+    private parent: HTMLElement;
+    private canvas: HTMLCanvasElement;
+    private ctx: CanvasRenderingContext2D | null;
+
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width width of the canvas
      * @param {number} height height of the canvas
      * @param {number} margin margin around image content
      */
-    constructor(parent = document.getElementsByTagName("body")[0], width = 500, height = 500, margin = 10) {
+    constructor(
+        parent: HTMLElement = document.getElementsByTagName("body")[0],
+        width: number = 500,
+        height: number = 500,
+        margin: number = 10
+    ) {
         this.width = width;
         this.height = height;
         this.margin = margin;
         this.parent = parent;
-        this.canvas;
         this.title = "Unnamed Drawing";
     }
 
@@ -21,7 +33,7 @@ class Drawing {
      * Creates the drawing container, title and canvas and draws the image.
      * @return {Drawing} this
      */
-    init() {
+    public init(): Drawing {
         this.clear();
         this.createCanvas();
         this.draw();
@@ -32,7 +44,7 @@ class Drawing {
      * Clears the parent element.
      * @return {Drawing} this
      */
-    clear() {
+    public clear(): Drawing {
         if (this.canvas) {
             this.parent.removeChild(this.canvas);
         }
@@ -40,10 +52,19 @@ class Drawing {
     }
 
     /**
+     * Draws the image.
+     * @return {Drawing} this
+     */
+    public draw(): Drawing {
+        console.warn("draw(): Not implemented yet!");
+        return this;
+    }
+
+    /**
      * Creates the canvas.
      * @return {Drawing} this
      */
-    createCanvas() {
+    private createCanvas(): Drawing {
         if (!this.canvas) {
             this.canvas = document.createElement("canvas");
             this.canvas.width = this.width;
@@ -51,15 +72,6 @@ class Drawing {
             this.parent.appendChild(this.canvas);
         }
         this.ctx = this.canvas.getContext("2d");
-        return this;
-    }
-
-    /**
-     * Draws the image.
-     * @return {Drawing} this
-     */
-    draw() {
-        console.warn("draw(): Not implemented yet!");
         return this;
     }
 }
