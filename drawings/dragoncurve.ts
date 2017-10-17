@@ -3,7 +3,8 @@
  *
  * https://en.wikipedia.org/wiki/Dragon_curve
  */
-class DragonCurve extends Drawing {
+class DragonCurve extends Drawing
+{
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -15,7 +16,8 @@ class DragonCurve extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin);
         this.title = "Dragon Curve";
     }
@@ -24,7 +26,8 @@ class DragonCurve extends Drawing {
      * Draws the image.
      * @returns {DragonCurve} this
      */
-    public draw(): DragonCurve {
+    public draw(): DragonCurve
+    {
         // color brewer spectral 11
         const palette = [
             "#9e0142",
@@ -44,7 +47,8 @@ class DragonCurve extends Drawing {
         // get curve
         // l: left turn, r: right turn
         let curve = "R";
-        for (let l = 1; l < level; l++) {
+        for (let l = 1; l < level; l++)
+        {
             curve = this.getNext(curve);
         }
 
@@ -57,11 +61,14 @@ class DragonCurve extends Drawing {
         path.push([0, 0]);
         path.push([0, -1]);
 
-        for (let i = 0; i < curve.length; i++) {
+        for (let i = 0; i < curve.length; i++)
+        {
             // go 1 step in current direction
-            if (curve[i] === "L") {
+            if (curve[i] === "L")
+            {
                 currentAngleDeg = (currentAngleDeg + 90) % 360;
-            } else {
+            } else
+            {
                 currentAngleDeg = (currentAngleDeg - 90);
                 currentAngleDeg = currentAngleDeg < 0 ? currentAngleDeg + 360 : currentAngleDeg;
             }
@@ -88,10 +95,15 @@ class DragonCurve extends Drawing {
      * @param curve old curve
      * @returns new curve
      */
-    private getNext(curve: string): string {
+    private getNext(curve: string): string
+    {
         // replace middle by L
         const middle = (curve.length - 1) / 2;
-        const curveL = `${curve.substring(0, middle)}L${curve.substring(middle + 1, curve.length)}`;
+        const curveL = `${
+            curve.substring(0, middle)
+            }L${
+            curve.substring(middle + 1, curve.length)
+            }`;
         return `${curve}R${curveL}`;
     }
 }

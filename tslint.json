@@ -11,6 +11,10 @@
             true,
             "array"
         ],
+        "max-line-length": [
+            true,
+            100
+        ],
         "arrow-parens": false,
         "curly": true,
         "encoding": true,

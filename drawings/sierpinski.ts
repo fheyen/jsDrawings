@@ -3,7 +3,8 @@
  *
  * https://en.wikipedia.org/wiki/Sierpinski_triangle
  */
-class Sierpinski extends Drawing {
+class Sierpinski extends Drawing
+{
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -15,7 +16,8 @@ class Sierpinski extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin);
         this.title = "Sierpinski Triangle";
     }
@@ -24,7 +26,8 @@ class Sierpinski extends Drawing {
      * Draws the image.
      * @returns {Sierpinski} this
      */
-    public draw(): Sierpinski {
+    public draw(): Sierpinski
+    {
         // maximum recursion level
         const maxLevel = 10;
 
@@ -60,9 +63,15 @@ class Sierpinski extends Drawing {
         level: number,
         maxLevel: number,
         points: { x: number, y: number }[]
-    ) {
+    )
+    {
         // draw triangle
-        lib.drawPolygon(this.ctx, points, "rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.1)");
+        lib.drawPolygon(
+            this.ctx,
+            points,
+            "rgba(0, 0, 0, 0.1)",
+            "rgba(0, 0, 0, 0.1)"
+        );
 
         // get points of child triangles
         const pointsA = [
@@ -93,7 +102,8 @@ class Sierpinski extends Drawing {
         ];
 
         // recurse
-        if (level > 1) {
+        if (level > 1)
+        {
             this.recurse(level - 1, maxLevel, pointsA);
             this.recurse(level - 1, maxLevel, pointsB);
             this.recurse(level - 1, maxLevel, pointsC);

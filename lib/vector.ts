@@ -1,11 +1,13 @@
 /**
  * Simple 2d vector class.
  */
-class Vector {
+class Vector
+{
     public static add(
         vector1: { x: number, y: number },
         vector2: { x: number, y: number }
-    ) {
+    )
+    {
         return {
             x: vector1.x + vector2.x,
             y: vector1.y + vector2.y
@@ -16,7 +18,8 @@ class Vector {
         vector: { x: number, y: number },
         x: number,
         y: number
-    ) {
+    )
+    {
         return {
             x: vector.x + x,
             y: vector.y + y
@@ -26,7 +29,8 @@ class Vector {
     public static diff(
         vector1: { x: number, y: number },
         vector2: { x: number, y: number }
-    ) {
+    )
+    {
         return {
             x: vector1.x - vector2.x,
             y: vector1.y - vector2.y
@@ -35,14 +39,16 @@ class Vector {
 
     public static norm(
         vector: { x: number, y: number }
-    ) {
+    )
+    {
 
         return Math.hypot(vector.x, vector.y);
     }
 
     public static normalize(
         vector: { x: number, y: number }
-    ) {
+    )
+    {
         const norm = Vector.norm(vector);
         return {
             x: vector.x / norm,
@@ -53,7 +59,8 @@ class Vector {
     public static mult(
         vector: { x: number, y: number },
         factor: number
-    ) {
+    )
+    {
         return {
             x: vector.x * factor,
             y: vector.y * factor
@@ -63,7 +70,8 @@ class Vector {
     public static dist(
         vector1: { x: number, y: number },
         vector2: { x: number, y: number }
-    ) {
+    )
+    {
         return Vector.norm(Vector.diff(vector1, vector2));
     }
 
@@ -82,7 +90,8 @@ class Vector {
         cy: number,
         fx: number,
         fy: number
-    ) {
+    )
+    {
         vector = Vector.translate(vector, -cx, -cy);
         vector.x *= fx;
         vector.y *= fy;
@@ -103,7 +112,8 @@ class Vector {
         cx: number,
         cy: number,
         angle: number
-    ) {
+    )
+    {
         vector = Vector.translate(vector, -cx, -cy);
         const x = vector.x;
         const y = vector.y;

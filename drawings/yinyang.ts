@@ -3,7 +3,8 @@
  *
  * https://en.wikipedia.org/wiki/Yin_and_yang
  */
-class YinYang extends Drawing {
+class YinYang extends Drawing
+{
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -15,7 +16,8 @@ class YinYang extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin, "Yin Yang");
     }
 
@@ -23,19 +25,20 @@ class YinYang extends Drawing {
      * Draws the image.
      * @returns {YinYang} this
      */
-    public draw(): YinYang {
-        const centerX = this.width / 2;
-        const centerY = this.height / 2;
-        const radius = Math.min(this.width, this.height) / 2 - this.margin;
+    public draw(): YinYang
+    {
+        const cx = this.width / 2;
+        const cy = this.height / 2;
+        const r = Math.min(this.width, this.height) / 2 - this.margin;
 
-        lib.drawCircle(this.ctx, centerX, centerY, radius, "#000", "#000", 0, Math.PI);
-        lib.drawCircle(this.ctx, centerX, centerY, radius, "#fff", "#fff", Math.PI, 2 * Math.PI);
+        lib.drawCircle(this.ctx, cx, cy, r, "#000", "#000", 0, Math.PI);
+        lib.drawCircle(this.ctx, cx, cy, r, "#fff", "#fff", Math.PI, 2 * Math.PI);
 
-        lib.drawCircle(this.ctx, centerX - radius / 2, centerY, radius / 2, "#000", "#000");
-        lib.drawCircle(this.ctx, centerX + radius / 2, centerY, radius / 2, "#fff", "#fff");
+        lib.drawCircle(this.ctx, cx - r / 2, cy, r / 2, "#000", "#000");
+        lib.drawCircle(this.ctx, cx + r / 2, cy, r / 2, "#fff", "#fff");
 
-        lib.drawCircle(this.ctx, centerX - radius / 2, centerY, radius / 8, "#fff", "#fff");
-        lib.drawCircle(this.ctx, centerX + radius / 2, centerY, radius / 8, "#000", "#000");
+        lib.drawCircle(this.ctx, cx - r / 2, cy, r / 8, "#fff", "#fff");
+        lib.drawCircle(this.ctx, cx + r / 2, cy, r / 8, "#000", "#000");
 
         return this;
     }

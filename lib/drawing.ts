@@ -1,7 +1,8 @@
 /**
  * Class for a drawing in JavaScript.
  */
-class Drawing {
+class Drawing
+{
     public title: string;
     protected width: number;
     protected height: number;
@@ -22,7 +23,8 @@ class Drawing {
         height: number = 500,
         margin: number = 10,
         title: string = "Unnamed Drawing"
-    ) {
+    )
+    {
         this.width = width;
         this.height = height;
         this.margin = margin;
@@ -34,7 +36,8 @@ class Drawing {
      * Creates the drawing container, title and canvas and draws the image.
      * @return {Drawing} this
      */
-    public init(): Drawing {
+    public init(): Drawing
+    {
         this.clear();
         this.createCanvas();
         this.draw();
@@ -45,8 +48,10 @@ class Drawing {
      * Clears the parent element.
      * @return {Drawing} this
      */
-    public clear(): Drawing {
-        if (this.canvas) {
+    public clear(): Drawing
+    {
+        if (this.canvas)
+        {
             this.parent.removeChild(this.canvas);
         }
         return this;
@@ -56,7 +61,8 @@ class Drawing {
      * Draws the image.
      * @return {Drawing} this
      */
-    public draw(): Drawing {
+    public draw(): Drawing
+    {
         console.warn("draw(): Not implemented yet!");
         return this;
     }
@@ -65,8 +71,10 @@ class Drawing {
      * Creates the canvas.
      * @return {Drawing} this
      */
-    private createCanvas(): Drawing {
-        if (!this.canvas) {
+    private createCanvas(): Drawing
+    {
+        if (!this.canvas)
+        {
             this.canvas = document.createElement("canvas");
             this.canvas.width = this.width;
             this.canvas.height = this.height;

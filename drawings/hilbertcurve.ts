@@ -3,7 +3,8 @@
  *
  * https://en.wikipedia.org/wiki/Hilbert_curve
  */
-class HilbertCurve extends Drawing {
+class HilbertCurve extends Drawing
+{
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -15,7 +16,8 @@ class HilbertCurve extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin);
         this.title = "Hilbert Curve";
     }
@@ -24,7 +26,8 @@ class HilbertCurve extends Drawing {
      * Draws the image.
      * @returns {HilbertCurve} this
      */
-    public draw(): HilbertCurve {
+    public draw(): HilbertCurve
+    {
         // color brewer spectral 11
         const palette = [
             "#9e0142",
@@ -44,7 +47,8 @@ class HilbertCurve extends Drawing {
         // get curve
         // l: left turn, r: right turn
         let curve = "A";
-        for (let l = 1; l < level; l++) {
+        for (let l = 1; l < level; l++)
+        {
             curve = this.getNext(curve);
         }
 
@@ -58,8 +62,10 @@ class HilbertCurve extends Drawing {
         path.push([0, 0]);
         path.push([0, -factor]);
 
-        for (let i = 0; i < curve.length; i++) {
-            switch (curve[i]) {
+        for (let i = 0; i < curve.length; i++)
+        {
+            switch (curve[i])
+            {
                 case "F":
                     // go forward (in the current direction)
                     const currentAngleRad = currentAngleDeg / 180 * Math.PI;
@@ -103,7 +109,8 @@ class HilbertCurve extends Drawing {
      * @param curve old curve
      * @returns new curve
      */
-    private getNext(curve: string): string {
+    private getNext(curve: string): string
+    {
         // A -> -BF+AFA+FB-
         // B -> +AF-BFB−FA+
         curve = lib.replaceAll(curve, "A", "-bF+AFA+Fb-");

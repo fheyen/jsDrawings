@@ -3,7 +3,8 @@
  *
  * https://de.wikipedia.org/wiki/Blume_des_Lebens
  */
-class Ornament extends Drawing {
+class Ornament extends Drawing
+{
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -15,7 +16,8 @@ class Ornament extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin);
         this.title = "Ornament";
     }
@@ -24,9 +26,11 @@ class Ornament extends Drawing {
      * Draws the image.
      * @returns {Ornament} this
      */
-    public draw(): Ornament {
+    public draw(): Ornament
+    {
 
-        if (this.ctx === null) {
+        if (this.ctx === null)
+        {
             throw new Error("canvas is null!");
         }
 
@@ -68,7 +72,8 @@ class Ornament extends Drawing {
      * @param {number} y y-coordinate
      * @param {number} r radius
      */
-    private drawPart(x: number, y: number, r: number) {
+    private drawPart(x: number, y: number, r: number)
+    {
         const ctx = this.canvas.getContext("2d");
         const pi = Math.PI;
         x += r / 2;
@@ -83,15 +88,19 @@ class Ornament extends Drawing {
      * @param {number} r radius
      * @param {number} cy center y coodinate of the canvas
      */
-    private drawLines(r: number, cy: number) {
+    private drawLines(r: number, cy: number)
+    {
         const m = this.margin + 10;
         const lengths = [6, 5, 4, 3];
-        for (let line = 0; line < lengths.length; line++) {
-            for (let i = 0; i < lengths[line]; i++) {
+        for (let line = 0; line < lengths.length; line++)
+        {
+            for (let i = 0; i < lengths[line]; i++)
+            {
                 const top = line * 0.5 * r * Math.sqrt(3);
                 const left = m + (line * 0.5 + i) * r;
                 this.drawPart(left, cy + top, r);
-                if (line > 0) {
+                if (line > 0)
+                {
                     this.drawPart(left, cy - top, r);
                 }
             }

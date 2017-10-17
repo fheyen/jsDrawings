@@ -3,7 +3,8 @@
  *
  * https://en.wikipedia.org/wiki/Mandelbrot_set#Continuous_.28smooth.29_coloring
  */
-class Mandelbrot extends Drawing {
+class Mandelbrot extends Drawing
+{
     private colorCache: Map<number, string>;
 
     /**
@@ -17,7 +18,8 @@ class Mandelbrot extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin);
         this.title = "Mandelbrot Set";
     }
@@ -26,7 +28,8 @@ class Mandelbrot extends Drawing {
      * Draws the image.
      * @returns {Mandelbrot} this
      */
-    public draw(): Mandelbrot {
+    public draw(): Mandelbrot
+    {
         // source: https://stackoverflow.com/questions/16500656/
         //         which-color-gradient-is-used-to-color-mandelbrot-in-wikipedia
         const palette = [
@@ -54,12 +57,16 @@ class Mandelbrot extends Drawing {
         // for each pixel
         const w = Math.floor(this.width);
         const h = Math.floor(this.height);
-        for (let px = 0; px <= w; px += pixelSize) {
-            for (let py = 0; py <= Math.floor(h / 2); py += pixelSize) {
+        for (let px = 0; px <= w; px += pixelSize)
+        {
+            for (let py = 0; py <= Math.floor(h / 2); py += pixelSize)
+            {
 
-                // x0 = scaled x coordinate of pixel (scaled to lie in the Mandelbrot X scale (-2.5, 1))
+                // x0 = scaled x coordinate of pixel
+                // (scaled to lie in the Mandelbrot X scale (-2.5, 1))
                 const x0 = (px / w) * 3.5 - 2.5;
-                // y0 = scaled y coordinate of pixel (scaled to lie in the Mandelbrot Y scale (-1, 1))
+                // y0 = scaled y coordinate of pixel
+                // (scaled to lie in the Mandelbrot Y scale (-1, 1))
                 const y0 = (py / h) * 2 - 1;
 
                 let x = 0.0;
@@ -67,7 +74,8 @@ class Mandelbrot extends Drawing {
                 let iteration = 0;
 
                 // Here N=2^8 is chosen as a reasonable bailout radius.
-                while (x * x + y * y < (1 << 16) && iteration < maxIteration) {
+                while (x * x + y * y < (1 << 16) && iteration < maxIteration)
+                {
                     const xtemp = x * x - y * y + x0;
                     y = 2 * x * y + y0;
                     x = xtemp;
@@ -75,7 +83,8 @@ class Mandelbrot extends Drawing {
                 }
 
                 // Used to avoid floating point issues with points inside the set.
-                if (iteration < maxIteration) {
+                if (iteration < maxIteration)
+                {
                     // sqrt of inner term removed using log simplification rules.
                     const logZn = Math.log(x * x + y * y) / 2;
                     const nu = Math.log(logZn / Math.log(2)) / Math.log(2);
@@ -88,11 +97,13 @@ class Mandelbrot extends Drawing {
                 }
 
                 // get color
-                if (this.ctx === null) {
+                if (this.ctx === null)
+                {
                     throw new Error("canvas is null!");
                 }
                 const color = this.getCachedColor(iteration, maxIteration, palette);
-                if (color !== undefined) {
+                if (color !== undefined)
+                {
                     this.ctx.fillStyle = color;
                     this.ctx.fillRect(px, py, pixelSize, pixelSize);
                     // use symmetry
@@ -111,25 +122,31 @@ class Mandelbrot extends Drawing {
      * @param {string[]} palette color palette
      * @returns {string} cached color
      */
-    private getCachedColor(value: number, max: number, palette: string[]): string | undefined {
+    private getCachedColor(value: number, max: number, palette: string[]): string | undefined
+    {
         // crate cache if not yet done
-        if (!this.colorCache) {
+        if (!this.colorCache)
+        {
             this.colorCache = new Map();
         }
 
-        if (this.colorCache.has(value)) {
+        if (this.colorCache.has(value))
+        {
             // cache lookup
             return this.colorCache.get(value);
-        } else {
+        } else
+        {
             // calculate value
             const color1 = palette[Math.floor(value / max * (palette.length - 1))];
             let color2 = palette[Math.floor(value / max * (palette.length - 1)) + 1];
-            if (!color2) {
+            if (!color2)
+            {
                 color2 = palette[palette.length - 1];
             }
 
             let fraction = (value / (max / palette.length));
-            if (fraction >= 1) {
+            if (fraction >= 1)
+            {
                 fraction = 1;
             }
 

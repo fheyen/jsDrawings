@@ -3,7 +3,8 @@
  *
  * https://en.wikipedia.org/wiki/Osgood_curve
  */
-class OsgoodCurve extends Drawing {
+class OsgoodCurve extends Drawing
+{
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -15,7 +16,8 @@ class OsgoodCurve extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin);
         this.title = "Osgood Curve";
     }
@@ -24,7 +26,8 @@ class OsgoodCurve extends Drawing {
      * Draws the image.
      * @returns {OsgoodCurve} this
      */
-    public draw(): OsgoodCurve {
+    public draw(): OsgoodCurve
+    {
         // maximum recursion level
         const maxLevel = 11;
 
@@ -63,7 +66,8 @@ class OsgoodCurve extends Drawing {
         level: number,
         maxLevel: number,
         points: { x: number, y: number }[]
-    ): void {
+    ): void
+    {
         const wedgeSize = 0.05;
         // draw wedge
         const diff = Vector.diff(points[1], points[0]);
@@ -92,7 +96,8 @@ class OsgoodCurve extends Drawing {
         ];
 
         // recurse
-        if (level > 1) {
+        if (level > 1)
+        {
             this.recurse(level - 1, maxLevel, pointsA);
             this.recurse(level - 1, maxLevel, pointsB);
         }

@@ -3,7 +3,8 @@
  *
  * https://en.wikipedia.org/wiki/Hexaflake
  */
-class HexaFlake extends Drawing {
+class HexaFlake extends Drawing
+{
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -15,7 +16,8 @@ class HexaFlake extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin);
         this.title = "Hexa Flake";
     }
@@ -24,7 +26,8 @@ class HexaFlake extends Drawing {
      * Draws the image.
      * @returns {HexaFlake} this
      */
-    public draw(): HexaFlake {
+    public draw(): HexaFlake
+    {
         // maximum recursion level
         const maxLevel = 7;
 
@@ -54,11 +57,13 @@ class HexaFlake extends Drawing {
         maxLevel: number,
         radius: number,
         center: { x: number, y: number }
-    ): void {
+    ): void
+    {
         // calculate hexagon points
         const points = [];
         let angleDeg = 30;
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++)
+        {
             points.push({
                 x: center.x + radius * Math.cos(angleDeg / 180 * Math.PI),
                 y: center.y + radius * Math.sin(angleDeg / 180 * Math.PI)
@@ -72,7 +77,8 @@ class HexaFlake extends Drawing {
         const childRadius = radius / 3;
         const centers = [];
         angleDeg = 30;
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++)
+        {
             centers.push({
                 x: center.x + 2 * childRadius * Math.cos(angleDeg / 180 * Math.PI),
                 y: center.y + 2 * childRadius * Math.sin(angleDeg / 180 * Math.PI)
@@ -81,8 +87,10 @@ class HexaFlake extends Drawing {
         }
 
         // recurse
-        if (level > 1) {
-            for (let i = 0; i < 6; i++) {
+        if (level > 1)
+        {
+            for (let i = 0; i < 6; i++)
+            {
                 this.recurse(level - 1, maxLevel, childRadius, centers[i]);
             }
         }

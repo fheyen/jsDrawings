@@ -3,7 +3,8 @@
  *
  * https://en.wikipedia.org/wiki/Gosper_curve
  */
-class GosperCurve extends Drawing {
+class GosperCurve extends Drawing
+{
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -15,7 +16,8 @@ class GosperCurve extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin);
         this.title = "Gosper Curve";
     }
@@ -24,7 +26,8 @@ class GosperCurve extends Drawing {
      * Draws the image.
      * @returns {GosperCurve} this
      */
-    public draw(): GosperCurve {
+    public draw(): GosperCurve
+    {
         // color brewer spectral 11
         const palette = [
             "#9e0142",
@@ -40,7 +43,8 @@ class GosperCurve extends Drawing {
 
         // get curve
         let curve = "A";
-        for (let l = 1; l < level; l++) {
+        for (let l = 1; l < level; l++)
+        {
             curve = this.getNext(curve);
         }
 
@@ -53,9 +57,11 @@ class GosperCurve extends Drawing {
         path.push([0, 0]);
         path.push([0, -1]);
 
-        for (let i = 0; i < curve.length; i++) {
+        for (let i = 0; i < curve.length; i++)
+        {
             // go 1 step in current direction
-            switch (curve[i]) {
+            switch (curve[i])
+            {
                 case "A":
                 case "B":
                     // go forward (in the current direction)
@@ -97,7 +103,8 @@ class GosperCurve extends Drawing {
      * @param curve old curve
      * @returns new curve
      */
-    private getNext(curve: string): string {
+    private getNext(curve: string): string
+    {
         // A -> A-B--B+A++AA+B-
         // B -> +A-BB--B-A++A+B
         curve = lib.replaceAll(curve, "A", "A-b--b+A++AA+b-");

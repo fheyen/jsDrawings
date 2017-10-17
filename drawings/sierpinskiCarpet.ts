@@ -3,7 +3,8 @@
  *
  * https://en.wikipedia.org/wiki/Sierpinski_carpet
  */
-class SierpinskiCarpet extends Drawing {
+class SierpinskiCarpet extends Drawing
+{
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -15,7 +16,8 @@ class SierpinskiCarpet extends Drawing {
         width: number,
         height: number,
         margin: number
-    ) {
+    )
+    {
         super(parent, width, height, margin);
         this.title = "Sierpinsky Carpet";
     }
@@ -24,8 +26,10 @@ class SierpinskiCarpet extends Drawing {
      * Draws the image.
      * @returns {SierpinskiCarpet} this
      */
-    public draw(): SierpinskiCarpet {
-        if (this.ctx === null) {
+    public draw(): SierpinskiCarpet
+    {
+        if (this.ctx === null)
+        {
             throw new Error("ctx is null!");
         }
 
@@ -62,8 +66,10 @@ class SierpinskiCarpet extends Drawing {
         maxLevel: number,
         size: number,
         center: { x: number, y: number }
-    ) {
-        if (this.ctx === null) {
+    )
+    {
+        if (this.ctx === null)
+        {
             throw new Error("ctx is null!");
         }
 
@@ -74,8 +80,10 @@ class SierpinskiCarpet extends Drawing {
         const startX = center.x - size;
         const startY = center.y - size;
         const centers = [];
-        for (let row = 0; row < 3; row++) {
-            for (let col = 0; col < 3; col++) {
+        for (let row = 0; row < 3; row++)
+        {
+            for (let col = 0; col < 3; col++)
+            {
                 centers.push({
                     x: startX + col * size,
                     y: startY + row * size
@@ -84,8 +92,10 @@ class SierpinskiCarpet extends Drawing {
         }
 
         // recurse
-        if (level > 1) {
-            for (let i = 0; i < 9; i++) {
+        if (level > 1)
+        {
+            for (let i = 0; i < 9; i++)
+            {
                 this.recurse(level - 1, maxLevel, size / 3, centers[i]);
             }
         }

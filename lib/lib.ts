@@ -1,20 +1,25 @@
 const lib = {
     /**
-     * Translates and scales 2D points to fit given bounds, while keeping aspect ratio.
+     * Translates and scales 2D points to fit given bounds,
+     * while keeping aspect ratio.
      * @param {number[][]} points - array of points as [x, y]
      * @param {number} width - width
      * @param {number} height - height
      * @param {number} margin - margin
      * @returns {number[][]} rescaled points
      */
-    rescaleAndCenter(points: number[][], width: number, height: number, margin: number): number[][] {
+    rescaleAndCenter(points: number[][], width: number, height: number, margin: number): number[][]
+    {
         const [minX, minY, maxX, maxY] = lib.getMinMax(points);
         const w = width;
         const h = height;
         const m = margin;
 
         // get scaling factor and translation vector
-        const factor = Math.min((w - 2 * m) / (maxX - minX), (h - 2 * m) / (maxY - minY));
+        const factor = Math.min(
+            (w - 2 * m) / (maxX - minX),
+            (h - 2 * m) / (maxY - minY)
+        );
         const moveX = (w - (maxX - minX) * factor) / 2;
         const moveY = (h - (maxY - minY) * factor) / 2;
 
@@ -32,13 +37,15 @@ const lib = {
      * @param {number[][]} points array of points as [x, y]
      * @return {number[]} [minX, minY, maxX, maxY]
      */
-    getMinMax(points: number[][]): number[] {
+    getMinMax(points: number[][]): number[]
+    {
         let minX = Number.MAX_VALUE;
         let minY = Number.MAX_VALUE;
         let maxX = Number.MIN_VALUE;
         let maxY = Number.MIN_VALUE;
 
-        points.forEach(p => {
+        points.forEach(p =>
+        {
             minX = p[0] < minX ? p[0] : minX;
             minY = p[1] < minY ? p[1] : minY;
             maxX = p[0] > maxX ? p[0] : maxX;
@@ -51,26 +58,30 @@ const lib = {
     /**
      * Escapes a regular expression.
      *
-     * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
+     * http://stackoverflow.com/questions/1144783/
+     * replacing-all-occurrences-of-a-string-in-javascript
      *
      * @param {string} str regex
      * @return {string} escaped regex
      */
-    escapeRegExp(str: string): string {
+    escapeRegExp(str: string): string
+    {
         return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
     },
 
     /**
      * Replaces all occurrences of <find> in <str> with <replace>.
      *
-     * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
+     * http://stackoverflow.com/questions/1144783/
+     * replacing-all-occurrences-of-a-string-in-javascript
      *
      * @param {string} str string
      * @param {string} find text to replace
      * @param {string} replace text to replace with
      * @returns {string} result
      */
-    replaceAll(str: string, find: string, replace: string): string {
+    replaceAll(str: string, find: string, replace: string): string
+    {
         return str.replace(new RegExp(lib.escapeRegExp(find), "g"), replace);
     },
 
@@ -79,12 +90,15 @@ const lib = {
      * @param {string} color color in hex code
      * @return {object} RGB
      */
-    hexColorToRGB(color: string): { r: number, g: number, b: number } {
-        if (typeof (color) !== "string") {
+    hexColorToRGB(color: string): { r: number, g: number, b: number }
+    {
+        if (typeof (color) !== "string")
+        {
             throw new TypeError(`color is not a hex string: ${color}`);
         }
         const c = color.charAt(0) === "#" ? color.substring(1, 7) : color;
-        if (c.length < 6) {
+        if (c.length < 6)
+        {
             throw new TypeError(`color has not the correct length of 6 characters: ${color}`);
         }
         return {
@@ -101,9 +115,11 @@ const lib = {
      * @param {number} b blue color component
      * @return {string} hex string
      */
-    rgbColorToHex(r: number, g: number, b: number): string {
+    rgbColorToHex(r: number, g: number, b: number): string
+    {
         // one value from integer to hex string, copied from d3
-        function rgbToHex(v: number) {
+        function rgbToHex(v: number)
+        {
             return v < 16 ? `0${Math.max(0, v).toString(16)}` : Math.min(255, v).toString(16);
         }
         return `#${rgbToHex(r)}${rgbToHex(g)}${rgbToHex(b)}`;
@@ -113,14 +129,18 @@ const lib = {
      * Returns a color interpolated between two specified colors.
      * @param {string} color1 color as hex code
      * @param {string} color2 color as hex code
-     * @param {number} fraction value in [0, 1] that represents the relative position between to interpolation points
+     * @param {number} fraction value in [0, 1] that represents the
+     *  relative position between to interpolation points
      * @return {object} RGB
      */
-    colorLinearInterpolation(color1: string, color2: string, fraction: number): string {
-        if (fraction > 1 || fraction < 0) {
+    colorLinearInterpolation(color1: string, color2: string, fraction: number): string
+    {
+        if (fraction > 1 || fraction < 0)
+        {
             console.error(`fraction is not in [0, 1]: ${fraction}`);
         }
-        try {
+        try
+        {
             const rgb1 = lib.hexColorToRGB(color1);
             const rgb2 = lib.hexColorToRGB(color2);
             const resultRgb = {
@@ -130,7 +150,8 @@ const lib = {
             };
             const { r, g, b } = resultRgb;
             return lib.rgbColorToHex(r, g, b);
-        } catch (error) {
+        } catch (error)
+        {
             console.error(error);
             console.error("invalid colors:");
             console.error(color1);
@@ -160,8 +181,10 @@ const lib = {
         fill: string = "rgba(0, 0, 0, 0)",
         startAngle: number = 0,
         endAngle: number = 2 * Math.PI
-    ): void {
-        if (!ctx) {
+    ): void
+    {
+        if (!ctx)
+        {
             return;
         }
         ctx.save();
@@ -187,14 +210,17 @@ const lib = {
         points: { x: number, y: number }[],
         stroke: string = "#000",
         fill: string = "rgba(0, 0, 0, 0)"
-    ): void {
-        if (!ctx) {
+    ): void
+    {
+        if (!ctx)
+        {
             return;
         }
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
-        for (let i = 1; i < points.length; i++) {
+        for (let i = 1; i < points.length; i++)
+        {
             ctx.lineTo(points[i].x, points[i].y);
         }
         ctx.closePath();
@@ -216,14 +242,17 @@ const lib = {
         path: number[][],
         palette: string[],
         interpolate: boolean = true
-    ): void {
-        if (!ctx) {
+    ): void
+    {
+        if (!ctx)
+        {
             return;
         }
         let oldP = path[0];
         let i = 0;
         const blocklength = path.length / palette.length;
-        path.forEach(p => {
+        path.forEach(p =>
+        {
             ctx.beginPath();
             ctx.moveTo(oldP[0], oldP[1]);
             ctx.lineTo(p[0], p[1]);
@@ -232,15 +261,18 @@ const lib = {
             // change color while progressing
             const color1 = palette[Math.floor(i / path.length * (palette.length - 1))];
 
-            if (interpolate) {
+            if (interpolate)
+            {
                 // interpolate intermediate colors
                 let color2 = palette[Math.floor(i / path.length * (palette.length - 1)) + 1];
-                if (!color2) {
+                if (!color2)
+                {
                     color2 = palette[palette.length - 1];
                 }
                 const fraction = (i % blocklength) / blocklength;
                 ctx.strokeStyle = lib.colorLinearInterpolation(color1, color2, fraction);
-            } else {
+            } else
+            {
                 ctx.strokeStyle = color1;
             }
             ctx.stroke();
@@ -256,7 +288,8 @@ const lib = {
      * @param {number} max maximum
      * @return {number} random integer
      */
-    randomInt(min: number, max: number): number {
+    randomInt(min: number, max: number): number
+    {
         return min + Math.floor(Math.random() * (max - min));
     }
 };
