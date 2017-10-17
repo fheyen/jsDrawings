@@ -59,6 +59,11 @@ class RRT extends Drawing {
         return this;
     }
 }
+/**
+ * Helper class for RandomTree.
+ *
+ * @class RandomTreeVertex
+ */
 class RandomTreeVertex {
     constructor(position) {
         this.x = position.x;
@@ -66,6 +71,11 @@ class RandomTreeVertex {
         this.children = [];
     }
 }
+/**
+ * Random tree class.
+ *
+ * @class RandomTree
+ */
 class RandomTree {
     constructor(areaSize, stepsize, rootPosition, targetPosition, targetProb, obstacles, ctx) {
         if (ctx === null) {
@@ -79,7 +89,7 @@ class RandomTree {
         this.stepsize = stepsize;
         this.obstacles = obstacles;
         this.ctx = ctx;
-        this.vertices = [new RandomTreeVertex(this.root)];
+        this.vertices = [this.root];
     }
     /**
      * Generates an RRT.

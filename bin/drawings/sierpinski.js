@@ -4,7 +4,7 @@
  *
  * https://en.wikipedia.org/wiki/Sierpinski_triangle
  */
-class Sierpinski extends Drawing {
+class SierpinskiTriangle extends Drawing {
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
      * @param {number} width (default: 100) width of the canvas
@@ -17,7 +17,7 @@ class Sierpinski extends Drawing {
     }
     /**
      * Draws the image.
-     * @returns {Sierpinski} this
+     * @returns {SierpinskiTriangle} this
      */
     draw() {
         // maximum recursion level

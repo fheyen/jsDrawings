@@ -96,6 +96,11 @@ class RRT extends Drawing
     }
 }
 
+/**
+ * Helper class for RandomTree.
+ *
+ * @class RandomTreeVertex
+ */
 class RandomTreeVertex
 {
     public x: number;
@@ -111,6 +116,11 @@ class RandomTreeVertex
     }
 }
 
+/**
+ * Random tree class.
+ *
+ * @class RandomTree
+ */
 class RandomTree
 {
     private width: number;
@@ -145,7 +155,7 @@ class RandomTree
         this.stepsize = stepsize;
         this.obstacles = obstacles;
         this.ctx = ctx;
-        this.vertices = [new RandomTreeVertex(this.root)];
+        this.vertices = [this.root];
     }
 
     /**

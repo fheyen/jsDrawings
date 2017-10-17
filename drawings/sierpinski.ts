@@ -3,7 +3,7 @@
  *
  * https://en.wikipedia.org/wiki/Sierpinski_triangle
  */
-class Sierpinski extends Drawing
+class SierpinskiTriangle extends Drawing
 {
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
@@ -24,9 +24,9 @@ class Sierpinski extends Drawing
 
     /**
      * Draws the image.
-     * @returns {Sierpinski} this
+     * @returns {SierpinskiTriangle} this
      */
-    public draw(): Sierpinski
+    public draw(): SierpinskiTriangle
     {
         // maximum recursion level
         const maxLevel = 10;
