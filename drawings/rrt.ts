@@ -317,7 +317,7 @@ class RandomTree
         const direction = Vector.normalize(difference);
         const distance = Vector.dist(position, nearest);
         const step = Math.min(distance, this.stepsize);
-        const newPosition = Vector.add(nearest, Vector.mult(direction, this.stepsize));
+        const newPosition = Vector.add(nearest, Vector.mult(direction, step));
         // check for obstacles
         for (let i = 0; i < this.obstacles.length; i++)
         {
@@ -459,7 +459,7 @@ class Obstacle
      */
     public isHit(position: { x: number, y: number }): boolean
     {
-        alert("nyi");
+        console.error(`not yet implemented, argument: ${position}`);
         return false;
     }
 
@@ -470,7 +470,7 @@ class Obstacle
      */
     public draw(ctx: CanvasRenderingContext2D): void
     {
-        alert("nyi");
+        console.error(`not yet implemented, argument: ${ctx}`);
     }
 }
 

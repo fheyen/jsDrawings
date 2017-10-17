@@ -1,27 +1,28 @@
 "use strict";
-var lib = {
+const lib = {
     /**
-     * Translates and scales 2D points to fit given bounds, while keeping aspect ratio.
+     * Translates and scales 2D points to fit given bounds,
+     * while keeping aspect ratio.
      * @param {number[][]} points - array of points as [x, y]
      * @param {number} width - width
      * @param {number} height - height
      * @param {number} margin - margin
      * @returns {number[][]} rescaled points
      */
-    rescaleAndCenter: function (points, width, height, margin) {
-        var _a = lib.getMinMax(points), minX = _a[0], minY = _a[1], maxX = _a[2], maxY = _a[3];
-        var w = width;
-        var h = height;
-        var m = margin;
+    rescaleAndCenter(points, width, height, margin) {
+        const [minX, minY, maxX, maxY] = lib.getMinMax(points);
+        const w = width;
+        const h = height;
+        const m = margin;
         // get scaling factor and translation vector
-        var factor = Math.min((w - 2 * m) / (maxX - minX), (h - 2 * m) / (maxY - minY));
-        var moveX = (w - (maxX - minX) * factor) / 2;
-        var moveY = (h - (maxY - minY) * factor) / 2;
+        const factor = Math.min((w - 2 * m) / (maxX - minX), (h - 2 * m) / (maxY - minY));
+        const moveX = (w - (maxX - minX) * factor) / 2;
+        const moveY = (h - (maxY - minY) * factor) / 2;
         // map points to new locations
-        points = points.map(function (p) { return [
+        points = points.map(p => [
             (p[0] - minX) * factor + moveX,
             (p[1] - minY) * factor + moveY
-        ]; });
+        ]);
         return points;
     },
     /**
@@ -29,12 +30,12 @@ var lib = {
      * @param {number[][]} points array of points as [x, y]
      * @return {number[]} [minX, minY, maxX, maxY]
      */
-    getMinMax: function (points) {
-        var minX = Number.MAX_VALUE;
-        var minY = Number.MAX_VALUE;
-        var maxX = Number.MIN_VALUE;
-        var maxY = Number.MIN_VALUE;
-        points.forEach(function (p) {
+    getMinMax(points) {
+        let minX = Number.MAX_VALUE;
+        let minY = Number.MAX_VALUE;
+        let maxX = Number.MIN_VALUE;
+        let maxY = Number.MIN_VALUE;
+        points.forEach(p => {
             minX = p[0] < minX ? p[0] : minX;
             minY = p[1] < minY ? p[1] : minY;
             maxX = p[0] > maxX ? p[0] : maxX;
@@ -45,25 +46,27 @@ var lib = {
     /**
      * Escapes a regular expression.
      *
-     * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
+     * http://stackoverflow.com/questions/1144783/
+     * replacing-all-occurrences-of-a-string-in-javascript
      *
      * @param {string} str regex
      * @return {string} escaped regex
      */
-    escapeRegExp: function (str) {
+    escapeRegExp(str) {
         return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
     },
     /**
      * Replaces all occurrences of <find> in <str> with <replace>.
      *
-     * http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
+     * http://stackoverflow.com/questions/1144783/
+     * replacing-all-occurrences-of-a-string-in-javascript
      *
      * @param {string} str string
      * @param {string} find text to replace
      * @param {string} replace text to replace with
      * @returns {string} result
      */
-    replaceAll: function (str, find, replace) {
+    replaceAll(str, find, replace) {
         return str.replace(new RegExp(lib.escapeRegExp(find), "g"), replace);
     },
     /**
@@ -71,13 +74,13 @@ var lib = {
      * @param {string} color color in hex code
      * @return {object} RGB
      */
-    hexColorToRGB: function (color) {
+    hexColorToRGB(color) {
         if (typeof (color) !== "string") {
-            throw new TypeError("color is not a hex string: " + color);
+            throw new TypeError(`color is not a hex string: ${color}`);
         }
-        var c = color.charAt(0) === "#" ? color.substring(1, 7) : color;
+        const c = color.charAt(0) === "#" ? color.substring(1, 7) : color;
         if (c.length < 6) {
-            throw new TypeError("color has not the correct length of 6 characters: " + color);
+            throw new TypeError(`color has not the correct length of 6 characters: ${color}`);
         }
         return {
             r: parseInt(c.substring(0, 2), 16),
@@ -92,33 +95,34 @@ var lib = {
      * @param {number} b blue color component
      * @return {string} hex string
      */
-    rgbColorToHex: function (r, g, b) {
+    rgbColorToHex(r, g, b) {
         // one value from integer to hex string, copied from d3
         function rgbToHex(v) {
-            return v < 16 ? "0" + Math.max(0, v).toString(16) : Math.min(255, v).toString(16);
+            return v < 16 ? `0${Math.max(0, v).toString(16)}` : Math.min(255, v).toString(16);
         }
-        return "#" + rgbToHex(r) + rgbToHex(g) + rgbToHex(b);
+        return `#${rgbToHex(r)}${rgbToHex(g)}${rgbToHex(b)}`;
     },
     /**
      * Returns a color interpolated between two specified colors.
      * @param {string} color1 color as hex code
      * @param {string} color2 color as hex code
-     * @param {number} fraction value in [0, 1] that represents the relative position between to interpolation points
+     * @param {number} fraction value in [0, 1] that represents the
+     *  relative position between to interpolation points
      * @return {object} RGB
      */
-    colorLinearInterpolation: function (color1, color2, fraction) {
+    colorLinearInterpolation(color1, color2, fraction) {
         if (fraction > 1 || fraction < 0) {
-            console.error("fraction is not in [0, 1]: " + fraction);
+            console.error(`fraction is not in [0, 1]: ${fraction}`);
         }
         try {
-            var rgb1 = lib.hexColorToRGB(color1);
-            var rgb2 = lib.hexColorToRGB(color2);
-            var resultRgb = {
+            const rgb1 = lib.hexColorToRGB(color1);
+            const rgb2 = lib.hexColorToRGB(color2);
+            const resultRgb = {
                 r: Math.round(rgb1.r * (1 - fraction) + rgb2.r * fraction),
                 g: Math.round(rgb1.g * (1 - fraction) + rgb2.g * fraction),
                 b: Math.round(rgb1.b * (1 - fraction) + rgb2.b * fraction)
             };
-            var r = resultRgb.r, g = resultRgb.g, b = resultRgb.b;
+            const { r, g, b } = resultRgb;
             return lib.rgbColorToHex(r, g, b);
         }
         catch (error) {
@@ -141,11 +145,7 @@ var lib = {
      * @param {number} endAngle (default: 2 * Pi) end angle
      * @return {void}
      */
-    drawCircle: function (ctx, x, y, radius, stroke, fill, startAngle, endAngle) {
-        if (stroke === void 0) { stroke = "#000"; }
-        if (fill === void 0) { fill = "rgba(0, 0, 0, 0)"; }
-        if (startAngle === void 0) { startAngle = 0; }
-        if (endAngle === void 0) { endAngle = 2 * Math.PI; }
+    drawCircle(ctx, x, y, radius, stroke = "#000", fill = "rgba(0, 0, 0, 0)", startAngle = 0, endAngle = 2 * Math.PI) {
         if (!ctx) {
             return;
         }
@@ -166,16 +166,14 @@ var lib = {
      * @param {string} fill fill style
      * @return {void}
      */
-    drawPolygon: function (ctx, points, stroke, fill) {
-        if (stroke === void 0) { stroke = "#000"; }
-        if (fill === void 0) { fill = "rgba(0, 0, 0, 0)"; }
+    drawPolygon(ctx, points, stroke = "#000", fill = "rgba(0, 0, 0, 0)") {
         if (!ctx) {
             return;
         }
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
-        for (var i = 1; i < points.length; i++) {
+        for (let i = 1; i < points.length; i++) {
             ctx.lineTo(points[i].x, points[i].y);
         }
         ctx.closePath();
@@ -191,28 +189,27 @@ var lib = {
      * @param {array[]} path points as [x, y]
      * @param {string[]} palette stroke style array
      */
-    drawPath: function (ctx, path, palette, interpolate) {
-        if (interpolate === void 0) { interpolate = true; }
+    drawPath(ctx, path, palette, interpolate = true) {
         if (!ctx) {
             return;
         }
-        var oldP = path[0];
-        var i = 0;
-        var blocklength = path.length / palette.length;
-        path.forEach(function (p) {
+        let oldP = path[0];
+        let i = 0;
+        const blocklength = path.length / palette.length;
+        path.forEach(p => {
             ctx.beginPath();
             ctx.moveTo(oldP[0], oldP[1]);
             ctx.lineTo(p[0], p[1]);
             ctx.closePath();
             // change color while progressing
-            var color1 = palette[Math.floor(i / path.length * (palette.length - 1))];
+            const color1 = palette[Math.floor(i / path.length * (palette.length - 1))];
             if (interpolate) {
                 // interpolate intermediate colors
-                var color2 = palette[Math.floor(i / path.length * (palette.length - 1)) + 1];
+                let color2 = palette[Math.floor(i / path.length * (palette.length - 1)) + 1];
                 if (!color2) {
                     color2 = palette[palette.length - 1];
                 }
-                var fraction = (i % blocklength) / blocklength;
+                const fraction = (i % blocklength) / blocklength;
                 ctx.strokeStyle = lib.colorLinearInterpolation(color1, color2, fraction);
             }
             else {
@@ -229,7 +226,7 @@ var lib = {
      * @param {number} max maximum
      * @return {number} random integer
      */
-    randomInt: function (min, max) {
+    randomInt(min, max) {
         return min + Math.floor(Math.random() * (max - min));
     }
 };

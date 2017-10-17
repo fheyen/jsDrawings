@@ -33,14 +33,58 @@ class Drawing
     }
 
     /**
+     * Sets the size of this drawing.
+     *
+     * @param {number} width width
+     * @param {number} height height
+     * @returns {Drawing} this
+     * @memberof Drawing
+     */
+    public setSize(width: number, height: number): Drawing
+    {
+        this.width = width;
+        this.height = height;
+        return this;
+    }
+
+    /**
+     * Sets the width of this drawing.
+     *
+     * @param {number} width width
+     * @returns {Drawing} this
+     * @memberof Drawing
+     */
+    public setWidth(width: number): Drawing
+    {
+        this.width = width;
+        return this;
+    }
+
+    /**
+     * Sets the height of this drawing.
+     *
+     * @param {number} height height
+     * @returns {Drawing} this
+     * @memberof Drawing
+     */
+    public setHeight(height: number): Drawing
+    {
+        this.height = height;
+        return this;
+    }
+
+    /**
      * Creates the drawing container, title and canvas and draws the image.
      * @return {Drawing} this
      */
-    public init(): Drawing
+    public init(draw: boolean = true): Drawing
     {
         this.clear();
         this.createCanvas();
-        this.draw();
+        if (draw)
+        {
+            this.draw();
+        }
         return this;
     }
 
