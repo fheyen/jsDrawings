@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/fheyen/jsDrawings#readme",
   "devDependencies": {
-    "eslint": "^4.8.0",
-    "eslint-config-google": "^0.9.1"
+    "typescript": "^2.5.3",
+    "tslint": "^5.7.0"
   },
   "dependencies": {}
 }
