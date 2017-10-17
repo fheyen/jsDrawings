@@ -2,6 +2,27 @@
 
 Drawings in JavaScript. Suggestions are welcome.
 
+1. [jsDrawings](#jsdrawings)
+    1. [Finished](#finished)
+        1. [Overview](#overview)
+        2. [Yin Yang](#yin-yang)
+        3. [Ornament](#ornament)
+        4. [Mandelbrot](#mandelbrot)
+        5. [Dragon Curve](#dragon-curve)
+        6. [Gosper Curve](#gosper-curve)
+    2. [Hilbert Curve](#hilbert-curve)
+        1. [Osgood Curve](#osgood-curve)
+        2. [Sierpinski Triangle](#sierpinski-triangle)
+        3. [Sierpinski Carpet](#sierpinski-carpet)
+        4. [Hexaflake](#hexaflake)
+        5. [Rapidly-exploring Random Tree](#rapidly-exploring-random-tree)
+        6. [Pythagoras Tree](#pythagoras-tree)
+    3. [Planned](#planned)
+        1. [Animated drawing](#animated-drawing)
+        2. [Interactive Parameters](#interactive-parameters)
+    4. [Usage](#usage)
+
+
 ## Finished
 
 ### Overview
@@ -98,3 +119,21 @@ Drawings in JavaScript. Suggestions are welcome.
 ### Animated drawing
 
 ### Interactive Parameters
+
+## Usage
+
+Drawings are created via their constructor. You can then set their size (or only width or height) and call init() to draw them.
+
+```javascript
+      const dc = new DragonCurve();
+      dc.setSize(500, 500);
+      dc.init();
+```
+
+Or via function chaining:
+
+```javascript
+      const dc = new DragonCurve().setSize(500, 500).init();
+```
+
+See [drawing.ts](./lib/drawing.ts) for all possible arguments.
