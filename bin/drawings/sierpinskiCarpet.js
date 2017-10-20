@@ -20,6 +20,15 @@ class SierpinskiCarpet extends Drawing {
      * @returns {SierpinskiCarpet} this
      */
     draw() {
+        // maximum recursion level
+        const maxLevel = 5;
+        let step = 0;
+        const interval = setInterval(() => {
+            this.drawStep(step++);
+            if (step > maxLevel) {
+                clearInterval(interval);
+            }
+        }, 500);
         return this;
     }
     /**
@@ -30,7 +39,7 @@ class SierpinskiCarpet extends Drawing {
         // reset canvas
         this.ctx.clearRect(0, 0, this.width, this.height);
         // maximum recursion level
-        const maxLevel = 5;
+        const maxLevel = step;
         // initial values
         const size = Math.min(this.width, this.height) - 2 * this.margin;
         const center = {
