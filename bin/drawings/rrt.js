@@ -20,9 +20,6 @@ class RRT extends Drawing {
      * @returns {RRT} this
      */
     draw() {
-        if (this.ctx === null) {
-            throw new Error("ctx is null!");
-        }
         const stepsize = 5;
         const start = {
             x: this.width / 2,
@@ -78,9 +75,6 @@ class RandomTreeVertex {
  */
 class RandomTree {
     constructor(areaSize, stepsize, rootPosition, targetPosition, targetProb, obstacles, ctx) {
-        if (ctx === null) {
-            throw new Error("ctx is null!");
-        }
         this.width = areaSize.width;
         this.height = areaSize.height;
         this.root = new RandomTreeVertex(rootPosition);
@@ -132,9 +126,6 @@ class RandomTree {
      * @returns {void}
      */
     draw() {
-        if (this.ctx === null) {
-            throw new Error("ctx is null!");
-        }
         this.ctx.fillStyle = "#000";
         // draw background
         this.ctx.fillRect(0, 0, this.width, this.height);
@@ -181,9 +172,6 @@ class RandomTree {
      * @returns {void}
      */
     drawPath(path) {
-        if (this.ctx === null) {
-            throw new Error("ctx is null!");
-        }
         // just go up in tree until root is rached
         for (let i = 0; i < path.length - 1; i++) {
             this.ctx.beginPath();
@@ -285,9 +273,6 @@ class RandomTree {
         }
         // draw line from root to all children ...
         root.children.forEach(c => {
-            if (this.ctx === null) {
-                return;
-            }
             this.ctx.beginPath();
             this.ctx.moveTo(root.x, root.y);
             this.ctx.lineTo(c.x, c.y);

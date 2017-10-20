@@ -59,9 +59,6 @@ class PythagorasTreeVertex {
  */
 class PythagorasTree {
     constructor(startSquare, level, ctx) {
-        if (ctx === null) {
-            throw new Error("ctx is null!");
-        }
         this.startSquare = startSquare;
         this.level = level;
         this.ctx = ctx;

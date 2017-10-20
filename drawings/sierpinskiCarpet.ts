@@ -28,10 +28,19 @@ class SierpinskiCarpet extends Drawing
      */
     public draw(): SierpinskiCarpet
     {
-        if (this.ctx === null)
-        {
-            throw new Error("ctx is null!");
-        }
+
+
+        return this;
+    }
+
+    /**
+     * Draws one animation step of the image.
+     * @param step current step
+     */
+    private drawStep(step: number): void
+    {
+        // reset canvas
+        this.ctx.clearRect(0, 0, this.width, this.height);
 
         // maximum recursion level
         const maxLevel = 5;
@@ -50,8 +59,6 @@ class SierpinskiCarpet extends Drawing
         // recursively draw
         this.ctx.fillStyle = "#fff";
         this.recurse(maxLevel, maxLevel, size / 3, center);
-
-        return this;
     }
 
     /**
@@ -68,11 +75,6 @@ class SierpinskiCarpet extends Drawing
         center: { x: number, y: number }
     )
     {
-        if (this.ctx === null)
-        {
-            throw new Error("ctx is null!");
-        }
-
         // fill middle
         this.ctx.fillRect(center.x - size / 2, center.y - size / 2, size, size);
 

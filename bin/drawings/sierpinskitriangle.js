@@ -36,6 +36,8 @@ class SierpinskiTriangle extends Drawing {
      * @param step current step
      */
     drawStep(step) {
+        // reset canvas
+        this.ctx.clearRect(0, 0, this.width, this.height);
         // start triangle
         const startPoints = [
             {
@@ -51,8 +53,6 @@ class SierpinskiTriangle extends Drawing {
                 y: this.margin
             }
         ];
-        // reset canvas
-        this.ctx.clearRect(0, 0, this.width, this.height);
         // recursively draw triangles
         this.recurse(step, step, startPoints);
     }

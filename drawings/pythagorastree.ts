@@ -88,13 +88,9 @@ class PythagorasTree
     constructor(
         startSquare: Square,
         level: number,
-        ctx: CanvasRenderingContext2D | null
+        ctx: CanvasRenderingContext2D
     )
     {
-        if (ctx === null)
-        {
-            throw new Error("ctx is null!");
-        }
         this.startSquare = startSquare;
         this.level = level;
         this.ctx = ctx;

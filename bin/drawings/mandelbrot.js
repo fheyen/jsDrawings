@@ -75,9 +75,6 @@ class Mandelbrot extends Drawing {
                     iteration = iteration + 1 - nu;
                 }
                 // get color
-                if (this.ctx === null) {
-                    throw new Error("canvas is null!");
-                }
                 const color = this.getCachedColor(iteration, maxIteration, palette);
                 if (color !== undefined) {
                     this.ctx.fillStyle = color;

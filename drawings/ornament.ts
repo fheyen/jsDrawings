@@ -28,12 +28,6 @@ class Ornament extends Drawing
      */
     public draw(): Ornament
     {
-
-        if (this.ctx === null)
-        {
-            throw new Error("canvas is null!");
-        }
-
         const ctx = this.ctx;
         const cx = this.width / 2;
         const cy = this.height / 2;
