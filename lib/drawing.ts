@@ -9,7 +9,7 @@ class Drawing
     protected margin: number;
     protected parent: HTMLElement;
     protected canvas: HTMLCanvasElement;
-    protected ctx: CanvasRenderingContext2D | null;
+    protected ctx: CanvasRenderingContext2D;
 
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
@@ -124,7 +124,7 @@ class Drawing
             this.canvas.height = this.height;
             this.parent.appendChild(this.canvas);
         }
-        this.ctx = this.canvas.getContext("2d");
+        this.ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
         return this;
     }
 }

@@ -27,19 +27,59 @@ class YinYang extends Drawing
      */
     public draw(): YinYang
     {
+        let step = 0;
+
+        const interval = setInterval(() =>
+        {
+            this.drawStep(step++);
+            if (step >= 6)
+            {
+                clearInterval(interval);
+            }
+        }, 500);
+
+        return this;
+    }
+
+    private drawStep(step: number): void
+    {
+        if (step > 0)
+        {
+            this.drawStep(step - 1);
+        }
+
         const cx = this.width / 2;
         const cy = this.height / 2;
         const r = Math.min(this.width, this.height) / 2 - this.margin;
 
-        lib.drawCircle(this.ctx, cx, cy, r, "#000", "#000", 0, Math.PI);
-        lib.drawCircle(this.ctx, cx, cy, r, "#fff", "#fff", Math.PI, 2 * Math.PI);
+        switch (step)
+        {
+            case 0:
+                lib.drawCircle(this.ctx, cx, cy, r, "#000", "#000", 0, Math.PI);
+                return;
 
-        lib.drawCircle(this.ctx, cx - r / 2, cy, r / 2, "#000", "#000");
-        lib.drawCircle(this.ctx, cx + r / 2, cy, r / 2, "#fff", "#fff");
+            case 1:
+                lib.drawCircle(this.ctx, cx, cy, r, "#fff", "#fff", Math.PI, 2 * Math.PI);
+                return;
 
-        lib.drawCircle(this.ctx, cx - r / 2, cy, r / 8, "#fff", "#fff");
-        lib.drawCircle(this.ctx, cx + r / 2, cy, r / 8, "#000", "#000");
+            case 2:
+                lib.drawCircle(this.ctx, cx - r / 2, cy, r / 2, "#000", "#000");
+                return;
 
-        return this;
+            case 3:
+                lib.drawCircle(this.ctx, cx + r / 2, cy, r / 2, "#fff", "#fff");
+                return;
+
+            case 4:
+                lib.drawCircle(this.ctx, cx - r / 2, cy, r / 8, "#fff", "#fff");
+                return;
+
+            case 5:
+                lib.drawCircle(this.ctx, cx + r / 2, cy, r / 8, "#000", "#000");
+                return;
+
+            default:
+                return;
+        }
     }
 }
