@@ -18,15 +18,15 @@ class HilbertCurve extends Drawing
         margin: number
     )
     {
-        super(parent, width, height, margin);
-        this.title = "Hilbert Curve";
+        super(parent, width, height, margin, "Hilbert Curve");
+        this.maxAnimationStep = 8;
     }
 
     /**
-     * Draws the image.
-     * @returns {HilbertCurve} this
+     * Draws one animation step of the image.
+     * @param step current step
      */
-    public draw(): HilbertCurve
+    public drawStep(step: number): void
     {
         // color brewer spectral 11
         const palette = [
@@ -42,12 +42,11 @@ class HilbertCurve extends Drawing
             "#3288bd",
             "#5e4fa2"
         ];
-        const level = 7;
 
         // get curve
         // l: left turn, r: right turn
         let curve = "A";
-        for (let l = 1; l < level; l++)
+        for (let l = 1; l < step; l++)
         {
             curve = this.getNext(curve);
         }
@@ -100,8 +99,6 @@ class HilbertCurve extends Drawing
 
         // draw
         lib.drawPath(this.ctx, path, palette, false);
-
-        return this;
     }
 
     /**

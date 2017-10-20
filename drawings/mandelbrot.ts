@@ -20,8 +20,7 @@ class Mandelbrot extends Drawing
         margin: number
     )
     {
-        super(parent, width, height, margin);
-        this.title = "Mandelbrot Set";
+        super(parent, width, height, margin, "Mandelbrot Set");
     }
 
     /**

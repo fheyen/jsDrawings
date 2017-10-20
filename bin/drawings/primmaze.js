@@ -12,7 +12,7 @@ class PrimMaze extends Drawing {
      * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent, width, height, margin) {
-        super(parent, width, height, margin, "Yin Yang");
+        super(parent, width, height, margin, "Prim Maze");
     }
     /**
      * Draws the image.

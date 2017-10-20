@@ -12,16 +12,14 @@ class OsgoodCurve extends Drawing {
      * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent, width, height, margin) {
-        super(parent, width, height, margin);
-        this.title = "Osgood Curve";
+        super(parent, width, height, margin, "Osgood Curve");
+        this.maxAnimationStep = 11;
     }
     /**
-     * Draws the image.
-     * @returns {OsgoodCurve} this
+     * Draws one animation step of the image.
+     * @param step current step
      */
-    draw() {
-        // maximum recursion level
-        const maxLevel = 11;
+    drawStep(step) {
         // start triangle
         const startPoints = [
             {
@@ -40,8 +38,7 @@ class OsgoodCurve extends Drawing {
         // daw triangle
         lib.drawPolygon(this.ctx, startPoints, "rgba(0, 0, 0, 0)", "#fff");
         // recursively draw triangles
-        this.recurse(maxLevel, maxLevel, startPoints);
-        return this;
+        this.recurse(step, step, startPoints);
     }
     /**
      * Recursively draws triangles.

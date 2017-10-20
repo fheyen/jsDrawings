@@ -18,19 +18,16 @@ class HexaFlake extends Drawing
         margin: number
     )
     {
-        super(parent, width, height, margin);
-        this.title = "Hexa Flake";
+        super(parent, width, height, margin, "Hexa Flake");
+        this.maxAnimationStep = 6;
     }
 
     /**
-     * Draws the image.
-     * @returns {HexaFlake} this
+     * Draws one animation step of the image.
+     * @param step current step
      */
-    public draw(): HexaFlake
+    public drawStep(step: number): void
     {
-        // maximum recursion level
-        const maxLevel = 7;
-
         // initial values
         const radius = Math.min(this.width, this.height) / 2 - this.margin;
         const center = {
@@ -39,9 +36,7 @@ class HexaFlake extends Drawing
         };
 
         // recursively draw hexagons
-        this.recurse(maxLevel, maxLevel, radius, center);
-
-        return this;
+        this.recurse(step, step, radius, center);
     }
 
     /**

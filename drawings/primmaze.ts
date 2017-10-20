@@ -18,7 +18,7 @@ class PrimMaze extends Drawing
         margin: number
     )
     {
-        super(parent, width, height, margin, "Yin Yang");
+        super(parent, width, height, margin, "Prim Maze");
     }
 
     /**

@@ -10,6 +10,7 @@ class Drawing
     protected parent: HTMLElement;
     protected canvas: HTMLCanvasElement;
     protected ctx: CanvasRenderingContext2D;
+    protected maxAnimationStep: number;
 
     /**
      * @param {Element} parent DOM elemnt to append this drawing to
@@ -107,8 +108,26 @@ class Drawing
      */
     public draw(): Drawing
     {
-        console.warn("draw(): Not implemented yet!");
+        let step = 0;
+        const interval = setInterval(() =>
+        {
+            this.ctx.clearRect(0, 0, this.width, this.height);
+            this.drawStep(step++);
+            if (step > this.maxAnimationStep)
+            {
+                clearInterval(interval);
+            }
+        }, 500);
         return this;
+    }
+
+    /**
+     * Draws one animation step of the image.
+     * @param step current step
+     */
+    public drawStep(step: number): void
+    {
+        console.warn("draw(): Not implemented yet!");
     }
 
     /**

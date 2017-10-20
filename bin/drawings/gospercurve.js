@@ -12,14 +12,14 @@ class GosperCurve extends Drawing {
      * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent, width, height, margin) {
-        super(parent, width, height, margin);
-        this.title = "Gosper Curve";
+        super(parent, width, height, margin, "Gosper Curve");
+        this.maxAnimationStep = 7;
     }
     /**
-     * Draws the image.
-     * @returns {GosperCurve} this
+     * Draws one animation step of the image.
+     * @param step current step
      */
-    draw() {
+    drawStep(step) {
         // color brewer spectral 11
         const palette = [
             "#9e0142",
@@ -31,10 +31,9 @@ class GosperCurve extends Drawing {
             "#3288bd",
             "#5e4fa2"
         ];
-        const level = 5;
         // get curve
         let curve = "A";
-        for (let l = 1; l < level; l++) {
+        for (let l = 1; l < step; l++) {
             curve = this.getNext(curve);
         }
         // draw curve
@@ -74,7 +73,6 @@ class GosperCurve extends Drawing {
         path = lib.rescaleAndCenter(path, this.width, this.height, this.margin);
         // draw
         lib.drawPath(this.ctx, path, palette, false);
-        return this;
     }
     /**
      * Get next-level curve

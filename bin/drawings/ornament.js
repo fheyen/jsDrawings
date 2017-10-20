@@ -12,8 +12,7 @@ class Ornament extends Drawing {
      * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent, width, height, margin) {
-        super(parent, width, height, margin);
-        this.title = "Ornament";
+        super(parent, width, height, margin, "Ornament");
     }
     /**
      * Draws the image.

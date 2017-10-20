@@ -12,8 +12,7 @@ class Mandelbrot extends Drawing {
      * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent, width, height, margin) {
-        super(parent, width, height, margin);
-        this.title = "Mandelbrot Set";
+        super(parent, width, height, margin, "Mandelbrot Set");
     }
     /**
      * Draws the image.

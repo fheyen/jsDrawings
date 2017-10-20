@@ -12,8 +12,7 @@ class RRT extends Drawing {
      * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent, width, height, margin) {
-        super(parent, width, height, margin);
-        this.title = "RRT";
+        super(parent, width, height, margin, "RRT");
     }
     /**
      * Draws the image.

@@ -18,8 +18,7 @@ class Ornament extends Drawing
         margin: number
     )
     {
-        super(parent, width, height, margin);
-        this.title = "Ornament";
+        super(parent, width, height, margin, "Ornament");
     }
 
     /**

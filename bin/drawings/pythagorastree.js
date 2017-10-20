@@ -12,15 +12,14 @@ class PT extends Drawing {
      * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent, width, height, margin) {
-        super(parent, width, height, margin);
-        this.title = "Pythagoras Tree";
+        super(parent, width, height, margin, "Pythagoras Tree");
+        this.maxAnimationStep = 10;
     }
     /**
-     * Draws the image.
-     * @returns {PT} this
+     * Draws one animation step of the image.
+     * @param step current step
      */
-    draw() {
-        const level = 9;
+    drawStep(step) {
         const startSize = (Math.min(this.width, this.height) - 2 * this.margin) / 6;
         const startSquare = new Square([
             {
@@ -40,11 +39,13 @@ class PT extends Drawing {
                 y: this.height - this.margin
             }
         ]);
-        const tree = new PythagorasTree(startSquare, level, this.ctx);
+        const tree = new PythagorasTree(startSquare, step, this.ctx);
         tree.generateTree().draw();
-        return this;
     }
 }
+/**
+ * Pythagoras tree vertex class.
+ */
 class PythagorasTreeVertex {
     constructor(square, children = []) {
         this.square = square;

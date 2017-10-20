@@ -18,45 +18,16 @@ class SierpinskiCarpet extends Drawing
         margin: number
     )
     {
-        super(parent, width, height, margin);
-        this.title = "Sierpinsky Carpet";
-    }
-
-    /**
-     * Draws the image.
-     * @returns {SierpinskiCarpet} this
-     */
-    public draw(): SierpinskiCarpet
-    {
-        // maximum recursion level
-        const maxLevel = 5;
-
-        let step = 0;
-
-        const interval = setInterval(() =>
-        {
-            this.drawStep(step++);
-            if (step > maxLevel)
-            {
-                clearInterval(interval);
-            }
-        }, 500);
-
-        return this;
+        super(parent, width, height, margin, "Sierpinsky Carpet");
+        this.maxAnimationStep = 5;
     }
 
     /**
      * Draws one animation step of the image.
      * @param step current step
      */
-    private drawStep(step: number): void
+    public drawStep(step: number): void
     {
-        // reset canvas
-        this.ctx.clearRect(0, 0, this.width, this.height);
-
-        // maximum recursion level
-        const maxLevel = step;
-
         // initial values
         const size = Math.min(this.width, this.height) - 2 * this.margin;
         const center = {
@@ -70,7 +41,7 @@ class SierpinskiCarpet extends Drawing
 
         // recursively draw
         this.ctx.fillStyle = "#fff";
-        this.recurse(maxLevel, maxLevel, size / 3, center);
+        this.recurse(step, step, size / 3, center);
     }
 
     /**

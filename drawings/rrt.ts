@@ -18,8 +18,7 @@ class RRT extends Drawing
         margin: number
     )
     {
-        super(parent, width, height, margin);
-        this.title = "RRT";
+        super(parent, width, height, margin, "RRT");
     }
 
     /**

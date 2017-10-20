@@ -12,32 +12,14 @@ class SierpinskiTriangle extends Drawing {
      * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent, width, height, margin) {
-        super(parent, width, height, margin);
-        this.title = "Sierpinski Triangle";
-    }
-    /**
-     * Draws the image.
-     * @returns {SierpinskiTriangle} this
-     */
-    draw() {
-        // maximum recursion level
-        const maxLevel = 10;
-        let step = 0;
-        const interval = setInterval(() => {
-            this.drawStep(step++);
-            if (step > maxLevel) {
-                clearInterval(interval);
-            }
-        }, 500);
-        return this;
+        super(parent, width, height, margin, "Sierpinski Triangle");
+        this.maxAnimationStep = 14;
     }
     /**
      * Draws one animation step of the image.
      * @param step current step
      */
     drawStep(step) {
-        // reset canvas
-        this.ctx.clearRect(0, 0, this.width, this.height);
         // start triangle
         const startPoints = [
             {

@@ -19,33 +19,14 @@ class YinYang extends Drawing
     )
     {
         super(parent, width, height, margin, "Yin Yang");
-    }
-
-    /**
-     * Draws the image.
-     * @returns {YinYang} this
-     */
-    public draw(): YinYang
-    {
-        let step = 0;
-
-        const interval = setInterval(() =>
-        {
-            this.drawStep(step++);
-            if (step >= 6)
-            {
-                clearInterval(interval);
-            }
-        }, 500);
-
-        return this;
+        this.maxAnimationStep = 5;
     }
 
     /**
      * Draws one animation step of the image.
      * @param step current step
      */
-    private drawStep(step: number): void
+    public drawStep(step: number): void
     {
         if (step > 0)
         {

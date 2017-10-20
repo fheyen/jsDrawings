@@ -78,8 +78,22 @@ class Drawing {
      * @return {Drawing} this
      */
     draw() {
-        console.warn("draw(): Not implemented yet!");
+        let step = 0;
+        const interval = setInterval(() => {
+            this.ctx.clearRect(0, 0, this.width, this.height);
+            this.drawStep(step++);
+            if (step > this.maxAnimationStep) {
+                clearInterval(interval);
+            }
+        }, 500);
         return this;
+    }
+    /**
+     * Draws one animation step of the image.
+     * @param step current step
+     */
+    drawStep(step) {
+        console.warn("draw(): Not implemented yet!");
     }
     /**
      * Creates the canvas.

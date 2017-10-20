@@ -13,20 +13,7 @@ class YinYang extends Drawing {
      */
     constructor(parent, width, height, margin) {
         super(parent, width, height, margin, "Yin Yang");
-    }
-    /**
-     * Draws the image.
-     * @returns {YinYang} this
-     */
-    draw() {
-        let step = 0;
-        const interval = setInterval(() => {
-            this.drawStep(step++);
-            if (step >= 6) {
-                clearInterval(interval);
-            }
-        }, 500);
-        return this;
+        this.maxAnimationStep = 5;
     }
     /**
      * Draws one animation step of the image.

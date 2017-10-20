@@ -12,14 +12,14 @@ class DragonCurve extends Drawing {
      * @param {number} margin (default: 10) margin around image content
      */
     constructor(parent, width, height, margin) {
-        super(parent, width, height, margin);
-        this.title = "Dragon Curve";
+        super(parent, width, height, margin, "Dragon Curve");
+        this.maxAnimationStep = 14;
     }
     /**
-     * Draws the image.
-     * @returns {DragonCurve} this
+     * Draws one animation step of the image.
+     * @param step current step
      */
-    draw() {
+    drawStep(step) {
         // color brewer spectral 11
         const palette = [
             "#9e0142",
@@ -34,11 +34,10 @@ class DragonCurve extends Drawing {
             "#3288bd",
             "#5e4fa2"
         ];
-        const level = 10;
         // get curve
         // l: left turn, r: right turn
         let curve = "R";
-        for (let l = 1; l < level; l++) {
+        for (let l = 1; l < step; l++) {
             curve = this.getNext(curve);
         }
         // draw curve
@@ -68,7 +67,6 @@ class DragonCurve extends Drawing {
         path = lib.rescaleAndCenter(path, this.width, this.height, this.margin);
         // draw
         lib.drawPath(this.ctx, path, palette, false);
-        return this;
     }
     /**
      * Get next-level curve
