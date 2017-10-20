@@ -22,6 +22,20 @@ class SierpinskiTriangle extends Drawing {
     draw() {
         // maximum recursion level
         const maxLevel = 10;
+        let step = 0;
+        const interval = setInterval(() => {
+            this.drawStep(step++);
+            if (step > maxLevel) {
+                clearInterval(interval);
+            }
+        }, 500);
+        return this;
+    }
+    /**
+     * Draws one animation step of the image.
+     * @param step current step
+     */
+    drawStep(step) {
         // start triangle
         const startPoints = [
             {
@@ -37,9 +51,10 @@ class SierpinskiTriangle extends Drawing {
                 y: this.margin
             }
         ];
+        // reset canvas
+        this.ctx.clearRect(0, 0, this.width, this.height);
         // recursively draw triangles
-        this.recurse(maxLevel, maxLevel, startPoints);
-        return this;
+        this.recurse(step, step, startPoints);
     }
     /**
      * Recursively draws triangles.

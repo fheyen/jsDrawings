@@ -28,6 +28,10 @@ class YinYang extends Drawing {
         }, 500);
         return this;
     }
+    /**
+     * Draws one animation step of the image.
+     * @param step current step
+     */
     drawStep(step) {
         if (step > 0) {
             this.drawStep(step - 1);
