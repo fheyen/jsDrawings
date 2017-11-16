@@ -21,6 +21,8 @@ Drawings in JavaScript. Suggestions are welcome.
 
 ## Finished
 
+The finished drawings are displayed on the [GitHub.io page](https://fheyen.github.io/jsDrawings/).
+
 ### Overview
 
 ![](img/xs/yinyang.png?raw=true "Yin Yang")
