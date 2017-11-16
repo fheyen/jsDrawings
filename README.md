@@ -10,18 +10,14 @@ Drawings in JavaScript. Suggestions are welcome.
         4. [Mandelbrot](#mandelbrot)
         5. [Dragon Curve](#dragon-curve)
         6. [Gosper Curve](#gosper-curve)
-    2. [Hilbert Curve](#hilbert-curve)
-        1. [Osgood Curve](#osgood-curve)
-        2. [Sierpinski Triangle](#sierpinski-triangle)
-        3. [Sierpinski Carpet](#sierpinski-carpet)
-        4. [Hexaflake](#hexaflake)
-        5. [Rapidly-exploring Random Tree](#rapidly-exploring-random-tree)
-        6. [Pythagoras Tree](#pythagoras-tree)
-    3. [Planned](#planned)
-        1. [Animated drawing](#animated-drawing)
-        2. [Interactive Parameters](#interactive-parameters)
-    4. [Usage](#usage)
-
+        7. [Hilbert Curve](#hilbert-curve)
+        8. [Osgood Curve](#osgood-curve)
+        9. [Sierpinski Triangle](#sierpinski-triangle)
+        10. [Sierpinski Carpet](#sierpinski-carpet)
+        11. [Hexaflake](#hexaflake)
+        12. [Rapidly-exploring Random Tree](#rapidly-exploring-random-tree)
+        13. [Pythagoras Tree](#pythagoras-tree)
+    2. [Usage](#usage)
 
 ## Finished
 
@@ -71,7 +67,7 @@ Drawings in JavaScript. Suggestions are welcome.
 
 ![](img/gospercurve.png?raw=true "Gosper Curve")
 
-## Hilbert Curve
+### Hilbert Curve
 
 [wikipedia](https://en.wikipedia.org/wiki/Hilbert_curve)
 
@@ -113,12 +109,6 @@ Drawings in JavaScript. Suggestions are welcome.
 [wikipedia](https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)#Varying_the_angle)
 
 ![](img/pythagorastree.png?raw=true "Pythagoras Tree")
-
-## Planned
-
-### Animated drawing
-
-### Interactive Parameters
 
 ## Usage
 
