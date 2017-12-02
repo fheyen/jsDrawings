@@ -1,6 +1,6 @@
 # jsDrawings
 
-Drawings in JavaScript. Suggestions are welcome.
+Drawings in JavaScript / TypeScript. Suggestions are welcome.
 
 1. [jsDrawings](#jsdrawings)
     1. [Finished](#finished)
